@@ -1,0 +1,28 @@
+{
+  "credits" : [
+    {
+      "id": 1,
+      "fullname": "Oliver Haran",
+      "title": "Head Chef",
+      "image": "test",
+      "link": "test",
+      "description": "test"
+    },
+    {
+      "id": 2,
+      "fullname": "Ollie Haran",
+      "title": "Head Chef",
+      "image": "test",
+      "link": "test",
+      "description": "test"
+    },
+    {
+      "id": 3,
+      "fullname": "Ol Haran",
+      "title": "Head Chef",
+      "image": "test",
+      "link": "test",
+      "description": "test"
+    }
+  ]
+}
