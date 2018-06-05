@@ -40,6 +40,7 @@
 .cvsb-sprite {
   position: relative;
   padding: 0 5px;
+  margin-left: 10px;
   margin-right: 5px;
   display: inline-block;
   background-image: url(https://www.cvs.com/webcontent/images/header-sprite.png);

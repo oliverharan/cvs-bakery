@@ -3,8 +3,9 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Credits } from '../models/credits.model';
+import { SideNav } from '../models/sidenav.model';
 
-const CREDITDATA = '../../assets/data.json';
+const RELAYDATA = '../../assets/data.json';
 
 
 @Injectable({
@@ -16,7 +17,12 @@ export class RelayService {
 
   getCredits(): Observable<Credits[]> {
     return this.http
-    .get(CREDITDATA)
+    .get(RELAYDATA)
+    .pipe(map((response: Response) => response.json()));
+  }
+  getSideNav(): Observable<SideNav[]> {
+    return this.http
+    .get(RELAYDATA)
     .pipe(map((response: Response) => response.json()));
   }
 
