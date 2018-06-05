@@ -12,6 +12,8 @@ import { RelayService } from './services/relay.service';
   ],
   providers: [RelayService],
   exports: [MainNavComponent],
-  declarations: [MainNavComponent, CreditsComponent]
+  declarations: [
+    MainNavComponent,
+    CreditsComponent]
 })
 export class CvsCookerModule { }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Credits } from '../models/credits.model';
 
-const CREDITDATA = '../../../assets/data.json';
+const CREDITDATA = '../../assets/data.json';
 
 
 @Injectable({

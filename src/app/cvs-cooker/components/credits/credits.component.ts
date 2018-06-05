@@ -13,7 +13,6 @@ export class CreditsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.details);
   }
 
 }

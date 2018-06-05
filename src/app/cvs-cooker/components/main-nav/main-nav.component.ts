@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, ElementRef, Renderer2, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { Credits } from '../../models/credits.model';
 import { RelayService } from '../../services/relay.service';
 @Component({
@@ -25,7 +25,7 @@ import { RelayService } from '../../services/relay.service';
       <div class="creditPopOver" #credit>
 
           Content goes here
-          <credits [details]="creditsList"></credits>
+          <credits [details]="details"></credits>
       </div>
       <div class="popover-connector"></div>
 
@@ -35,6 +35,10 @@ import { RelayService } from '../../services/relay.service';
 })
 
 export class MainNavComponent implements OnInit, AfterViewInit {
+
+  @Input() details: Credits[];
+
+
   show = false;
   creditsList: Credits[];
 
