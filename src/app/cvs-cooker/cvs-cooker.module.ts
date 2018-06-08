@@ -6,6 +6,7 @@ import { CreditsComponent } from './components/credits/credits.component';
 import { RelayService } from './services/relay.service';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { OvenComponent } from './components/oven/oven.component';
+import { SubtopicDirective } from '../cvs-cooker/Directives/subtopic.directive';
 
 @NgModule({
   imports: [
@@ -13,11 +14,17 @@ import { OvenComponent } from './components/oven/oven.component';
     HttpModule
   ],
   providers: [RelayService],
-  exports: [MainNavComponent],
+  exports: [
+    MainNavComponent,
+    SideNavComponent,
+    OvenComponent
+  ],
   declarations: [
     MainNavComponent,
     CreditsComponent,
     SideNavComponent,
-    OvenComponent]
+    OvenComponent,
+    SubtopicDirective
+  ]
 })
 export class CvsCookerModule { }

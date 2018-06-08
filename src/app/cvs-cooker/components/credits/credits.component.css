@@ -1,0 +1,32 @@
+.cvsb-container {
+  display: flex;
+
+}
+.cvs-credits {
+  list-style-type: none;
+  padding: 0 0 10px 10px;
+}
+.cvs-credits li:first-child {
+  font-size: 125%;
+  font-weight: bold;
+}
+.cvs-credits li:nth-child(2){
+  font-style: italic;
+}
+.cvsb-sprite {
+  position: relative;
+  margin-top: 11px;
+  padding: 0 5px;
+  margin-left: 10px;
+  margin-right: 5px;
+  display: inline-block;
+  background-image: url(https://www.cvs.com/webcontent/images/header-sprite.png);
+  background-repeat: no-repeat;
+  width: 23px;
+  height: 25px;
+  line-height: 0;
+  font-size: 0;
+  color: transparent;
+  background-position: -5px -160px;
+  vertical-align: middle;
+}
