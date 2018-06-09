@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Credits } from '../models/credits.model';
+import { ReceipeCatalog } from '../models/receipeCatalog.model';
 import { SideNav } from '../models/sidenav.model';
 
 const RELAYDATA = '../../assets/data.json';
@@ -21,6 +22,11 @@ export class RelayService {
     .pipe(map((response: Response) => response.json()));
   }
   getSideNav(): Observable<SideNav[]> {
+    return this.http
+    .get(RELAYDATA)
+    .pipe(map((response: Response) => response.json()));
+  }
+  getReceipeCatalog(): Observable<ReceipeCatalog[]> {
     return this.http
     .get(RELAYDATA)
     .pipe(map((response: Response) => response.json()));

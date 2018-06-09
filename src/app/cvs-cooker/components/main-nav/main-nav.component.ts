@@ -14,7 +14,7 @@ import { RelayService } from '../../services/relay.service';
           <a href="#">cvs-bakery</a>
           <div class="author">
             <span>By</span>
-            <a href="#">The CVS UX Team</a>
+            <a href="#">The Angular Architects Team</a>
           </div>
         </div>
       </div>
@@ -23,8 +23,6 @@ import { RelayService } from '../../services/relay.service';
       <div class="cvsb-rightTabs">
       <button typ="button" class="menuButton primary" (click)="toggleCredits()">Credits</button>
       <div class="creditPopOver" #credit>
-
-          Content goes here
           <credits [details]="details"></credits>
       </div>
       <div class="popover-connector"></div>
