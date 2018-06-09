@@ -6,5 +6,7 @@ export interface ReceipeCatalog {
   subtopic: {
     id: number;
     title: string;
+    active: boolean;
+    static: boolean;
   };
 }

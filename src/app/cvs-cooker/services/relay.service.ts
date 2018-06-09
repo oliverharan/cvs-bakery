@@ -31,6 +31,11 @@ export class RelayService {
     .get(RELAYDATA)
     .pipe(map((response: Response) => response.json()));
   }
+  updateReceipCatalog(receipe: ReceipeCatalog): Observable<ReceipeCatalog>{
+    return this.http
+    .put('${RELAYDATA}/${receipe.id}', receipe)
+    .pipe(map((response: Response) => response.json()));
+  }
 
 }
 

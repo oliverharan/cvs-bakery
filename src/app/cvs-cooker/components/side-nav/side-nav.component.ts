@@ -7,14 +7,17 @@ import { SubtopicDirective } from '../../Directives/subtopic.directive';
   styleUrls: ['./side-nav.component.css']
 })
 export class SideNavComponent implements OnInit {
-@ViewChild('subtopics') subtopics: TemplateRef<any>;
+// @ViewChild('subtopics') subtopics: TemplateRef<any>;
 
   @Input() receipes: ReceipeCatalog;
-
+  @Input() subtopics: ReceipeCatalog;
+  editing = false;
   constructor() { }
 
   ngOnInit() {
     console.log('Subtopic', this.subtopics);
   }
-
+  onEdit() {
+    this.editing = !this.editing;
+  }
 }

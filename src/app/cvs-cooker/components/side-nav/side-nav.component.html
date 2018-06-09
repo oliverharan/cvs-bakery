@@ -1,30 +1,10 @@
-<div class="sideNavContainer">
-  <div class="pane-left vertical">
-      <div class="pane-left-wrapper vertical">
-          <div class="pane-left-content vertical">
-              <div class="pane-left-content-wrapper">
-                  <span>Now serving, fresh hot topics. Select a topic to view all its receipes.</span>
-                </div>
-                <div class="pane-left-content-wrapper" *ngFor="let items of receipes">
-                  <ul>
-                    <li>{{items.title}}</li>
-                    <li  #subtopics="subtopic" [subtopic]="receipes" *ngFor="let subitems of items['subtopic']" ><div *ngIf="subitems.title">{{subitems.title}}</div></li>
-                  </ul>
-                </div>
-          </div>
-      </div>
+<ul>
+  <li>
+      <div *ngIf="!editing">{{subtopics.title}}</div>
+      <div *ngIf="!subtopics.static">
+    <input *ngIf="editing" [value]="subtopics.title" type="text">
+    <button type="button" (click)="onEdit()">Edit</button>
   </div>
-  <span class="Resizer vertical "></span>
-  <div class="pane-center vertical">
-    <div class="pane-center-wrapper vertical">
-      <div class="pane-center-content vertical">
-          <div class="pane-center-content-wrapper vertical">
+  </li>
+</ul>
 
-            </div>
-        <span class="Resizer vertical "></span>
-        <div class="panel-right vertical">
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

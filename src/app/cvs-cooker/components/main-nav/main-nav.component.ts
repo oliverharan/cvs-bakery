@@ -1,60 +1,29 @@
 import { Component, Input, ElementRef, Renderer2, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { Credits } from '../../models/credits.model';
 import { RelayService } from '../../services/relay.service';
+
 @Component({
   selector: 'main-nav',
   styleUrls: ['main-nav.component.css'],
-  template: `
-  <div class="cvsb-mainNav">
-    <div class="cvsb-headerBar">
-      <div class="cvsb-sideMenu">
-        <div class="cvsb-logoWrap">
-        <a class="cvsb-sprite"></a>
-        <div class="cvsb-name">
-          <a href="#">cvs-bakery</a>
-          <div class="author">
-            <span>By</span>
-            <a href="#">The Angular Architects Team</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-      <div class="cvsb-rightTabs">
-      <button typ="button" class="menuButton primary" (click)="toggleCredits()">Credits</button>
-      <div class="creditPopOver" #credit>
-          <credits [details]="details"></credits>
-      </div>
-      <div class="popover-connector"></div>
-
-    </div>
-    </div>
-  `
+  templateUrl: 'main-nav.component.html'
 })
 
 export class MainNavComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('credit', { read: ElementRef }) credit: ElementRef;
+
   @Input() details: Credits[];
-
-
-  show = false;
   creditsList: Credits[];
-
-  @ViewChild("credit", { read: ElementRef }) credit: ElementRef;
+  show = false;
 
   ngOnInit() {
     // this.setCredits();
-    console.log(this.creditsList);
+    // console.log(this.creditsList);
   }
   ngAfterViewInit() {  }
 
   constructor(private el: ElementRef, private render: Renderer2, private relayService: RelayService) { }
 
-  // setCredits(){
-  //   this.relayService
-  //   .getCredits()
-  //   .subscribe((data: any) => this.creditsList = data);
-  // }
   toggleCredits() {
     if (!this.show) {
       this.show = true;
@@ -64,8 +33,13 @@ export class MainNavComponent implements OnInit, AfterViewInit {
       this.show = false;
       this.render.removeClass(this.credit.nativeElement, 'active');
       this.render.removeClass(document.querySelector('.popover-connector'), 'active');
-
     }
 
   }
+
+  // setCredits(){
+  //   this.relayService
+  //   .getCredits()
+  //   .subscribe((data: any) => this.creditsList = data);
+  // }
 }
