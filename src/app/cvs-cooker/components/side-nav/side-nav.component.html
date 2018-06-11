@@ -1,10 +1,10 @@
 <ul>
-  <li>
-      <div *ngIf="!editing">{{subtopics.title}}</div>
-      <div *ngIf="!subtopics.static">
-    <input *ngIf="editing" [value]="subtopics.title" type="text">
-    <button type="button" (click)="onEdit()">Edit</button>
-  </div>
-  </li>
+    <li>
+        <div *ngIf="!editing">{{subtopics.title}}</div>
+        <div *ngIf="!subtopics.static">
+            <input type="text" *ngIf="editing" [value]="subtopics.title" (input)="onNameChange(subTopicName.value)" #subTopicName />
+            <button type="button" (click)="onEdit()">{{editing ? 'Done': 'Edit'}}</button>
+            <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button>
+        </div>
+    </li>
 </ul>
-

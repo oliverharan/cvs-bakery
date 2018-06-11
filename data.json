@@ -30,46 +30,15 @@
             "static": true,
             "subtopic": [{
                     "id": 1,
-                    "title": "html2",
-                    "active": true,
-                    "static": false
+                    "title": "html"
                 },
                 {
                     "id": 2,
-                    "title": "css2",
-                    "active": true,
-                    "static": true
+                    "title": "css"
                 },
                 {
                     "id": 3,
-                    "title": "javascript2",
-                    "active": true,
-                    "static": true
-                }
-            ]
-        },
-        {
-            "id": 4,
-            "title": "html",
-            "active": true,
-            "static": false,
-            "subtopic": [{
-                    "id": 1,
-                    "title": "html2",
-                    "active": true,
-                    "static": false
-                },
-                {
-                    "id": 2,
-                    "title": "css2",
-                    "active": true,
-                    "static": true
-                },
-                {
-                    "id": 3,
-                    "title": "javascript2",
-                    "active": true,
-                    "static": true
+                    "title": "javascript"
                 }
             ]
         },
@@ -87,27 +56,17 @@
             "static": true,
             "subtopic": [{
                     "id": 1,
-                    "title": "html2",
-                    "active": true,
-                    "static": false
+                    "title": "html"
                 },
                 {
                     "id": 2,
-                    "title": "css2",
-                    "active": true,
-                    "static": true
+                    "title": "css"
                 },
                 {
                     "id": 3,
-                    "title": "javascript2",
-                    "active": true,
-                    "static": true
+                    "title": "javascript"
                 }
             ]
         }
-    ],
-    "sideNav": [{
-        "title": "",
-        "tag": ""
-    }]
+    ]
 }

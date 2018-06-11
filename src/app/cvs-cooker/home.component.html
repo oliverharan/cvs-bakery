@@ -2,31 +2,31 @@
 <main-nav [details]="credits"></main-nav>
 <!-- Left Content Panel-->
 <div class="sideNavContainer">
-  <div class="pane-left vertical">
-    <div class="pane-left-wrapper vertical">
-      <div class="pane-left-content vertical">
-        <div class="pane-left-content-wrapper">
-          <span>Now serving, fresh hot topics. Select a topic to view all its receipes.</span>
+    <div class="pane-left vertical">
+        <div class="pane-left-wrapper vertical">
+            <div class="pane-left-content vertical">
+                <div class="pane-left-content-wrapper">
+                    <span>Now serving, fresh hot topics. Select a topic to view all its receipes.</span>
+                </div>
+                <div class="pane-left-content-wrapper" *ngFor="let items of catalogList;let i = index">
+                    {{items.title}}
+                    <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems" (edit)="handleEdit($event)" (remove)="handleRemove($event, i)"></side-nav>
+                </div>
+            </div>
         </div>
-        <div class="pane-left-content-wrapper" *ngFor="let items of catalogList">
-          {{items.title}}
-          <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems"></side-nav>
-        </div>
-      </div>
     </div>
-  </div>
-  <span class="Resizer vertical "></span>
-  <div class="pane-center vertical">
-    <div class="pane-center-wrapper vertical">
-      <div class="pane-center-content vertical">
-        <div class="pane-center-content-wrapper vertical">test
+    <span class="Resizer vertical "></span>
+    <div class="pane-center vertical">
+        <div class="pane-center-wrapper vertical">
+            <div class="pane-center-content vertical">
+                <div class="pane-center-content-wrapper vertical">test
+                </div>
+                <span class="Resizer vertical "></span>
+                <div class="panel-right vertical">
+                </div>
+            </div>
         </div>
-        <span class="Resizer vertical "></span>
-        <div class="panel-right vertical">
-        </div>
-      </div>
     </div>
-  </div>
 </div>
 <!-- Center & Right Main Content-->
 <app-oven></app-oven>

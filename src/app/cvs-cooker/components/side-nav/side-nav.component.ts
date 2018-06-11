@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ReceipeCatalog } from '../../models/receipeCatalog.model';
-import { SubtopicDirective } from '../../Directives/subtopic.directive';
+
 @Component({
   selector: 'side-nav',
   templateUrl: './side-nav.component.html',
@@ -11,13 +11,24 @@ export class SideNavComponent implements OnInit {
 
   @Input() receipes: ReceipeCatalog;
   @Input() subtopics: ReceipeCatalog;
+  @Output() remove: EventEmitter<any> = new EventEmitter();
+  @Output() edit: EventEmitter<any> = new EventEmitter();
   editing = false;
   constructor() { }
 
   ngOnInit() {
-    console.log('Subtopic', this.subtopics);
+    // console.log('Subtopic', this.subtopics);
   }
   onEdit() {
+    if (this.edit) {
+      this.edit.emit(this.subtopics);
+    }
     this.editing = !this.editing;
+  }
+  onNameChange(value: string) {
+    this.subtopics.title = value;
+  }
+  onRemove() {
+    this.remove.emit(this.subtopics);
   }
 }
