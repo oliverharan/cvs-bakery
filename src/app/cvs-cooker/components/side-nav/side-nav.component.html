@@ -8,3 +8,10 @@
         </div>
     </li>
 </ul>
+<div>
+    <div *ngIf="!subtopics.static">
+        <input type="text" *ngIf="editing" [value]="subtopics.title" (input)="onNameChange(subTopicName.value)" #subTopicName />
+        <button type="button" (click)="onEdit()">{{editing ? 'Done': 'Edit'}}</button>
+        <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button>
+    </div>
+</div>
