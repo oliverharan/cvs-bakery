@@ -10,7 +10,7 @@
                 </div>
                 <div class="pane-left-content-wrapper" *ngFor="let items of catalogList;let i = index">
                     {{items.title}}
-                    <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems" (edit)="handleEdit($event)" (remove)="handleRemove($event, i)"></side-nav>
+                    <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)"></side-nav>
                 </div>
             </div>
         </div>

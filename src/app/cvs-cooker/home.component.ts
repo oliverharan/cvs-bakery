@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, ElementRef, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Credits } from '../cvs-cooker/models/credits.model';
 import { RelayService } from '../cvs-cooker/services/relay.service';
 import { ReceipeCatalog } from './models/receipeCatalog.model';
@@ -14,10 +14,11 @@ export class HomeComponent implements OnInit {
   credits: Credits[];
   catalogList: ReceipeCatalog[];
   catalogListSubTopic: ReceipeCatalog[];
-  subTopicItem: any;
-  constructor(private relayService: RelayService, private e: ElementRef) {}
+
+  constructor(private relayService: RelayService){}
 
   ngOnInit() {
+
     // Navbar Credits button
     this.relayService
     .getCredits()
@@ -34,14 +35,4 @@ export class HomeComponent implements OnInit {
     .subscribe((data: ReceipeCatalog[]) => this.catalogListSubTopic = data['receipeCatalog']['subtopic']);
   }
 
-  handleRemove(event: ReceipeCatalog, subItemID) {
-    this.subTopicItem = this.catalogList[subItemID]['subtopic'];
-    this.catalogList[subItemID]['subtopic'] = this.subTopicItem.filter((subItems: ReceipeCatalog) => {
-      return subItems.id !== event.id;
-    });
-  }
-  handleEdit(event) {
-    console.log(event);
-
-  }
 }
