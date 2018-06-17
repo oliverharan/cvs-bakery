@@ -32,3 +32,47 @@ export class SideNavComponent implements OnInit {
     this.remove.emit(this.subtopics);
   }
 }
+
+@Component({
+  selector: 'topic-input',
+  template: `
+  <input type="text" [value]="itemTitle.title" (input)="onNameChange(subTopicName.value)" #subTopicName />
+  <button type="button" (click)="onEdit(subTopicName.value)">Submit</button>
+  <button type="button" (click)="onRemove()">Remove</button>
+  <button type="button" (click)="onCancel()">Cancel</button>
+  <!-- <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button> -->
+  `
+})
+
+export class TopicInputComponent implements OnInit {
+  @Input() itemTitle: any;
+  @Output() edit: EventEmitter<any> = new EventEmitter();
+  @Output() remove: EventEmitter<any> = new EventEmitter();
+  @Output() cancel: EventEmitter<any> = new EventEmitter();
+  initialTitle: any;
+  cancelling: boolean = false;
+  constructor(){
+
+  }
+  ngOnInit() {
+    console.log(this.itemTitle);
+    this.initialTitle = this.itemTitle.title;
+  }
+  onNameChange(val) {
+    this.itemTitle.title = val;
+    
+  }
+  onEdit(val) {
+    console.log(val);
+    this.edit.emit(val);
+  }
+  onRemove(){
+    this.remove.emit(this.itemTitle);
+    console.log(this.itemTitle);
+  }
+  onCancel(){
+    this.cancelling = true;
+    this.itemTitle.title = this.initialTitle;
+    this.cancel.emit(this.cancelling);
+  }
+}

@@ -8,10 +8,14 @@
                 <div class="pane-left-content-wrapper">
                     <span>Now serving, fresh hot topics. Select a topic to view all its receipes.</span>
                 </div>
-                <div class="pane-left-content-wrapper" *ngFor="let items of catalogList;let i = index">
+                <div class="pane-left-content-wrapper" *ngFor="let items of catalogList;let i = index" >
                     {{items.title}}
-                    <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)"></side-nav>
-                </div>
+                    <button *ngIf="!items.static" type="button" (click)="onEdit(items.title, i); selectedItem = i">Edit</button>
+                    <!-- <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)"></side-nav>                     -->
+                    <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems"></side-nav>
+                <topic-input id="editor" [ngClass]="selectedItem === i ? 'show': 'hidden'" [itemTitle]="items" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)" (cancel)="handleCancel();"></topic-input>
+              </div>
+
             </div>
         </div>
     </div>

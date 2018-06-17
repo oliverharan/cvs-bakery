@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
 import { Credits } from '../cvs-cooker/models/credits.model';
 import { RelayService } from '../cvs-cooker/services/relay.service';
 import { ReceipeCatalog } from './models/receipeCatalog.model';
@@ -10,12 +10,15 @@ import { ReceipeCatalog } from './models/receipeCatalog.model';
 })
 
 export class HomeComponent implements OnInit {
-
+  @Output() edit: EventEmitter<any> = new EventEmitter();
   credits: Credits[];
   catalogList: ReceipeCatalog[];
   catalogListSubTopic: ReceipeCatalog[];
-
-  constructor(private relayService: RelayService){}
+  items: any;
+  editing: boolean = false;
+  show: boolean = false;
+  selectedItem: string;
+  constructor(private relayService: RelayService, private el: ElementRef){}
 
   ngOnInit() {
 
@@ -34,5 +37,36 @@ export class HomeComponent implements OnInit {
     .getReceipeCatalog()
     .subscribe((data: ReceipeCatalog[]) => this.catalogListSubTopic = data['receipeCatalog']['subtopic']);
   }
+  onEdit(event, i) {
+    // this.editing = true;
+    // let y = this.el.nativeElement.querySelector('#editor');
+    // y.className = 'show';
+    // y.className.removeClass = 'hidden';
+    // if (this.edit) {
+    //   this.edit.emit(val);
+    //   console.log(val);
+    // }
+    // console.log('val',y);
+    console.log(event, i);
+    // this.handleEdit(val);
+  }
+  handleEdit(val, i) {
+    this.selectedItem = '';
+    console.log('Value handle edit', val, i);
 
+    this.catalogList[i].title = val;
+    // this.items = val;
+    // this.show = false;
+  }
+  handleRemove(event, i) {
+    // console.log(event, i);
+        this.show = false;
+    this.catalogList = this.catalogList.filter((catalogList: ReceipeCatalog) => {
+      console.log(event.id);
+     return catalogList.id !== event.id;
+    });
+  }
+  handleCancel() {
+    this.selectedItem = '';
+  }
 }

@@ -27,7 +27,7 @@
             "id": 1,
             "title": "accessibilty",
             "active": true,
-            "static": true,
+            "static": false,
             "subtopic": [{
                     "id": 1,
                     "title": "html2",

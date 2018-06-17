@@ -86,3 +86,9 @@
   box-sizing: border-box;
   background-clip: padding-box;
 }
+.hidden {
+  display: none;
+}
+.active {
+  display:block;
+}
