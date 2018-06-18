@@ -8,13 +8,22 @@
                 <div class="pane-left-content-wrapper">
                     <span>Now serving, fresh hot topics. Select a topic to view all its receipes.</span>
                 </div>
-                <div class="pane-left-content-wrapper" *ngFor="let items of catalogList;let i = index" >
-                    {{items.title}}
-                    <button *ngIf="!items.static" type="button" (click)="onEdit(items.title, i); selectedItem = i">Edit</button>
+                <div class="pane-left-content-wrapper" *ngFor="let items of catalogList;let i = index">
+                    <div class="pane-left-content-inner">
+                        {{items.title}}
+                        <div>
+                            <button *ngIf="!items.static" (click)="onEdit(items.title, i); selectedEdit = i" class="edit-button fas fa-pencil-alt"></button>
+                            <button (click)="toggleSubTopics(); expandTopic = i" class="chevron-down-button " [@slideInOut]></button>
+                        </div>
+                    </div>
+
                     <!-- <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)"></side-nav>                     -->
-                    <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems"></side-nav>
-                <topic-input id="editor" [ngClass]="selectedItem === i ? 'show': 'hidden'" [itemTitle]="items" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)" (cancel)="handleCancel();"></topic-input>
-              </div>
+                    <div *ngIf="visible">
+                        <side-nav [ngClass]="expandTopic === i ? 'show': 'hidden'" *ngFor="let subItems of items['subtopic']" [subtopics]="subItems"></side-nav>
+                    </div>
+
+                    <topic-input id="editor" [ngClass]="selectedEdit === i ? 'show': 'hidden'" [itemTitle]="items" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)" (cancel)="handleCancel();"></topic-input>
+                </div>
 
             </div>
         </div>

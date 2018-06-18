@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
+import { trigger, transition, animate, style, state } from '@angular/animations';
 import { Credits } from '../cvs-cooker/models/credits.model';
 import { RelayService } from '../cvs-cooker/services/relay.service';
 import { ReceipeCatalog } from './models/receipeCatalog.model';
@@ -6,7 +7,14 @@ import { ReceipeCatalog } from './models/receipeCatalog.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('slideInOut', [
+      state('visible',   style({
+        transform: 'rotateY(180deg) rotateZ(90deg)',
+      })),
+    ])
+  ]
 })
 
 export class HomeComponent implements OnInit {
@@ -17,9 +25,14 @@ export class HomeComponent implements OnInit {
   items: any;
   editing: boolean = false;
   show: boolean = false;
-  selectedItem: string;
+  selectedEdit: any;
+  expandTopic: any;
+  visible = false;
   constructor(private relayService: RelayService, private el: ElementRef){}
 
+  toggleSubTopics() {
+    this.visible = !this.visible;
+  }
   ngOnInit() {
 
     // Navbar Credits button
@@ -51,7 +64,7 @@ export class HomeComponent implements OnInit {
     // this.handleEdit(val);
   }
   handleEdit(val, i) {
-    this.selectedItem = '';
+    this.selectedEdit = '';
     console.log('Value handle edit', val, i);
 
     this.catalogList[i].title = val;
@@ -67,6 +80,6 @@ export class HomeComponent implements OnInit {
     });
   }
   handleCancel() {
-    this.selectedItem = '';
+    this.selectedEdit = '';
   }
 }
