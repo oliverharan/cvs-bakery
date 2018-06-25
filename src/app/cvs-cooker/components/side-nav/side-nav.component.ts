@@ -32,6 +32,36 @@ export class SideNavComponent implements OnInit {
     this.remove.emit(this.subtopics);
   }
 }
+@Component({
+  selector: 'side-nav-topic',
+  template: `
+                        <div class="dFlex">
+                        <button
+                        *ngIf="topic['subtopic'].length"
+                        (click)=" expandTopic = topicId; outputId();"
+                        class="chevron-down-button fas fa-caret-right" ></button>
+                        <div>{{topic.title}}</div>
+                        </div>
+  `,
+  styleUrls: ['./side-nav.component.css']
+})
+export class SideNavTopicComponent implements OnInit {
+  @Input() topic: ReceipeCatalog;
+  @Input() topicId: ReceipeCatalog;
+  @Output() selectTopic: EventEmitter<any> = new EventEmitter();
+  expandTopic: number;
+  hasSubItems: any;
+
+  constructor(){}
+  ngOnInit(){
+  }
+
+  outputId(){
+    // console.log('emit', this.expandTopic);
+    this.selectTopic.emit(this.expandTopic);
+  }
+
+}
 
 @Component({
   selector: 'topic-input',
@@ -60,7 +90,7 @@ export class TopicInputComponent implements OnInit {
   }
   onNameChange(val) {
     this.itemTitle.title = val;
-    
+
   }
   onEdit(val) {
     console.log(val);

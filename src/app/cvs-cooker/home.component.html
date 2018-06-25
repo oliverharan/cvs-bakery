@@ -10,18 +10,21 @@
                 </div>
                 <div class="pane-left-content-wrapper" *ngFor="let items of catalogList;let i = index">
                     <div class="pane-left-content-inner">
-                        {{items.title}}
+                      <!-- Topics -->
+                      <side-nav-topic [topic]="items" [topicId]="i" (selectTopic)="openSub($event)" class="dFlex fBasis"></side-nav-topic>
+                        <!-- {{items.title}}
                         <div>
-                            <button *ngIf="!items.static" (click)="onEdit(items.title, i); selectedEdit = i" class="edit-button fas fa-pencil-alt"></button>
                             <button (click)="toggleSubTopics(); expandTopic = i" class="chevron-down-button " [@slideInOut]></button>
-                        </div>
+                        </div> -->
+                        <!-- Edit Button-->
+                        <button *ngIf="!items.static" (click)="onEdit(catalogList[i], i); selectedEdit = i" class="edit-button fas fa-pencil-alt"></button>
                     </div>
-
                     <!-- <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)"></side-nav>                     -->
+                    <!-- Sub Topics-->
                     <div *ngIf="visible">
-                        <side-nav [ngClass]="expandTopic === i ? 'show': 'hidden'" *ngFor="let subItems of items['subtopic']" [subtopics]="subItems"></side-nav>
+                        <side-nav [ngClass]="expandTopic === i ? 'show': 'hidden'"  *ngFor="let subItems of items['subtopic']" [subtopics]="subItems"></side-nav>
                     </div>
-
+                    <!-- Edit Topic Name-->
                     <topic-input id="editor" [ngClass]="selectedEdit === i ? 'show': 'hidden'" [itemTitle]="items" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)" (cancel)="handleCancel();"></topic-input>
                 </div>
 

@@ -26,13 +26,13 @@ export class HomeComponent implements OnInit {
   editing: boolean = false;
   show: boolean = false;
   selectedEdit: any;
+  selectTopicIndex: number;
   expandTopic: any;
   visible = false;
+
   constructor(private relayService: RelayService, private el: ElementRef){}
 
-  toggleSubTopics() {
-    this.visible = !this.visible;
-  }
+
   ngOnInit() {
 
     // Navbar Credits button
@@ -50,6 +50,38 @@ export class HomeComponent implements OnInit {
     .getReceipeCatalog()
     .subscribe((data: ReceipeCatalog[]) => this.catalogListSubTopic = data['receipeCatalog']['subtopic']);
   }
+
+  handleEdit(event: ReceipeCatalog, i) {
+    this.selectedEdit = '';
+    console.log('Value handle edit', event, i);
+    // this.catalogList[i].title = event;
+    this.catalogList = this.catalogList.map(((catalogList: ReceipeCatalog) => {
+      if (catalogList.id === event.id) {
+        catalogList = Object.assign({}, catalogList, event);
+      }
+      return catalogList;
+    }));
+  }
+  handleRemove(event: ReceipeCatalog, i) {
+    // console.log(event, i);
+        this.show = false;
+    this.catalogList = this.catalogList.filter((catalogList: ReceipeCatalog) => {
+      console.log(event.id);
+     return catalogList.id !== event.id;
+    });
+  }
+  handleCancel() {
+    this.selectedEdit = '';
+  }
+  openSub(event){
+    this.visible = !this.visible;
+    // this.visible = true;
+    console.log('Select topic id', event);
+    this.expandTopic = event;
+    console.log(this.expandTopic);
+    console.log(this.visible);
+    // this.selectTopicIndex = i;
+  }
   onEdit(event, i) {
     // this.editing = true;
     // let y = this.el.nativeElement.querySelector('#editor');
@@ -60,26 +92,7 @@ export class HomeComponent implements OnInit {
     //   console.log(val);
     // }
     // console.log('val',y);
-    console.log(event, i);
+    console.log('test', event, i);
     // this.handleEdit(val);
-  }
-  handleEdit(val, i) {
-    this.selectedEdit = '';
-    console.log('Value handle edit', val, i);
-
-    this.catalogList[i].title = val;
-    // this.items = val;
-    // this.show = false;
-  }
-  handleRemove(event, i) {
-    // console.log(event, i);
-        this.show = false;
-    this.catalogList = this.catalogList.filter((catalogList: ReceipeCatalog) => {
-      console.log(event.id);
-     return catalogList.id !== event.id;
-    });
-  }
-  handleCancel() {
-    this.selectedEdit = '';
   }
 }

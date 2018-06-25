@@ -1,3 +1,6 @@
+.dFlex {
+  display: flex;
+}
 .editTopic {
   color:red;
 }
@@ -5,4 +8,24 @@
   position: absolute;
   left: 0;
   bottom: 0;
+}
+
+/* .chevron-down-button::before {
+  content: "";
+  background-color: transparent;
+  border-style: none;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  color: #2196F3;
+} */
+
+.chevron-down-button {
+  /* background: url(../../../../assets/icons/chevron-down.svg) top center no-repeat; */
+  background-color: transparent;
+  border-style: none;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  color: #d58d68;
 }
