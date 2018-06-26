@@ -1,8 +1,10 @@
 <ul>
     <li>
-        <div [ngClass]="{editTopic: editing}" >{{subtopics.title}}</div>
+        <div [ngClass]="{editTopic: editing}" class="subtopic-content align-center">{{subtopics.title}}</div>
         <div *ngIf="!subtopics.static">
-        <button type="button" (click)="onEdit()">{{editing ? 'Done': 'Edit'}}</button>
+            <!-- <button *ngIf="!items.static" (click)="onEdit(catalogList[i], i); selectedEdit = i" class="edit-button fas fa-pencil-alt"></button> -->
+            <button (click)="onEdit()" class="edit-button fas fa-pencil-alt"></button>
+        <!-- <button type="button" (click)="onEdit()">{{editing ? 'Done': 'Edit'}}</button> -->
         <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button>
       </div>
         <!-- <div *ngIf="!subtopics.static">

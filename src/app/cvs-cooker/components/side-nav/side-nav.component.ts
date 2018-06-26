@@ -40,7 +40,7 @@ export class SideNavComponent implements OnInit {
                         *ngIf="topic['subtopic'].length"
                         (click)=" expandTopic = topicId; outputId();"
                         class="chevron-down-button fas fa-caret-right" ></button>
-                        <div>{{topic.title}}</div>
+                        <div class="subtopic-content align-center">{{topic.title}}</div>
                         </div>
   `,
   styleUrls: ['./side-nav.component.css']
