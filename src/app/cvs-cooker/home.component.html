@@ -25,7 +25,7 @@
                         <side-nav [ngClass]="expandTopic === i ? 'show': 'hidden'"  *ngFor="let subItems of items['subtopic']" [subtopics]="subItems"></side-nav>
                     </div>
                     <!-- Edit Topic Name-->
-                    <topic-input id="editor" [ngClass]="selectedEdit === i ? 'show': 'hidden'" [itemTitle]="items" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)" (cancel)="handleCancel();"></topic-input>
+                    <topic-input *ngIf="topicEditToggle" id="editor" [ngClass]="selectedEdit === i ? 'show': 'hidden'" [itemTitle]="items" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)" (cancel)="handleCancel();" class="topic-input"></topic-input>
                 </div>
 
             </div>

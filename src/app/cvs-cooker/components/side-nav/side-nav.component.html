@@ -1,11 +1,12 @@
 <ul>
-    <li>
-        <div [ngClass]="{editTopic: editing}" class="subtopic-content align-center">{{subtopics.title}}</div>
-        <div *ngIf="!subtopics.static">
+    <li class="dFlex">
+        <div [ngClass]="{editTopic: editing}" class="subtopic-content align-center topic_tab_2x">{{subtopics.title}}</div>
+        <div *ngIf="!subtopics.static" class="dFlex fBasis justifyEnd">
             <!-- <button *ngIf="!items.static" (click)="onEdit(catalogList[i], i); selectedEdit = i" class="edit-button fas fa-pencil-alt"></button> -->
             <button (click)="onEdit()" class="edit-button fas fa-pencil-alt"></button>
+            <button (click)="onRemove()" class="edit-button fas fa-trash-alt"></button>
         <!-- <button type="button" (click)="onEdit()">{{editing ? 'Done': 'Edit'}}</button> -->
-        <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button>
+        <!-- <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button> -->
       </div>
         <!-- <div *ngIf="!subtopics.static">
             <input type="text" *ngIf="editing" [value]="subtopics.title" (input)="onNameChange(subTopicName.value)" #subTopicName />
@@ -14,11 +15,15 @@
          </div> -->
     </li>
 </ul>
-<div>
-    <div class="editPanel" *ngIf="!subtopics.static">
-        <input type="text" *ngIf="editing" [value]="subtopics.title" (input)="onNameChange(subTopicName.value)" #subTopicName />
+<div *ngIf="editing" class="dFlex subtopic-input-wrapper">
+    <div class="subtopic-input-container">
+        <div class="subtopic-input-button" *ngIf="!subtopics.static">
+            <div class="topic-input-tab">Edit/Remove SubTopic</div>
+            <div (click)="onEdit()" class=" fas fa-times-circle fa-2x topic-input-close "></div>
+        <input type="text" [value]="subtopics.title" (input)="onNameChange(subTopicName.value)" #subTopicName />
         <button type="button" (click)="onEdit()">{{editing ? 'Done': 'Edit'}}</button>
         <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button>
     </div>
+  </div>
 </div>
 

@@ -40,7 +40,9 @@ export class SideNavComponent implements OnInit {
                         *ngIf="topic['subtopic'].length"
                         (click)=" expandTopic = topicId; outputId();"
                         class="chevron-down-button fas fa-caret-right" ></button>
-                        <div class="subtopic-content align-center">{{topic.title}}</div>
+                        <div
+                        [ngClass]="{topic_tab : topic['subtopic'].length == 0}"
+                        class="subtopic-content align-center">{{topic.title}}</div>
                         </div>
   `,
   styleUrls: ['./side-nav.component.css']
@@ -65,11 +67,21 @@ export class SideNavTopicComponent implements OnInit {
 
 @Component({
   selector: 'topic-input',
+  styleUrls: ['./side-nav.component.css'],
   template: `
+  <div class="topic-input-container">
+  <div class="topic-input-tab">Edit/Remove Topic</div>
+  <div (click)="onCancel()" class=" fas fa-times-circle fa-2x topic-input-close "></div>
+  <div class="topic-input-contents align-self-center">
+  <h2>Edit the Catalog Topic Name</h2>
   <input type="text" [value]="itemTitle.title" (input)="onNameChange(subTopicName.value)" #subTopicName />
-  <button type="button" (click)="onEdit(subTopicName.value)">Submit</button>
-  <button type="button" (click)="onRemove()">Remove</button>
-  <button type="button" (click)="onCancel()">Cancel</button>
+  <div class="dFlex topic-input-button">
+  <button type="button" (click)="onEdit(subTopicName.value)" class="topic-btn fas fa-save"><span>Save</span></button>
+  <button type="button" (click)="onRemove()" class="topic-btn  fas fa-trash-alt"><span>Remove</span></button>
+  <button type="button" (click)="onCancel()" class="topic-btn  fas fa-times-circle"><span>Cancel</span></button>
+  </div>
+  </div>
+  </div>
   <!-- <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button> -->
   `
 })

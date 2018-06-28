@@ -131,3 +131,14 @@
 .fBasis{
   flex-basis: 100%;
 }
+.topic-input {
+  position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(65,223,78,.90);
+    width: 100%;
+    min-height: 200px;
+    height: inherit;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}

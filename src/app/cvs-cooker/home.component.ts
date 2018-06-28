@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   selectTopicIndex: number;
   expandTopic: any;
   visible = false;
-
+  topicEditToggle = false;
   constructor(private relayService: RelayService, private el: ElementRef){}
 
 
@@ -72,6 +72,7 @@ export class HomeComponent implements OnInit {
   }
   handleCancel() {
     this.selectedEdit = '';
+    this.topicEditToggle = false;
   }
   openSub(event){
     this.visible = !this.visible;
@@ -83,6 +84,7 @@ export class HomeComponent implements OnInit {
     // this.selectTopicIndex = i;
   }
   onEdit(event, i) {
+    this.topicEditToggle = !this.topicEditToggle;
     // this.editing = true;
     // let y = this.el.nativeElement.querySelector('#editor');
     // y.className = 'show';
