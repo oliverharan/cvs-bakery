@@ -8,11 +8,14 @@ import { ReceipeCatalog } from '../../models/receipeCatalog.model';
 })
 export class SideNavComponent implements OnInit {
 // @ViewChild('subtopics') subtopics: TemplateRef<any>;
-
+  @Input() topic: ReceipeCatalog;
+  @Input() topicId: ReceipeCatalog;
   @Input() receipes: ReceipeCatalog;
   @Input() subtopics: ReceipeCatalog;
   @Output() remove: EventEmitter<any> = new EventEmitter();
   @Output() edit: EventEmitter<any> = new EventEmitter();
+  @Output() cancel: EventEmitter<any> = new EventEmitter();
+  cancelling: boolean = false;
   editing = false;
   constructor() { }
 
@@ -20,6 +23,7 @@ export class SideNavComponent implements OnInit {
     // console.log('Subtopic', this.subtopics);
   }
   onEdit() {
+    this.cancel.emit();
     if (this.edit) {
       this.edit.emit(this.subtopics);
     }

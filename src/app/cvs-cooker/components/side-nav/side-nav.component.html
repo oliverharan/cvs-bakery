@@ -1,21 +1,66 @@
+<div class="d-flex f-basis f-flow">
+    <ul *ngFor="let items of topic">
+      <li>
+          <div class="d-flex">
+              <button
+              *ngIf="items['subtopic'].length"
+              (click)=" expandTopic = topicId; outputId();"
+              class="chevron-down-button fas fa-caret-right" ></button>
+              <div
+              [ngClass]="{topic_tab : items['subtopic'].length == 0}"
+              class="subtopic-content align-center">{{items.title}}</div>
+              <!-- Edit Button-->
+                        <button *ngIf="!items.static" (click)="onEdit(catalogList[i], i); selectedEdit = i" class=" d-flex f-basis justifyEnd edit-button fas fa-pencil-alt"></button>
+              </div>
+                      <ul >
+          <li *ngFor="let items of items['subtopic']" class="d-flex">
+              <div [ngClass]="{editTopic: editing}" class="subtopic-content align-center topic_tab_2x">{{items.title}}</div>
+              <div *ngIf="!items.static" class="d-flex f-basis justifyEnd">
+                  <button (click)="onEdit()" class="edit-button fas fa-pencil-alt"></button>
+                  <!-- <button (click)="onRemove()" class="edit-button fas fa-trash-alt"></button> -->
+                </div>
+                <div *ngIf="editing" class="d-flex subtopic-input-wrapper">
+                    <div class="subtopic-input-container">
+                        <div class="subtopic-input-button" *ngIf="!items.static">
+                            <div class="topic-input-tab">Edit/Remove SubTopic</div>
+                            <div (click)="onEdit()" class=" fas fa-times-circle fa-2x topic-input-close "></div>
+                        <input type="text" [value]="items.title" (input)="onNameChange(subTopicName.value)" #subTopicName />
+                        <button type="button" (click)="onEdit()">{{editing ? 'Done': 'Edit'}}</button>
+                        <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button>
+                    </div>
+                  </div>
+              </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+
+<!--
 <ul>
-    <li class="dFlex">
+    <li class="d-flex">
         <div [ngClass]="{editTopic: editing}" class="subtopic-content align-center topic_tab_2x">{{subtopics.title}}</div>
-        <div *ngIf="!subtopics.static" class="dFlex fBasis justifyEnd">
-            <!-- <button *ngIf="!items.static" (click)="onEdit(catalogList[i], i); selectedEdit = i" class="edit-button fas fa-pencil-alt"></button> -->
+        <div *ngIf="!subtopics.static" class="d-flex f-basis justifyEnd">
             <button (click)="onEdit()" class="edit-button fas fa-pencil-alt"></button>
             <button (click)="onRemove()" class="edit-button fas fa-trash-alt"></button>
+          </div> -->
+
+                        <!-- <button *ngIf="!items.static" (click)="onEdit(catalogList[i], i); selectedEdit = i" class="edit-button fas fa-pencil-alt"></button> -->
+
         <!-- <button type="button" (click)="onEdit()">{{editing ? 'Done': 'Edit'}}</button> -->
         <!-- <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button> -->
-      </div>
         <!-- <div *ngIf="!subtopics.static">
             <input type="text" *ngIf="editing" [value]="subtopics.title" (input)="onNameChange(subTopicName.value)" #subTopicName />
             <button type="button" (click)="onEdit()">{{editing ? 'Done': 'Edit'}}</button>
             <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button>
          </div> -->
-    </li>
+
+
+
+
+        <!-- </li>
 </ul>
-<div *ngIf="editing" class="dFlex subtopic-input-wrapper">
+<div *ngIf="editing" class="d-flex subtopic-input-wrapper">
     <div class="subtopic-input-container">
         <div class="subtopic-input-button" *ngIf="!subtopics.static">
             <div class="topic-input-tab">Edit/Remove SubTopic</div>
@@ -25,5 +70,5 @@
         <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button>
     </div>
   </div>
-</div>
+</div> -->
 

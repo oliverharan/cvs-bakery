@@ -8,22 +8,22 @@
                 <div class="pane-left-content-wrapper">
                     <span>Now serving, fresh hot topics. Select a topic to view all its receipes.</span>
                 </div>
-                <div class="pane-left-content-wrapper" *ngFor="let items of catalogList;let i = index">
+                <div class="pane-left-content-wrapper">
                     <div class="pane-left-content-inner">
                       <!-- Topics -->
-                      <side-nav-topic [topic]="items" [topicId]="i" (selectTopic)="openSub($event)" class="dFlex fBasis"></side-nav-topic>
+                      <side-nav [topic]="catalogList" (selectTopic)="openSub($event)" class="dFlex fBasis"></side-nav>
                         <!-- {{items.title}}
                         <div>
                             <button (click)="toggleSubTopics(); expandTopic = i" class="chevron-down-button " [@slideInOut]></button>
                         </div> -->
                         <!-- Edit Button-->
-                        <button *ngIf="!items.static" (click)="onEdit(catalogList[i], i); selectedEdit = i" class="edit-button fas fa-pencil-alt"></button>
+                        <!-- <button *ngIf="!items.static" (click)="onEdit(catalogList[i], i); selectedEdit = i" class="edit-button fas fa-pencil-alt"></button> -->
                     </div>
                     <!-- <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)"></side-nav>                     -->
                     <!-- Sub Topics-->
-                    <div *ngIf="visible">
+                    <!-- <div *ngIf="visible">
                         <side-nav [ngClass]="expandTopic === i ? 'show': 'hidden'"  *ngFor="let subItems of items['subtopic']" [subtopics]="subItems"></side-nav>
-                    </div>
+                    </div> -->
                     <!-- Edit Topic Name-->
                     <topic-input *ngIf="topicEditToggle" id="editor" [ngClass]="selectedEdit === i ? 'show': 'hidden'" [itemTitle]="items" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)" (cancel)="handleCancel();" class="topic-input"></topic-input>
                 </div>

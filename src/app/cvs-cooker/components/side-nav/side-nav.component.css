@@ -1,10 +1,12 @@
-.dFlex {
+.d-flex {
   display: flex;
 }
-.fBasis{
+.f-basis{
   flex-basis: 100%;
 }
-
+.f-flow{
+  flex-flow: column nowrap;
+}
 .editTopic {
   color:red;
 }

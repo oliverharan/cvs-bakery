@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   expandTopic: any;
   visible = false;
   topicEditToggle = false;
+  closeSubtopic: boolean;
   constructor(private relayService: RelayService, private el: ElementRef){}
 
 
@@ -50,7 +51,9 @@ export class HomeComponent implements OnInit {
     .getReceipeCatalog()
     .subscribe((data: ReceipeCatalog[]) => this.catalogListSubTopic = data['receipeCatalog']['subtopic']);
   }
-
+  subtopicClose(){
+    this.closeSubtopic = false;
+  }
   handleEdit(event: ReceipeCatalog, i) {
     this.selectedEdit = '';
     console.log('Value handle edit', event, i);
@@ -83,7 +86,12 @@ export class HomeComponent implements OnInit {
     console.log(this.visible);
     // this.selectTopicIndex = i;
   }
+  close() {
+        this.closeSubtopic = !this.closeSubtopic;
+
+  }
   onEdit(event, i) {
+    this.closeSubtopic = false;
     this.topicEditToggle = !this.topicEditToggle;
     // this.editing = true;
     // let y = this.el.nativeElement.querySelector('#editor');
