@@ -24,6 +24,15 @@
     font-weight: bold;
     letter-spacing: .05em;
 }
+.hidden {
+  height: 0;
+  opacity: 0;
+}
+.subtopicList {
+  opacity: 1;
+  height: 100%;
+
+}
 .align-center{
   align-items: center;
 }

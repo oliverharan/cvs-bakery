@@ -17,10 +17,26 @@ export class SideNavComponent implements OnInit {
   @Output() cancel: EventEmitter<any> = new EventEmitter();
   cancelling: boolean = false;
   editing = false;
+  showList = null;
+  expandTopic: any = null;
   constructor() { }
 
   ngOnInit() {
     // console.log('Subtopic', this.subtopics);
+  }
+  expandList(i: number) {
+    if (this.showList = null) {
+      this.expandTopic = i;
+      this.showList = true;
+    } else if (this.expandTopic !== i) {
+      this.showList = false;
+      this.expandTopic = i;
+    } else if (this.expandTopic = i) {
+      this.expandTopic = null;
+      this.showList = false;
+    } else if (this.expandTopic = null && this.showList) {
+      this.showList = false;
+    }
   }
   onEdit() {
     this.cancel.emit();
