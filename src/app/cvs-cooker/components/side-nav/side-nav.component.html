@@ -1,17 +1,26 @@
-<div class="d-flex f-basis f-flow">
+<div class="d-flex f-flow f-basis">
+    <div class="pane-left-content-wrapper">
+        <span class="d-flex justifyEnd align-center add-category">Add New Category<span class="fas fa-plus" (click)="addTopic($event);"></span></span>
+    </div>
   <!-- Topics-->
   <!-- Loop Catagory Topics-->
+  <div>
+
   <ul *ngFor="let items of topic; let i = index">
     <li>
       <div class="d-flex">
         <!-- Expand Subtopics List-->
-        <button *ngIf="items['subtopic'].length" (click)="expandList(i);" class="chevron-down-button fas fa-caret-right"></button>
+        <button *ngIf="items.subtopic[0].title !== ''" (click)="expandList(i)" class="chevron-down-button fas fa-caret-right"></button>
         <!-- Topics-->
-        <div [ngClass]="{topic_tab : items['subtopic'].length == 0}" class="subtopic-content align-center">
+        <div [ngClass]="{topic_tab : !items.subtopic || !items.subtopic[0].title}" class="subtopic-content align-center">
           {{items.title}}
         </div>
         <!-- Edit Button-->
-        <button *ngIf="!items.static" (click)="onEdit(items[i], i); selectedEdit = i" class=" d-flex f-basis justifyEnd edit-button fas fa-pencil-alt"></button>
+        <!-- <button *ngIf="!items.static" (click)="activeTopic = true; selectedEdit = i; selectedItems = items; onEdit(items[i], i); " class=" d-flex f-basis justifyEnd edit-button fas fa-pencil-alt"></button> -->
+        <div class="d-flex f-basis justifyEnd">
+            <button class="fas fa-pencil-alt d-flex edit-button " *ngIf="!items.static" (click)="activeTopic = true; selectedEdit = i; selectedItems = items; editItem($event, items); "></button>
+            <app-edit-topic *ngIf="editing && itemToEdit.id == items.id" [editing]="editing" [items]="selectedItems" (cancel)="onCancel()" (edit)="onEdit($event)" (remove)="onRemove($event)"></app-edit-topic>
+          </div>
       </div>
       <!-- Subtopics-->
       <ul>
@@ -19,13 +28,16 @@
         <li *ngFor="let items of items['subtopic']" [ngClass]="expandTopic === i ? 'subtopicList': 'hidden'" class="subtopic-list d-flex">
           <div [ngClass]="{editTopic: editing}" class="subtopic-content align-center topic_tab_2x">
             {{items.title}}
+
           </div>
           <!-- Edit Subtopics Button-->
           <div *ngIf="!items.static" class="d-flex f-basis justifyEnd">
-            <button (click)="onEdit()" class="edit-button fas fa-pencil-alt"></button>
+            <button (click)="activeSubtopic = true; editItem($event, items); selectedItems = items" class="edit-button fas fa-pencil-alt"></button>
+            <app-edit-topic *ngIf="editing && itemToEdit.id == items.id" [editing]="editing" [items]="selectedItems" (edit)="onEdit($event)"  (cancel)="onCancel()" (remove)="onRemove($event)"></app-edit-topic>
+
             <!-- <button (click)="onRemove()" class="edit-button fas fa-trash-alt"></button> -->
           </div>
-          <div *ngIf="editing" class="d-flex subtopic-input-wrapper">
+          <!-- <div *ngIf="editing" class="d-flex subtopic-input-wrapper">
             <div class="subtopic-input-container">
               <div class="subtopic-input-button" *ngIf="!items.static">
                 <div class="topic-input-tab">Edit/Remove SubTopic</div>
@@ -35,11 +47,18 @@
                 <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button>
               </div>
             </div>
-          </div>
+          </div> -->
         </li>
       </ul>
     </li>
   </ul>
+  <app-add-topic [editing]="addingTopic" (cancel)="onCancel($event)" [items]="selectedItems" (edit)="onEdit($event)"></app-add-topic>
+  <ng-template #noItems>
+      <h5>There are no items returned</h5>
+    </ng-template>
+  </div>
+
+  <!-- <app-edit-topic [editing]="editing" *ngIf="editing" [items]="selectedItems"></app-edit-topic> -->
 
 
   <!--

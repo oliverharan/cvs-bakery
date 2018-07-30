@@ -88,20 +88,18 @@ height: inherit;
   /* background: url(../../../../assets/icons/chevron-down.svg) top center no-repeat; */
   background-color: transparent;
   border-style: none;
-  min-width: 20px;
+  width: 20px;
   height: 20px;
   padding: 0;
   color: #d58d68;
 }
 .edit-button {
-  justify-content: center;
   background-color: transparent;
   border-style: none;
   width: 20px;
   height: 20px;
   padding: 0;
   color: #d58d68;
-  z-index: 0;
 }
 .topic-input-container{
 position: relative;
@@ -158,11 +156,4 @@ min-height: 165px;
   text-transform: uppercase;
   padding-left: 5px;
 
-}
-.add-category {
-  height: 25px;
-}
-.add-category > span {
-  padding:0 0 0 8px;
-  color: rgba(65,223,78,.90);
 }

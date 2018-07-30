@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
+import { EditTopicComponent } from '../edit-topic/edit-topic.component';
+import { AddTopicComponent } from '../add-topic/add-topic.component';
 import { ReceipeCatalog } from '../../models/receipeCatalog.model';
 
 @Component({
@@ -6,20 +8,34 @@ import { ReceipeCatalog } from '../../models/receipeCatalog.model';
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.css']
 })
-export class SideNavComponent implements OnInit {
+export class SideNavComponent implements OnInit, AfterViewInit {
 // @ViewChild('subtopics') subtopics: TemplateRef<any>;
   @Input() topic: ReceipeCatalog;
   @Input() topicId: ReceipeCatalog;
   @Input() receipes: ReceipeCatalog;
   @Input() subtopics: ReceipeCatalog;
+  @Input() addNewTopic: ReceipeCatalog;
   @Output() remove: EventEmitter<any> = new EventEmitter();
-  @Output() edit: EventEmitter<any> = new EventEmitter();
+  @Output() editMain: EventEmitter<any> = new EventEmitter();
   @Output() cancel: EventEmitter<any> = new EventEmitter();
+  @ViewChild(EditTopicComponent) editPanel: EditTopicComponent;
+  @ViewChild(AddTopicComponent) addPanel: AddTopicComponent;
   cancelling: boolean = false;
   editing = false;
+  addingTopic = false;
   showList = null;
   expandTopic: any = null;
+  activeTopic: boolean = null;
+  activeSubtopic: boolean = null;
+  item: any;
+  selectedItems: ReceipeCatalog;
+  itemToEdit: ReceipeCatalog;
   constructor() { }
+
+  ngAfterViewInit() {
+    // console.log('edittopic', this.editPanel);
+    // this.editPanel.tabTitle = 'mytitle';
+  }
 
   ngOnInit() {
     // console.log('Subtopic', this.subtopics);
@@ -38,18 +54,49 @@ export class SideNavComponent implements OnInit {
       this.showList = false;
     }
   }
-  onEdit() {
-    this.cancel.emit();
-    if (this.edit) {
-      this.edit.emit(this.subtopics);
+  addTopic(event: ReceipeCatalog) {
+    console.log('ev', event);
+    this.addingTopic = !this.addingTopic;
+  }
+  onCancel(val) {
+    console.log('vak', val);
+    this.editing = false;
+    if (this.addingTopic !== val) {
+      this.addingTopic = false;
+    } else {
+      this.addingTopic = true;
     }
+  }
+  editItem(event, item) {
+    // this.editing = true;
     this.editing = !this.editing;
+    this.itemToEdit = item;
+    console.log('itemtoedit', item);
+  }
+  onEdit(event: ReceipeCatalog, item) {
+    console.log('evet', event, item);
+    // this.editing = !this.editing;
+    // if (this.activeTopic) {
+    //   this.editPanel.tabTitle = 'Edit/Remove Topic';
+    //   this.activeTopic = null;
+    // } else if (this.activeSubtopic) {
+    //   this.editPanel.tabTitle = 'Edit/Remove Subtopic';
+    //   this.activeSubtopic = null;
+    // }
+    // this.cancel.emit();
+    if (this.editMain && event) {
+      this.editMain.emit(event);
+    }
+//     this.editMain.emit(event);
+// console.log('sub',event);
   }
   onNameChange(value: string) {
     this.subtopics.title = value;
   }
-  onRemove() {
-    this.remove.emit(this.subtopics);
+  onRemove(event) {
+    // console.log('myremove', event);
+    this.editing = false;
+    this.remove.emit(event);
   }
 }
 @Component({
