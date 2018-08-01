@@ -1,11 +1,11 @@
 <div class="d-flex f-flow f-basis">
     <div class="pane-left-content-wrapper">
+      <ng-content *ngIf='addingTopic' select="app-add-category"></ng-content>
         <span class="d-flex justifyEnd align-center add-category">Add New Category<span class="fas fa-plus" (click)="addTopic($event);"></span></span>
     </div>
   <!-- Topics-->
   <!-- Loop Catagory Topics-->
   <div>
-
   <ul *ngFor="let items of topic; let i = index">
     <li>
       <div class="d-flex">
@@ -52,7 +52,7 @@
       </ul>
     </li>
   </ul>
-  <app-add-topic [editing]="addingTopic" (cancel)="onCancel($event)" [items]="selectedItems" (edit)="onEdit($event)"></app-add-topic>
+  <!-- <app-add-topic [editing]="addingTopic" (cancel)="onCancel($event)" [items]="selectedItems" (add)="onAdd($event)" (edit)="onEdit($event)"></app-add-topic> -->
   <ng-template #noItems>
       <h5>There are no items returned</h5>
     </ng-template>

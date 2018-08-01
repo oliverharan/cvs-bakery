@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit, ContentChild, AfterContentInit } from '@angular/core';
 import { EditTopicComponent } from '../edit-topic/edit-topic.component';
 import { AddTopicComponent } from '../add-topic/add-topic.component';
+import { AddCategoryComponent } from '../add-category/add-category.component';
 import { ReceipeCatalog } from '../../models/receipeCatalog.model';
 
 @Component({
@@ -8,18 +9,21 @@ import { ReceipeCatalog } from '../../models/receipeCatalog.model';
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.css']
 })
-export class SideNavComponent implements OnInit, AfterViewInit {
+export class SideNavComponent implements OnInit, AfterViewInit, AfterContentInit {
 // @ViewChild('subtopics') subtopics: TemplateRef<any>;
   @Input() topic: ReceipeCatalog;
   @Input() topicId: ReceipeCatalog;
   @Input() receipes: ReceipeCatalog;
   @Input() subtopics: ReceipeCatalog;
   @Input() addNewTopic: ReceipeCatalog;
+  @Output() active: EventEmitter<any> = new EventEmitter();
   @Output() remove: EventEmitter<any> = new EventEmitter();
+  @Output() adder: EventEmitter<any> = new EventEmitter();
   @Output() editMain: EventEmitter<any> = new EventEmitter();
   @Output() cancel: EventEmitter<any> = new EventEmitter();
   @ViewChild(EditTopicComponent) editPanel: EditTopicComponent;
   @ViewChild(AddTopicComponent) addPanel: AddTopicComponent;
+  @ContentChild(AddCategoryComponent) addTopicForm: AddCategoryComponent;
   cancelling: boolean = false;
   editing = false;
   addingTopic = false;
@@ -32,6 +36,12 @@ export class SideNavComponent implements OnInit, AfterViewInit {
   itemToEdit: ReceipeCatalog;
   constructor() { }
 
+  ngAfterContentInit(){
+    console.log('after cnotent', this.addTopicForm);
+    if (this.addTopicForm.cancel) {
+      this.addTopicForm.cancel.subscribe(cancelDialog => this.addingTopic = cancelDialog);
+    }
+  }
   ngAfterViewInit() {
     // console.log('edittopic', this.editPanel);
     // this.editPanel.tabTitle = 'mytitle';
@@ -57,6 +67,8 @@ export class SideNavComponent implements OnInit, AfterViewInit {
   addTopic(event: ReceipeCatalog) {
     console.log('ev', event);
     this.addingTopic = !this.addingTopic;
+    this.adder.emit(this.addingTopic);
+
   }
   onCancel(val) {
     console.log('vak', val);
@@ -72,6 +84,12 @@ export class SideNavComponent implements OnInit, AfterViewInit {
     this.editing = !this.editing;
     this.itemToEdit = item;
     console.log('itemtoedit', item);
+  }
+  onAdd(event: ReceipeCatalog, item) {
+    console.log('addddd', event, item);
+    if (this.adder && event) {
+      this.adder.emit(event);
+    }
   }
   onEdit(event: ReceipeCatalog, item) {
     console.log('evet', event, item);

@@ -45,10 +45,10 @@
 .topic_tab_2x{
   padding-left: 40px;
 }
-.topic-input-container{
+.add-topic-input-container{
   position: relative;
 }
-.topic-input-tab {
+.add-topic-input-tab {
   position: absolute;
   top: -31px;
   left: 31px;
@@ -61,18 +61,23 @@
   font-weight: bolder;
   color: #f2f2f2;
 }
-.subtopic-input-wrapper{
-}
-.subtopic-input-container {
+
+.add-topic-input-container {
   position: absolute;
   bottom: 0;
   left: 0;
 background: rgba(65,223,78,.90);
 width: 100%;
-height: inherit;
+/* height: inherit; */
 }
-.subtopic-input-button{
-  height: 165px;
+.add-topic-input-wrapper{
+  flex-basis: 100%;
+  padding:0 33px;
+  /* height: 165px; */
+  min-height: 250px;
+  max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 /* .chevron-down-button::before {
   content: "";
@@ -88,20 +93,18 @@ height: inherit;
   /* background: url(../../../../assets/icons/chevron-down.svg) top center no-repeat; */
   background-color: transparent;
   border-style: none;
-  min-width: 20px;
+  width: 20px;
   height: 20px;
   padding: 0;
   color: #d58d68;
 }
 .edit-button {
-  justify-content: center;
   background-color: transparent;
   border-style: none;
   width: 20px;
   height: 20px;
   padding: 0;
   color: #d58d68;
-  z-index: 0;
 }
 .topic-input-container{
 position: relative;
@@ -110,27 +113,72 @@ min-height: 165px;
 }
 .topic-input-contents {
   flex-basis: 100%;
-  padding-left:33px;
+  padding:0 33px;
 }
-.topic-input-contents > input {
-  width: 225px;
+input {
+  width: 100%;
   border: navajowhite;
   padding: 5px;
   font-family: Lato, sans-serif;
   font-size: 125%;
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
 }
-.topic-input-contents > h2{
+form {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+    height: auto;
+    /* top: 20px; */
+    position: relative;
+}
+form > h2{
   font-size: 162%;
   font-weight: bold;
-  padding-bottom: 15px;
+  padding-top: 10px;
 }
-.topic-input-close {
+form > span{
+  padding: 5px 0 15px;
+}
+form > button{
+margin:15px 0px 0;
+padding:10px 0;
+font-weight: bold;
+font-size:125%;
+text-transform: uppercase;
+background-color:#269206;
+color:#f2f2f2;
+border: none;
+/* width: 30%; */
+}
+form > button:nth-child(10){
+  margin-bottom:15px;
+}
+hr {
+  width: 100%;
+    border: 0;
+    border-top: 1px solid #77e364;
+    border-bottom: 1px solid #3bc224;
+    margin-top: 20px;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #ccc;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #ccc;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #ccc;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #ccc;
+}
+.add-topic-input-close {
   position: absolute;
   top: 9px;
-  right: 9px;
+  right: 19px;
 }
 .topic-input-button {
   position: absolute;
@@ -159,10 +207,12 @@ min-height: 165px;
   padding-left: 5px;
 
 }
-.add-category {
-  height: 25px;
+.editable{
+  height: 18px;
+  display: flex;
+  align-content: center;
 }
-.add-category > span {
-  padding:8px 0 8px 8px;
-  color: rgba(65,223,78,.90);
+.editable > input {
+  width:15px;
+  margin: 0;
 }
