@@ -27,6 +27,7 @@ export class AddCategoryComponent implements OnInit {
   @Input() editing: boolean;
   @Output() cancel: EventEmitter<any> = new EventEmitter();
   @Output() edit: EventEmitter<any> = new EventEmitter();
+  @Output() adder: EventEmitter<any> = new EventEmitter();
   @Output() remove: EventEmitter<any> = new EventEmitter();
   @ViewChild('topicName') topicTitle: any;
   @ViewChild('topicNameEditable') topicNameEditable: any;
@@ -61,7 +62,8 @@ export class AddCategoryComponent implements OnInit {
     // this.remove.emit(this.subtopics);
   }
   onCancel() {
-    this.formReset();
+    console.log('ngmodel', this.item.title);
+    // this.formReset();
     this.editing = false;
     // this.item.title = '';
     // this.item.subtopic[0].title = '';
@@ -93,8 +95,10 @@ export class AddCategoryComponent implements OnInit {
       }]
     };
   }
-  onSubmit(event) {
-    console.log('check', this.item);
+  onSubmit(event: any) {
+    console.log('Step 1: Topic/Subtopic Injection', event);
+    // console.log(JSON.parse(JSON.stringify(test.currentTarget, null, 2)));
+    // this.adder.emit(event);
 
     // console.log('items', event.currentTarget);
     if (this.item.title !== '') {
@@ -104,7 +108,7 @@ export class AddCategoryComponent implements OnInit {
       // if (this.editableSubCategory) {
       //   this.item.subtopic[0].static = this.editableSubCategory;
       // }
-      this.edit.emit(this.item);
+      this.adder.emit(event);
     //   console.log('eveve', this.item);
     }
     // this.editableSubCategory = false;

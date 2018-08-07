@@ -1,108 +1,160 @@
 import { Component, OnInit, Output, EventEmitter, ElementRef } from '@angular/core';
-import { trigger, transition, animate, style, state } from '@angular/animations';
-import { Credits } from '../cvs-cooker/models/credits.model';
 import { RelayService } from '../cvs-cooker/services/relay.service';
+import { Credits } from '../cvs-cooker/models/credits.model';
 import { ReceipeCatalog } from './models/receipeCatalog.model';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  animations: [
-    trigger('slideInOut', [
-      state('visible',   style({
-        transform: 'rotateY(180deg) rotateZ(90deg)',
-      })),
-    ])
-  ]
 })
 
 export class HomeComponent implements OnInit {
+
   @Output() edit: EventEmitter<any> = new EventEmitter();
+
   credits: Credits[];
   catalogList: ReceipeCatalog[];
   catalogListSubTopic: ReceipeCatalog[];
-  items: any;
-  editing: boolean = false;
-  show: boolean = false;
+  show = false;
+  editing = false;
   selectedEdit: any;
-  selectTopicIndex: number;
-  expandTopic: any;
-  visible = false;
   topicEditToggle = false;
-  closeSubtopic: boolean;
-  constructor(private relayService: RelayService, private el: ElementRef){}
-
+  stepOne: any;
+  activeStepOne: any;
+  selectedItems: any;
+  constructor( private relayService: RelayService ) {}
 
   ngOnInit() {
 
-    // Navbar Credits button
-    this.relayService
-    .getCredits()
-    .subscribe((data: Credits[]) => this.credits = data['credits']);
+    // Navbar Get Credits button
+    this.relayService.getCredits().subscribe((data: Credits[]) => this.credits = data);
 
-    // SideNav Topics
-    this.relayService
-    .getReceipeCatalog()
-    .subscribe((data: ReceipeCatalog[]) => this.catalogList = data['receipeCatalog']);
-
-    // SideNav SubTopics
-    this.relayService
-    .getReceipeCatalog()
-    .subscribe((data: ReceipeCatalog[]) => this.catalogListSubTopic = data['receipeCatalog']['subtopic']);
-  }
-  subtopicClose(){
-    this.closeSubtopic = false;
-  }
-  handleEdit(event: ReceipeCatalog, i) {
-    this.selectedEdit = '';
-    console.log('Value handle edit', event, i);
-    // this.catalogList[i].title = event;
-    this.catalogList = this.catalogList.map(((catalogList: ReceipeCatalog) => {
-      if (catalogList.id === event.id) {
-        catalogList = Object.assign({}, catalogList, event);
-      }
-      return catalogList;
-    }));
-  }
-  handleRemove(event: ReceipeCatalog, i) {
-    // console.log(event, i);
-        this.show = false;
-    this.catalogList = this.catalogList.filter((catalogList: ReceipeCatalog) => {
-      console.log(event.id);
-     return catalogList.id !== event.id;
+    // SideNav Get Topics
+    this.relayService.getReceipeCatalog().subscribe((data: ReceipeCatalog[]) => {
+      this.catalogList = data;
     });
   }
-  handleCancel() {
-    this.selectedEdit = '';
-    this.topicEditToggle = false;
-  }
-  openSub(event){
-    this.visible = !this.visible;
-    // this.visible = true;
-    console.log('Select topic id', event);
-    this.expandTopic = event;
-    console.log(this.expandTopic);
-    console.log(this.visible);
-    // this.selectTopicIndex = i;
-  }
-  close() {
-        this.closeSubtopic = !this.closeSubtopic;
+    addDialog(event) {
+      console.log('adddialog', 'test');
+      this.stepOne = event;
+      // console.log('adddialog', this.stepOne);
+      // setTimeout(() => {
+      //   console.log('adddialog', this.stepOne);
+      // }, 2000);
 
-  }
-  onEdit(event, i) {
-    this.closeSubtopic = false;
-    this.topicEditToggle = !this.topicEditToggle;
-    // this.editing = true;
-    // let y = this.el.nativeElement.querySelector('#editor');
-    // y.className = 'show';
-    // y.className.removeClass = 'hidden';
-    // if (this.edit) {
-    //   this.edit.emit(val);
-    //   console.log(val);
-    // }
-    // console.log('val',y);
-    console.log('test', event, i);
-    // this.handleEdit(val);
-  }
+      // console.log('adddialog', JSON.parse(JSON.stringify(event.currentTarget)));
+    }
+    handleAdd(event: ReceipeCatalog) {
+      console.log('myvent', event);
+      // this.relayService.addCategory(event);
+    }
+    activeEdit(event: ReceipeCatalog) {
+      if (event) {
+        this.activeStepOne = event;
+        this.editing = !this.editing;
+        this.selectedItems = event;
+        console.log('Step One: Contain step 1 data for step 2', this.activeStepOne);
+      }
+      // this.relayService.updateReceipCatalog(event);
+      this.selectedEdit = '';
+    }
+    handleEdit(event: ReceipeCatalog) {
+      console.log('myvent2', event);
+      this.relayService.updateReceipCatalog(event);
+      this.selectedEdit = '';
+      // this.catalogList[i].title = event;
+      // this.relayService
+      // .updateReceipCatalog(event)
+      // .subscribe((data: ReceipeCatalog) => {
+      //   this.catalogList = this.catalogList.map(((catalogList: ReceipeCatalog) => {
+      //     if (catalogList.id === event.id) {
+      //       // console.log('Value handle edit', catalogList);
+      //       catalogList = Object.assign({}, catalogList, event);
+      //     }
+      //     console.log('Value handle edit', catalogList);
+      //     return catalogList;
+      //   }));
+      // });
+    }
+    handleRemove(event: ReceipeCatalog) {
+      console.log('remove', event);
+        this.show = false;
+        this.relayService.removeItem(event);
+      // this.catalogList = this.catalogList.filter((catalogList: ReceipeCatalog) => {
+      //   console.log(event.id);
+      //  return catalogList.id !== event.id;
+      // });
+    }
+    handleCancel() {
+      console.log('woooo');
+      this.selectedEdit = '';
+      this.topicEditToggle = false;
+    }
+    onCancel(e) {
+      console.log('myyyye', e);
+    }
+    onEdit(e) {
+      console.log('homeedit', e);
+    }
+
 }
+
+
+
+  // animations: [
+  //   trigger('slideInOut', [
+  //     state('visible',   style({
+  //       transform: 'rotateY(180deg) rotateZ(90deg)',
+  //     })),
+  //   ])
+  // ]
+
+    // JSON
+    // this.relayService
+    // .getReceipeCatalog()
+    // .subscribe((data: ReceipeCatalog[]) => this.catalogList = data);
+
+    // SideNav SubTopics
+    // this.relayService
+    // .getReceipeCatalog()
+    // .subscribe((data: ReceipeCatalog[]) => this.catalogListSubTopic = data);
+
+
+    // JSON
+    // this.relayService
+    // .getCredits()
+    // .subscribe((data: Credits[]) => this.credits = data);
+
+
+
+  // subtopicClose() {
+  //   this.closeSubtopic = false;
+  // }
+
+  // onEdit(event) {
+  //   this.closeSubtopic = false;
+  //   this.topicEditToggle = !this.topicEditToggle;
+  //   // this.editing = true;
+  //   // let y = this.el.nativeElement.querySelector('#editor');
+  //   // y.className = 'show';
+  //   // y.className.removeClass = 'hidden';
+  //   // if (this.edit) {
+  //   //   this.edit.emit(val);
+  //   //   console.log(val);
+  //   // }
+  //   // console.log('val',y);
+  //   // console.log('test', event, i);
+  //   // this.handleEdit(val);
+  // }
+
+
+  // openSub(event) {
+  //   this.visible = !this.visible;
+  //   // this.visible = true;
+  //   console.log('Select topic id', event);
+  //   this.expandTopic = event;
+  //   console.log(this.expandTopic);
+  //   console.log(this.visible);
+  //   // this.selectTopicIndex = i;
+  // }

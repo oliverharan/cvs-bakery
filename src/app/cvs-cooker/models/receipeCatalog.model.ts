@@ -1,12 +1,19 @@
 export interface ReceipeCatalog {
-  id: number;
+  id?: string;
   title: string;
   active: boolean;
   static: boolean;
-  subtopic: {
-    id: number;
+  subtopic: [{
+    id?: string;
     title: string;
     active: boolean;
     static: boolean;
-  };
+    children?: [{
+      id?: string;
+      title: string;
+      active?: boolean;
+      static?: boolean;
+      description: string;
+    }];
+  }];
 }

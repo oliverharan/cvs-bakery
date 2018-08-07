@@ -1,144 +1,99 @@
 .sideNavContainer {
-    display: flex;
-    flex: 1 1 0%;
-    height: initial;
-    position: absolute;
-    outline: none;
-    overflow: hidden;
-    user-select: text;
-    bottom: 0px;
-    top: 40px;
-    flex-direction: row;
-    left: 0px;
-    right: 0px;
+  display: flex;
+  flex: 1 1 0%;
+  height: initial;
+  position: absolute;
+  outline: none;
+  overflow: hidden;
+  user-select: text;
+  bottom: 0px;
+  top: 40px;
+  flex-direction: row;
+  left: 0px;
+  right: 0px;
 }
-
 .vertical {
-    height: 100%;
+  height: 100%;
 }
-
 .panel {
-    display: flex;
-    flex: 1 1 0%;
-    height: 100%;
-    position: absolute;
-    outline: none;
-    overflow: hidden;
-    user-select: text;
-    flex-direction: row;
-    left: 0px;
-    right: 0px;
+  display: flex;
+  flex: 1 1 0%;
+  height: 100%;
+  position: absolute;
+  outline: none;
+  overflow: hidden;
+  user-select: text;
+  flex-direction: row;
+  left: 0px;
+  right: 0px;
 }
-
 .panel-right {
-    flex: 1 1 0%;
-    position: relative;
-    outline: none;
+  flex: 1 1 0%;
+  position: relative;
+  outline: none;
 }
-
 .pane-left {
-    flex: 0 0 auto;
-    position: relative;
-    outline: none;
-    min-width: 20%;
+  flex: 0 0 auto;
+  position: relative;
+  outline: none;
+  min-width: 20%;
 }
-
 .pane-center {
-    flex: 1 1 0%;
-    position: relative;
-    outline: none;
+  flex: 1 1 0%;
+  position: relative;
+  outline: none;
 }
-
 .pane-left-content {
-    background: #353535;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: default;
-    white-space: nowrap;
-    margin-top: 0px;
-    /* height: 301px; */
-    position: relative;
-    width: 100%;
-    height: 100%;
-    /* background: #1e1e1e; */
-    color: #eee;
+  background: #353535;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  white-space: nowrap;
+  margin-top: 0px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: #eee;
 }
-
 .pane-left-content-wrapper {
-    padding: 7px 15px 3px;
-    border-top: 1px solid #2e2e2f;
-    border-bottom: 1px solid #2e2e2f;
-    padding-bottom: 5px;
-    font-size: 72%;
-    font-weight: 400;
+  padding: 7px 15px 3px;
+  border-top: 1px solid #2e2e2f;
+  border-bottom: 1px solid #2e2e2f;
+  padding-bottom: 5px;
+  font-size: 72%;
+  font-weight: 400;
 }
-
 .pane-left-content-wrapper:not(:first-child) {
-    border-top: none;
+  border-top: none;
 }
-
-.Resizer.vertical {
-    margin: 0 -5px;
-    border-left: 5px solid hsla(0, 0%, 100%, 0);
-    border-right: 5px solid hsla(0, 0%, 100%, 0);
-    cursor: col-resize;
-}
-
-.Resizer {
-    background: #000;
-    opacity: 0.2;
-    z-index: 20;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    background-clip: padding-box;
-}
-
-.hidden {
-    display: none;
-}
-
-.active {
-    display: block;
-}
-
 .pane-left-content-inner {
-    display: flex;
-    flex-flow: row nowrap;
+  display: flex;
+  flex-flow: row nowrap;
 }
-
-.pane-left-content-inner>div {
-    display: flex;
-    flex-basis: 100%;
-    justify-content: flex-end;
+.pane-left-content-inner > div {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: flex-end;
 }
-
-.edit-button {
-    background-color: transparent;
-    border-style: none;
-    width: 20px;
-    height: 20px;
-    padding: 0;
-    color: #d58d68;
+.resizer.vertical {
+  margin: 0 -5px;
+  border-left: 5px solid hsla(0, 0%, 100%, 0);
+  border-right: 5px solid hsla(0, 0%, 100%, 0);
+  cursor: col-resize;
 }
-.edit-button>i {
-    color: #d58d68;
+.resizer {
+  background: #000;
+  opacity: 0.2;
+  z-index: 20;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background-clip: padding-box;
 }
-.dFlex{
+.dFlex {
   display: flex;
 }
-.fBasis{
+.fBasis {
   flex-basis: 100%;
-}
-.topic-input {
-  position: absolute;
-    bottom: 0;
-    left: 0;
-    background: rgba(65,223,78,.90);
-    width: 100%;
-    min-height: 200px;
-    height: inherit;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
 }

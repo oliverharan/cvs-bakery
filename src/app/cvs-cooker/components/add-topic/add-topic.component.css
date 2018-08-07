@@ -45,9 +45,6 @@
 .topic_tab_2x{
   padding-left: 40px;
 }
-.add-topic-input-container{
-  position: relative;
-}
 .add-topic-input-tab {
   position: absolute;
   top: -31px;
@@ -61,15 +58,17 @@
   font-weight: bolder;
   color: #f2f2f2;
 }
+/* .add-topic-input-container{
+  position: relative;
+} */
 
-.add-topic-input-container {
+/* .add-topic-input-container {
   position: absolute;
   bottom: 0;
   left: 0;
 background: rgba(65,223,78,.90);
 width: 100%;
-/* height: inherit; */
-}
+} */
 .add-topic-input-wrapper{
   flex-basis: 100%;
   padding:0 33px;

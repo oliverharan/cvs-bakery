@@ -18,6 +18,7 @@ export class SideNavComponent implements OnInit, AfterViewInit, AfterContentInit
   @Input() addNewTopic: ReceipeCatalog;
   @Output() active: EventEmitter<any> = new EventEmitter();
   @Output() remove: EventEmitter<any> = new EventEmitter();
+  @Output() add: EventEmitter<any> = new EventEmitter();
   @Output() adder: EventEmitter<any> = new EventEmitter();
   @Output() editMain: EventEmitter<any> = new EventEmitter();
   @Output() cancel: EventEmitter<any> = new EventEmitter();
@@ -34,13 +35,35 @@ export class SideNavComponent implements OnInit, AfterViewInit, AfterContentInit
   item: any;
   selectedItems: ReceipeCatalog;
   itemToEdit: ReceipeCatalog;
+  test: any;
+  itemAdd: any;
+
   constructor() { }
 
   ngAfterContentInit(){
     console.log('after cnotent', this.addTopicForm);
     if (this.addTopicForm.cancel) {
-      this.addTopicForm.cancel.subscribe(cancelDialog => this.addingTopic = cancelDialog);
+      this.addTopicForm.cancel.subscribe(cancelDialog => {
+        this.addingTopic = cancelDialog;
+        this.cancel.emit();
+       });
     }
+    // this.addTopicForm.edit.subscribe((item) => console.log('mmmmm', item));
+    // this.addTopicForm.edit.subscribe(event => this.test = event );
+    this.addTopicForm.adder.subscribe(event => {
+      this.itemAdd = event;
+      console.log('mar', this.itemAdd);
+      this.add.emit(event);
+    });
+
+    // if (this.addTopicForm) {
+    //   this.addTopicForm.edit.subscribe((item: any) => {
+    //     this.itemAdd = item;
+    //     console.log('iii', item);
+    //     this.adder.emit(this.itemAdd);
+    //   } );
+    // }
+    console.log('mmmmm', this.itemAdd);
   }
   ngAfterViewInit() {
     // console.log('edittopic', this.editPanel);
@@ -83,7 +106,8 @@ export class SideNavComponent implements OnInit, AfterViewInit, AfterContentInit
     // this.editing = true;
     this.editing = !this.editing;
     this.itemToEdit = item;
-    console.log('itemtoedit', item);
+    this.editMain.emit(item);
+    console.log('itemtoedit', item, event);
   }
   onAdd(event: ReceipeCatalog, item) {
     console.log('addddd', event, item);
@@ -117,89 +141,89 @@ export class SideNavComponent implements OnInit, AfterViewInit, AfterContentInit
     this.remove.emit(event);
   }
 }
-@Component({
-  selector: 'side-nav-topic',
-  template: `
-                        <div class="dFlex">
-                        <button
-                        *ngIf="topic['subtopic'].length"
-                        (click)=" expandTopic = topicId; outputId();"
-                        class="chevron-down-button fas fa-caret-right" ></button>
-                        <div
-                        [ngClass]="{topic_tab : topic['subtopic'].length == 0}"
-                        class="subtopic-content align-center">{{topic.title}}</div>
-                        </div>
-  `,
-  styleUrls: ['./side-nav.component.css']
-})
-export class SideNavTopicComponent implements OnInit {
-  @Input() topic: ReceipeCatalog;
-  @Input() topicId: ReceipeCatalog;
-  @Output() selectTopic: EventEmitter<any> = new EventEmitter();
-  expandTopic: number;
-  hasSubItems: any;
+// @Component({
+//   selector: 'side-nav-topic',
+//   template: `
+//                         <div class="dFlex">
+//                         <button
+//                         *ngIf="topic['subtopic'].length"
+//                         (click)=" expandTopic = topicId; outputId();"
+//                         class="chevron-down-button fas fa-caret-right" ></button>
+//                         <div
+//                         [ngClass]="{topic_tab : topic['subtopic'].length == 0}"
+//                         class="subtopic-content align-center">{{topic.title}}</div>
+//                         </div>
+//   `,
+//   styleUrls: ['./side-nav.component.css']
+// })
+// export class SideNavTopicComponent implements OnInit {
+//   @Input() topic: ReceipeCatalog;
+//   @Input() topicId: ReceipeCatalog;
+//   @Output() selectTopic: EventEmitter<any> = new EventEmitter();
+//   expandTopic: number;
+//   hasSubItems: any;
 
-  constructor(){}
-  ngOnInit(){
-  }
+//   constructor(){}
+//   ngOnInit(){
+//   }
 
-  outputId(){
-    // console.log('emit', this.expandTopic);
-    this.selectTopic.emit(this.expandTopic);
-  }
+//   outputId(){
+//     // console.log('emit', this.expandTopic);
+//     this.selectTopic.emit(this.expandTopic);
+//   }
 
-}
+// }
 
-@Component({
-  selector: 'topic-input',
-  styleUrls: ['./side-nav.component.css'],
-  template: `
-  <div class="topic-input-container">
-  <div class="topic-input-tab">Edit/Remove Topic</div>
-  <div (click)="onCancel()" class=" fas fa-times-circle fa-2x topic-input-close "></div>
-  <div class="topic-input-contents align-self-center">
-  <h2>Edit the Catalog Topic Name</h2>
-  <input type="text" [value]="itemTitle.title" (input)="onNameChange(subTopicName.value)" #subTopicName />
-  <div class="dFlex topic-input-button">
-  <button type="button" (click)="onEdit(subTopicName.value)" class="topic-btn fas fa-save"><span>Save</span></button>
-  <button type="button" (click)="onRemove()" class="topic-btn  fas fa-trash-alt"><span>Remove</span></button>
-  <button type="button" (click)="onCancel()" class="topic-btn  fas fa-times-circle"><span>Cancel</span></button>
-  </div>
-  </div>
-  </div>
-  <!-- <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button> -->
-  `
-})
+// @Component({
+//   selector: 'topic-input',
+//   styleUrls: ['./side-nav.component.css'],
+//   template: `
+//   <div class="topic-input-container">
+//   <div class="topic-input-tab">Edit/Remove Topic</div>
+//   <div (click)="onCancel()" class=" fas fa-times-circle fa-2x topic-input-close "></div>
+//   <div class="topic-input-contents align-self-center">
+//   <h2>Edit the Catalog Topic Name</h2>
+//   <input type="text" [value]="itemTitle.title" (input)="onNameChange(subTopicName.value)" #subTopicName />
+//   <div class="dFlex topic-input-button">
+//   <button type="button" (click)="onEdit(subTopicName.value)" class="topic-btn fas fa-save"><span>Save</span></button>
+//   <button type="button" (click)="onRemove()" class="topic-btn  fas fa-trash-alt"><span>Remove</span></button>
+//   <button type="button" (click)="onCancel()" class="topic-btn  fas fa-times-circle"><span>Cancel</span></button>
+//   </div>
+//   </div>
+//   </div>
+//   <!-- <button type="button" (click)="onRemove()">{{editing ? 'Done': 'Remove'}}</button> -->
+//   `
+// })
 
-export class TopicInputComponent implements OnInit {
-  @Input() itemTitle: any;
-  @Output() edit: EventEmitter<any> = new EventEmitter();
-  @Output() remove: EventEmitter<any> = new EventEmitter();
-  @Output() cancel: EventEmitter<any> = new EventEmitter();
-  initialTitle: any;
-  cancelling: boolean = false;
-  constructor(){
+// export class TopicInputComponent implements OnInit {
+//   @Input() itemTitle: any;
+//   @Output() edit: EventEmitter<any> = new EventEmitter();
+//   @Output() remove: EventEmitter<any> = new EventEmitter();
+//   @Output() cancel: EventEmitter<any> = new EventEmitter();
+//   initialTitle: any;
+//   cancelling: boolean = false;
+//   constructor(){
 
-  }
-  ngOnInit() {
-    console.log(this.itemTitle);
-    this.initialTitle = this.itemTitle.title;
-  }
-  onNameChange(val) {
-    this.itemTitle.title = val;
+//   }
+//   ngOnInit() {
+//     console.log(this.itemTitle);
+//     this.initialTitle = this.itemTitle.title;
+//   }
+//   onNameChange(val) {
+//     this.itemTitle.title = val;
 
-  }
-  onEdit(val) {
-    console.log(val);
-    this.edit.emit(val);
-  }
-  onRemove(){
-    this.remove.emit(this.itemTitle);
-    console.log(this.itemTitle);
-  }
-  onCancel(){
-    this.cancelling = true;
-    this.itemTitle.title = this.initialTitle;
-    this.cancel.emit(this.cancelling);
-  }
-}
+//   }
+//   onEdit(val) {
+//     console.log(val);
+//     this.edit.emit(val);
+//   }
+//   onRemove(){
+//     this.remove.emit(this.itemTitle);
+//     console.log(this.itemTitle);
+//   }
+//   onCancel(){
+//     this.cancelling = true;
+//     this.itemTitle.title = this.initialTitle;
+//     this.cancel.emit(this.cancelling);
+//   }
+// }

@@ -4,7 +4,8 @@
             <div class="topic-input-tab">{{tabTitle}}</div>
         <div (click)="onCancel()" class=" fas fa-times-circle fa-2x topic-input-close "></div>
         <h2>Editing the {{items.title}} catagory</h2>
-        <input type="text" [(ngModel)]="items.title" name="title" (input)="onNameChange(subTopicName.value)" #subTopicName />
+        <input type="text" ngModel value="{{items.title}}" name="title" (input)="onNameChange(subTopicName.value)" #subTopicName />
+        <!-- <input type="text" [(ngModel)]="items.title" name="title" (input)="onNameChange(subTopicName.value)" #subTopicName /> -->
         <button type="button" (click)="onEdit($event, items)">{{editing ? 'Done': 'Edit'}}</button>
         <button type="button" (click)="onRemove($event)">{{editing ? 'Remove': 'Remove'}}</button>
       </div>

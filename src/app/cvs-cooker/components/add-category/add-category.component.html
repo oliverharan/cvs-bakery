@@ -4,21 +4,21 @@
       <div class="add-topic-input-wrapper ">
         <div class="add-topic-input-tab">{{tabTitle}}</div>
         <div (click)="onCancel()" class=" fas fa-times-circle fa-2x add-topic-input-close "></div>
-        <form (ngSubmit)="onSubmit($event)">
+        <form (submit)="onSubmit($event)">
             <h2>Add a category</h2>
             <span>Enter a generic category which your code describes.</span>
-            <input placeholder="(i.e. Design or French Cooking)" type="text" name="title" #topicName ngModel />
+            <input placeholder="(i.e. Design or French Cooking)" type="text" name="title" #topicName [value]="item.title" ngModel="item.title" />
             <div class="editable">
-                <input type="checkbox" name="editableCategory" #topicNameEditable [value]="item.static" (change)="editableCategory = !editableCategory">
+                <input type="checkbox" name="editableCategory" #topicNameEditable [value]="item.static" ngModel="item.static" (change)="editableCategory = !editableCategory">
                 <label>Make editable</label>
             </div>
             <div>(change the name or remove this item) </div>
             <hr>
             <h2>Add a sub-category</h2>
             <span>Enter items specific to your category.</span>
-            <input placeholder="(i.e. Colors or Meat Recipes)" type="text" name="subTitle" #subTopicName />
+            <input placeholder="(i.e. Colors or Meat Recipes)" type="text" name="subTitle" #subTopicName ngModel="item.subtopic.title"/>
             <div class="editable">
-                <input type="checkbox" name="editableSubCategory" #subTopicNameEditable [value]="item.subtopic[0].static" (change)="editableSubCategory = !editableSubCategory"  >
+                <input type="checkbox" name="editableSubCategory" #subTopicNameEditable [value]="item.subtopic[0].static" ngModel="item.subtopic[0].static" (change)="editableSubCategory = !editableSubCategory"  >
                 <label>Make editable</label>
             </div>
             <div>(change the name or remove this item) </div>

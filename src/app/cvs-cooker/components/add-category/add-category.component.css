@@ -68,6 +68,7 @@
   left: 0;
 background: rgba(65,223,78,.90);
 width: 100%;
+z-index: 1;
 /* height: inherit; */
 }
 .add-topic-input-wrapper{

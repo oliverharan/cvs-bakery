@@ -2,49 +2,69 @@
 <main-nav [details]="credits"></main-nav>
 <!-- Left Content Panel-->
 <div class="sideNavContainer">
-    <div class="pane-left vertical">
-        <div class="pane-left-wrapper vertical">
-            <div class="pane-left-content vertical">
-                <div class="pane-left-content-wrapper">
-                    <span>Now serving, fresh hot topics. Select a topic to view all its receipes.</span>
-                </div>
-                <div class="pane-left-content-wrapper">
-                    <div class="pane-left-content-inner">
-                      <!-- Topics -->
-                      <side-nav [topic]="catalogList" (selectTopic)="openSub($event)" class="dFlex fBasis"></side-nav>
-                        <!-- {{items.title}}
-                        <div>
-                            <button (click)="toggleSubTopics(); expandTopic = i" class="chevron-down-button " [@slideInOut]></button>
-                        </div> -->
-                        <!-- Edit Button-->
-                        <!-- <button *ngIf="!items.static" (click)="onEdit(catalogList[i], i); selectedEdit = i" class="edit-button fas fa-pencil-alt"></button> -->
-                    </div>
-                    <!-- <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)"></side-nav>                     -->
-                    <!-- Sub Topics-->
-                    <!-- <div *ngIf="visible">
-                        <side-nav [ngClass]="expandTopic === i ? 'show': 'hidden'"  *ngFor="let subItems of items['subtopic']" [subtopics]="subItems"></side-nav>
-                    </div> -->
-                    <!-- Edit Topic Name-->
-                    <topic-input *ngIf="topicEditToggle" id="editor" [ngClass]="selectedEdit === i ? 'show': 'hidden'" [itemTitle]="items" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)" (cancel)="handleCancel();" class="topic-input"></topic-input>
-                </div>
+  <div class="pane-left vertical">
+    <div class="pane-left-wrapper vertical">
+      <div class="pane-left-content vertical">
+        <div class="pane-left-content-wrapper">
+          <span>Now serving, fresh hot topics. Select a topic to view all its receipes.</span>
+        </div>
+        <div class="pane-left-content-wrapper">
+          <div class="pane-left-content-inner">
+            <!-- Topic Sidenav -->
+            <side-nav
+              id="editor"
+              class="dFlex fBasis"
+              [topic]="catalogList"
+              (editMain)="activeEdit($event)"
+              (add)="handleAdd($event)"
+              (remove)="handleRemove($event)"
+              (cancel)="handleCancel();">
+              <app-add-category
+                [editing]="addingTopic"
+                (cancel)="onCancel($event)"
+                [items]="selectedItems"
+                (adder)="addDialog($event)"
+                (edit)="onEdit($event)"
+                (active)="addDialog($event)">
+              </app-add-category>
+              <app-edit-topic
+              [editing]="editing"
+              [items]="selectedItems"
+              (cancel)="onCancel()"
+              (edit)="onEdit($event)"
+              (remove)="onRemove($event)">
+            </app-edit-topic>
+            <!-- <app-edit-topic
+            *ngIf="editing && itemToEdit.id == items.id"
+            [editing]="editing"
+            [items]="selectedItems"
+            (cancel)="onCancel()"
+            (edit)="onEdit($event)"
+            (remove)="onRemove($event)">
+          </app-edit-topic> -->
 
-            </div>
+            </side-nav>
+          </div>
         </div>
+      </div>
     </div>
-    <span class="Resizer vertical "></span>
-    <div class="pane-center vertical">
-        <div class="pane-center-wrapper vertical">
-            <div class="pane-center-content vertical">
-                <div class="pane-center-content-wrapper vertical">test
-                </div>
-                <span class="Resizer vertical "></span>
-                <div class="panel-right vertical">
-                </div>
-            </div>
+  </div>
+  <span class="resizer vertical "></span>
+  <!-- Center Content Panel -->
+  <div class="pane-center vertical">
+    <div class="pane-center-wrapper vertical">
+      <div class="pane-center-content vertical">
+        <div class="pane-center-content-wrapper vertical">
+          Item content
         </div>
+        <span class="resizer vertical "></span>
+        Right Main Content Panel -->
+        <div class="panel-right vertical">
+        </div>
+      </div>
     </div>
+  </div>
 </div>
-<!-- Center & Right Main Content-->
 <app-oven></app-oven>
 
 <!-- <div class="pane-left-content-wrapper" *ngFor="let items of receipes">
@@ -53,3 +73,19 @@
                     <li  #subtopics="subtopic" [subtopic]="receipes" *ngFor="let subitems of items['subtopic']" ><div *ngIf="subitems.title">{{subitems.title}}</div></li>
                   </ul>
                 </div> -->
+
+
+<!-- {{items.title}}
+                        <div>
+                            <button (click)="toggleSubTopics(); expandTopic = i" class="chevron-down-button " [@slideInOut]></button>
+                        </div> -->
+<!-- Edit Button-->
+<!-- <button *ngIf="!items.static" (click)="onEdit(catalogList[i], i); selectedEdit = i" class="edit-button fas fa-pencil-alt"></button> -->
+<!-- <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)"></side-nav>                     -->
+<!-- Sub Topics-->
+<!-- <div *ngIf="visible">
+                        <side-nav [ngClass]="expandTopic === i ? 'show': 'hidden'"  *ngFor="let subItems of items['subtopic']" [subtopics]="subItems"></side-nav>
+                    </div> -->
+<!-- Edit Topic Name-->
+<!-- <topic-input *ngIf="topicEditToggle" id="editor" [itemTitle]="items" (editMain)="handleEdit($event)" (remove)="handleRemove($event)" (cancel)="handleCancel();" class="topic-input"></topic-input> -->
+<!-- <topic-input id="editor" [itemTitle]="items" (editMain)="handleEdit($event)" (remove)="handleRemove($event)" (cancel)="handleCancel();" class="topic-input"></topic-input> -->

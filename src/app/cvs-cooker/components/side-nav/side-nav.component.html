@@ -19,7 +19,8 @@
         <!-- <button *ngIf="!items.static" (click)="activeTopic = true; selectedEdit = i; selectedItems = items; onEdit(items[i], i); " class=" d-flex f-basis justifyEnd edit-button fas fa-pencil-alt"></button> -->
         <div class="d-flex f-basis justifyEnd">
             <button class="fas fa-pencil-alt d-flex edit-button " *ngIf="!items.static" (click)="activeTopic = true; selectedEdit = i; selectedItems = items; editItem($event, items); "></button>
-            <app-edit-topic *ngIf="editing && itemToEdit.id == items.id" [editing]="editing" [items]="selectedItems" (cancel)="onCancel()" (edit)="onEdit($event)" (remove)="onRemove($event)"></app-edit-topic>
+            <ng-content select="app-edit-topic"></ng-content>
+            <!-- <app-edit-topic *ngIf="editing && itemToEdit.id == items.id" [editing]="editing" [items]="selectedItems" (cancel)="onCancel()" (edit)="onEdit($event)" (remove)="onRemove($event)"></app-edit-topic> -->
           </div>
       </div>
       <!-- Subtopics-->
@@ -33,7 +34,7 @@
           <!-- Edit Subtopics Button-->
           <div *ngIf="!items.static" class="d-flex f-basis justifyEnd">
             <button (click)="activeSubtopic = true; editItem($event, items); selectedItems = items" class="edit-button fas fa-pencil-alt"></button>
-            <app-edit-topic *ngIf="editing && itemToEdit.id == items.id" [editing]="editing" [items]="selectedItems" (edit)="onEdit($event)"  (cancel)="onCancel()" (remove)="onRemove($event)"></app-edit-topic>
+            <!-- <app-edit-topic *ngIf="editing && itemToEdit.id == items.id" [editing]="editing" [items]="selectedItems" (edit)="onEdit($event)"  (cancel)="onCancel()" (remove)="onRemove($event)"></app-edit-topic> -->
 
             <!-- <button (click)="onRemove()" class="edit-button fas fa-trash-alt"></button> -->
           </div>
