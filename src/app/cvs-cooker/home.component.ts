@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
       this.catalogList = data;
     });
   }
+    // Add
     addDialog(event) {
       console.log('adddialog', 'test');
       this.stepOne = event;
@@ -49,6 +50,7 @@ export class HomeComponent implements OnInit {
       console.log('myvent', event);
       // this.relayService.addCategory(event);
     }
+    // Edit
     activeEdit(event: ReceipeCatalog) {
       if (event) {
         this.activeStepOne = event;
@@ -77,6 +79,7 @@ export class HomeComponent implements OnInit {
       //   }));
       // });
     }
+    // Remove
     handleRemove(event: ReceipeCatalog) {
       console.log('remove', event);
         this.show = false;

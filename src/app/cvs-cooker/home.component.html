@@ -15,23 +15,23 @@
               id="editor"
               class="dFlex fBasis"
               [topic]="catalogList"
-              (editMain)="activeEdit($event)"
               (add)="handleAdd($event)"
-              (remove)="handleRemove($event)"
-              (cancel)="handleCancel();">
+              (editMain)="activeEdit($event)"
+              (cancel)="handleCancel();"
+              (remove)="handleRemove($event)">
               <app-add-category
-                [editing]="addingTopic"
-                (cancel)="onCancel($event)"
                 [items]="selectedItems"
-                (adder)="addDialog($event)"
+                [editing]="addingTopic"
                 (edit)="onEdit($event)"
-                (active)="addDialog($event)">
+                (active)="addDialog($event)"
+                (adder)="addDialog($event)"
+                (cancel)="onCancel($event)">
               </app-add-category>
               <app-edit-topic
-              [editing]="editing"
               [items]="selectedItems"
-              (cancel)="onCancel()"
+              [editing]="editing"
               (edit)="onEdit($event)"
+              (cancel)="onCancel()"
               (remove)="onRemove($event)">
             </app-edit-topic>
             <!-- <app-edit-topic

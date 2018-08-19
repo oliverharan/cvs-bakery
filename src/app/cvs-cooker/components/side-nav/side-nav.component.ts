@@ -22,7 +22,7 @@ export class SideNavComponent implements OnInit, AfterViewInit, AfterContentInit
   @Output() adder: EventEmitter<any> = new EventEmitter();
   @Output() editMain: EventEmitter<any> = new EventEmitter();
   @Output() cancel: EventEmitter<any> = new EventEmitter();
-  @ViewChild(EditTopicComponent) editPanel: EditTopicComponent;
+  @ContentChild(EditTopicComponent) editPanel: EditTopicComponent;
   @ViewChild(AddTopicComponent) addPanel: AddTopicComponent;
   @ContentChild(AddCategoryComponent) addTopicForm: AddCategoryComponent;
   cancelling: boolean = false;
@@ -42,6 +42,7 @@ export class SideNavComponent implements OnInit, AfterViewInit, AfterContentInit
 
   ngAfterContentInit(){
     console.log('after cnotent', this.addTopicForm);
+    console.log('after content', this.editPanel);
     if (this.addTopicForm.cancel) {
       this.addTopicForm.cancel.subscribe(cancelDialog => {
         this.addingTopic = cancelDialog;
