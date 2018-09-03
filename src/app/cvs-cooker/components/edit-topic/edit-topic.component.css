@@ -45,14 +45,14 @@
 .topic_tab_2x{
   padding-left: 40px;
 }
-.topic-input-container{
+/* .topic-input-container{
   position: relative;
-}
+} */
 .topic-input-tab {
   position: absolute;
   top: -31px;
   left: 31px;
-  background: rgba(65,223,78,.90);
+  background: rgba(65,223,78,.95);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 10px 15px 5px 14px;
@@ -62,14 +62,21 @@
   color: #f2f2f2;
 }
 .subtopic-input-wrapper{
+  flex-basis: 100%;
+  padding:0 33px;
+  /* height: 165px; */
+  min-height: 250px;
+  max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 .subtopic-input-container {
   position: absolute;
   bottom: 0;
   left: 0;
-background: rgba(65,223,78,.90);
+background: rgba(65,223,78,.95);
 width: 100%;
-height: inherit;
+z-index: 1;
 }
 .subtopic-input-button{
   height: 165px;
@@ -110,25 +117,50 @@ min-height: 165px;
   flex-basis: 100%;
   padding-left:33px;
 }
-.topic-input-contents > input {
-  width: 225px;
+input {
+  width: 100%;
   border: navajowhite;
   padding: 5px;
   font-family: Lato, sans-serif;
   font-size: 125%;
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
 }
-.topic-input-contents > h2{
-  font-size: 162%;
+form {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+    height: auto;
+    /* top: 20px; */
+    position: relative;
+}
+form > h2{
+  font-size: 185%;
   font-weight: bold;
-  padding-bottom: 15px;
+  padding-top: 10px;
+  text-transform: uppercase;
+  width: 50%;
+  white-space: pre-wrap;
 }
+form > span{
+  padding: 5px 0 15px;
+}
+form > button{
+  margin:15px 0px 0;
+  padding:10px 0;
+  font-weight: bold;
+  font-size:125%;
+  text-transform: uppercase;
+  background-color:#269206;
+  color:#f2f2f2;
+  border: none;
+  }
 .topic-input-close {
   position: absolute;
   top: 9px;
-  right: 9px;
+  right: 19px;
 }
 .topic-input-button {
   position: absolute;
@@ -148,12 +180,9 @@ min-height: 165px;
 }
 .topic-btn:last-child{
   margin-right: 9px;
-
 }
 .topic-btn > span{
-
   font-family: Lato,sans-serif;
   text-transform: uppercase;
   padding-left: 5px;
-
 }

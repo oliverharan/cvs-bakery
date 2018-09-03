@@ -45,9 +45,9 @@
 .topic_tab_2x{
   padding-left: 40px;
 }
-.add-topic-input-container{
+/* .add-topic-input-container{
   position: relative;
-}
+} */
 .add-topic-input-tab {
   position: absolute;
   top: -31px;
@@ -152,7 +152,6 @@ text-transform: uppercase;
 background-color:#269206;
 color:#f2f2f2;
 border: none;
-/* width: 30%; */
 }
 form > button:nth-child(10){
   margin-bottom:15px;

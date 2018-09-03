@@ -1,72 +1,61 @@
 {
-    "credits": [{
-            "id": 1,
-            "fullname": "Jeff Sicat",
-            "title": "Executive Chef (aka Group Chef)",
-            "image": "test",
-            "link": "test",
-            "description": "The Head Honcho"
+  "credits": [
+    {
+      "id": 1,
+      "fullname": "Jeff Sicat",
+      "title": "Executive Chef (aka Group Chef)",
+      "image": "test",
+      "link": "test",
+      "description": "The Head Honcho"
+    },
+    {
+      "id": 2,
+      "fullname": "Sue Sammond",
+      "title": "Sous Chef (aka The Sue Chef!)",
+      "image": "test",
+      "link": "test",
+      "description": "Making sugar taste sweeter"
+    },
+    {
+      "id": 3,
+      "fullname": "Oliver Haran",
+      "title": "Head Chef (aka Code Baker)",
+      "image": "test",
+      "link": "test",
+      "description": "Assembling ingredients for a better receipe"
+    }
+  ],
+  "receipeCatalog": [
+    {
+      "id": 1,
+      "title": "html2"
+    },
+    {
+      "id": 2,
+      "title": "css",
+      "active": true,
+      "static": true,
+      "subtopic": []
+    },
+    {
+      "id": 3,
+      "title": "javascript",
+      "active": true,
+      "static": true,
+      "subtopic": [
+        {
+          "id": 1,
+          "title": "html"
         },
         {
-            "id": 2,
-            "fullname": "Sue Sammond",
-            "title": "Sous Chef (aka The Sue Chef!)",
-            "image": "test",
-            "link": "test",
-            "description": "Making sugar taste sweeter"
-        }, {
-            "id": 3,
-            "fullname": "Oliver Haran",
-            "title": "Head Chef (aka Code Baker)",
-            "image": "test",
-            "link": "test",
-            "description": "Assembling ingredients for a better receipe"
+          "id": 2,
+          "title": "css"
+        },
+        {
+          "id": 3,
+          "title": "javascript"
         }
-    ],
-    "receipeCatalog": [{
-            "id": 1,
-            "title": "accessibilty",
-            "active": true,
-            "static": true,
-            "subtopic": [{
-                    "id": 1,
-                    "title": "html"
-                },
-                {
-                    "id": 2,
-                    "title": "css"
-                },
-                {
-                    "id": 3,
-                    "title": "javascript"
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "title": "css",
-            "active": true,
-            "static": true,
-            "subtopic": []
-        },
-        {
-            "id": 3,
-            "title": "javascript",
-            "active": true,
-            "static": true,
-            "subtopic": [{
-                    "id": 1,
-                    "title": "html"
-                },
-                {
-                    "id": 2,
-                    "title": "css"
-                },
-                {
-                    "id": 3,
-                    "title": "javascript"
-                }
-            ]
-        }
-    ]
+      ]
+    }
+  ]
 }
