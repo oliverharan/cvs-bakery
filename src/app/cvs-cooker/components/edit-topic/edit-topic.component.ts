@@ -17,6 +17,8 @@ export class EditTopicComponent implements OnInit {
   showList = null;
   expandTopic: any = null;
   tabTitle: string = 'Edit Tab';
+  editableCategory: boolean = false;
+
   constructor() { }
 
   ngOnInit() {

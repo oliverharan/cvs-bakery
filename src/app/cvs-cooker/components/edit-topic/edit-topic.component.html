@@ -1,19 +1,24 @@
 <div class="d-flex">
-  <div class="subtopic-input-container">
-<div *ngIf="editing" class="subtopic-input-wrapper ">
-        <!-- <div class="subtopic-input-button" *ngIf="!items.static">
+    <div class="subtopic-input-container">
+        <div *ngIf="editing" class="subtopic-input-wrapper ">
+            <!-- <div class="subtopic-input-button" *ngIf="!items.static">
           </div> -->
 
             <div class="topic-input-tab">{{tabTitle}}</div>
-        <div (click)="onCancel()" class=" fas fa-times-circle fa-2x topic-input-close "></div>
-        <form (submit)="onSubmit($event)">
-        <h2>Editing {{items.title}}</h2>
-        <span>Change the category name.</span>
-        <input type="text" ngModel value="{{items.title}}" name="title" (input)="onNameChange(subTopicName.value)" #subTopicName />
-        <!-- <input type="text" [(ngModel)]="items.title" name="title" (input)="onNameChange(subTopicName.value)" #subTopicName /> -->
-        <button type="button" (click)="onEdit($event, items)">{{editing ? 'Done': 'Edit'}}</button>
-        <button type="button" (click)="onRemove($event)">{{editing ? 'Remove': 'Remove'}}</button>
-      </form>
+            <div (click)="onCancel()" class=" fas fa-times-circle fa-2x topic-input-close "></div>
+            <form (submit)="onSubmit($event)">
+                <h2>Editing {{items.title}}</h2>
+                <span>Change the category name.</span>
+                <input type="text" ngModel value="{{items.title}}" name="title" (input)="onNameChange(subTopicName.value)" #subTopicName />
+                <div class="editable">
+                    <input type="checkbox" name="editableCategory" #topicNameEditable [value]="items.static" ngModel="items.static" (change)="editableCategory = !editableCategory">
+                    <label>Make editable</label>
+                </div>
+                <div>(change or remove this item publicly) </div>
+                <!-- <input type="text" [(ngModel)]="items.title" name="title" (input)="onNameChange(subTopicName.value)" #subTopicName /> -->
+                <button type="button" (click)="onEdit($event, items)">{{editing ? 'Done': 'Edit'}}</button>
+                <button type="button" (click)="onRemove($event)">{{editing ? 'Remove': 'Remove'}}</button>
+            </form>
+        </div>
     </div>
-  </div>
 </div>

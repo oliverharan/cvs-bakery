@@ -1,86 +1,105 @@
 .d-flex {
-  display: flex;
+    display: flex;
 }
-.f-basis{
-  flex-basis: 100%;
+
+.f-basis {
+    flex-basis: 100%;
 }
-.f-flow{
-  flex-flow: column nowrap;
+
+.f-flow {
+    flex-flow: column nowrap;
 }
+
 .editTopic {
-  color:red;
+    color: red;
 }
-.editPanel{
-  position: absolute;
-  left: 0;
-  bottom: 0;
+
+.editPanel {
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
+
 .justifyEnd {
-  justify-content: flex-end;
+    justify-content: flex-end;
 }
+
 .subtopic-content {
-  text-transform: uppercase;
-  font-size: 125%;
+    text-transform: uppercase;
+    font-size: 125%;
     font-weight: bold;
     letter-spacing: .05em;
 }
-.hidden {
-  height: 0;
-  opacity: 0;
-}
-.subtopicList {
-  opacity: 1;
-  height: 100%;
 
+.hidden {
+    height: 0;
+    opacity: 0;
 }
-.align-center{
-  align-items: center;
+
+.subtopicList {
+    opacity: 1;
+    height: 100%;
 }
-.align-self-center{
-  align-self: center;
+
+.align-center {
+    align-items: center;
 }
-.topic_tab{
-  padding-left: 20px;
+
+.align-self-center {
+    align-self: center;
 }
-.topic_tab_2x{
-  padding-left: 40px;
+
+.topic_tab {
+    padding-left: 20px;
 }
+
+.topic_tab_2x {
+    padding-left: 40px;
+}
+
+
 /* .topic-input-container{
   position: relative;
 } */
+
 .topic-input-tab {
-  position: absolute;
-  top: -31px;
-  left: 31px;
-  background: rgba(65,223,78,.95);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  padding: 10px 15px 5px 14px;
-  font-size: 118%;
-  text-transform: uppercase;
-  font-weight: bolder;
-  color: #f2f2f2;
+    position: absolute;
+    top: -31px;
+    left: 31px;
+    background: rgba(65, 223, 78, .95);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px 15px 5px 14px;
+    font-size: 118%;
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: #f2f2f2;
 }
-.subtopic-input-wrapper{
-  flex-basis: 100%;
-  padding:0 33px;
-  /* height: 165px; */
-  min-height: 250px;
-  max-height: 250px;
+
+.subtopic-input-wrapper {
+    flex-basis: 100%;
+    padding: 0 33px;
+    /* height: 165px; */
+    min-height: 250px;
+    max-height: 250px;
     overflow-y: auto;
     overflow-x: hidden;
 }
+
 .subtopic-input-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-background: rgba(65,223,78,.95);
-width: 100%;
-z-index: 1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(65, 223, 78, .95);
+    width: 100%;
+    z-index: 1;
 }
-.subtopic-input-button{
-  height: 165px;
+
+.subtopic-input-button {
+    height: 165px;
 }
+
+
 /* .chevron-down-button::before {
   content: "";
   background-color: transparent;
@@ -92,97 +111,120 @@ z-index: 1;
 } */
 
 .chevron-down-button {
-  /* background: url(../../../../assets/icons/chevron-down.svg) top center no-repeat; */
-  background-color: transparent;
-  border-style: none;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  color: #d58d68;
+    /* background: url(../../../../assets/icons/chevron-down.svg) top center no-repeat; */
+    background-color: transparent;
+    border-style: none;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    color: #d58d68;
 }
+
 .edit-button {
-  background-color: transparent;
-  border-style: none;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  color: #d58d68;
+    background-color: transparent;
+    border-style: none;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    color: #d58d68;
 }
-.topic-input-container{
-position: relative;
-display: flex;
-min-height: 165px;
+
+.topic-input-container {
+    position: relative;
+    display: flex;
+    min-height: 165px;
 }
+
 .topic-input-contents {
-  flex-basis: 100%;
-  padding-left:33px;
+    flex-basis: 100%;
+    padding-left: 33px;
 }
+
 input {
-  width: 100%;
-  border: navajowhite;
-  padding: 5px;
-  font-family: Lato, sans-serif;
-  font-size: 125%;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 15px;
-  box-sizing: border-box;
+    width: 100%;
+    border: navajowhite;
+    padding: 5px;
+    font-family: Lato, sans-serif;
+    font-size: 125%;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    box-sizing: border-box;
 }
+
 form {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
     height: auto;
     /* top: 20px; */
     position: relative;
 }
-form > h2{
-  font-size: 185%;
-  font-weight: bold;
-  padding-top: 10px;
-  text-transform: uppercase;
-  width: 50%;
-  white-space: pre-wrap;
-}
-form > span{
-  padding: 5px 0 15px;
-}
-form > button{
-  margin:15px 0px 0;
-  padding:10px 0;
-  font-weight: bold;
-  font-size:125%;
-  text-transform: uppercase;
-  background-color:#269206;
-  color:#f2f2f2;
-  border: none;
-  }
-.topic-input-close {
-  position: absolute;
-  top: 9px;
-  right: 19px;
-}
-.topic-input-button {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  align-items: flex-end;
-  display: flex;
-}
-.topic-btn{
-  background: #0c66a1;
-  padding: 10px;
-  border-radius: 15px;
-  border: none;
-  color:#f2f2f2;
-  margin: 0 5px 5px;
 
+form>h2 {
+    font-size: 185%;
+    font-weight: bold;
+    padding-top: 10px;
+    text-transform: uppercase;
+    width: 50%;
+    white-space: pre-wrap;
 }
-.topic-btn:last-child{
-  margin-right: 9px;
+
+form>span {
+    padding: 5px 0 15px;
 }
-.topic-btn > span{
-  font-family: Lato,sans-serif;
-  text-transform: uppercase;
-  padding-left: 5px;
+
+form>button {
+    margin: 15px 0px 0;
+    padding: 10px 0;
+    font-weight: bold;
+    font-size: 125%;
+    text-transform: uppercase;
+    background-color: #269206;
+    color: #f2f2f2;
+    border: none;
+}
+
+.editable {
+    height: 18px;
+    display: flex;
+    align-content: center;
+}
+
+.editable>input {
+    width: 15px;
+    margin: 0;
+}
+
+.topic-input-close {
+    position: absolute;
+    top: 9px;
+    right: 19px;
+}
+
+.topic-input-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    align-items: flex-end;
+    display: flex;
+}
+
+.topic-btn {
+    background: #0c66a1;
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    color: #f2f2f2;
+    margin: 0 5px 5px;
+}
+
+.topic-btn:last-child {
+    margin-right: 9px;
+}
+
+.topic-btn>span {
+    font-family: Lato, sans-serif;
+    text-transform: uppercase;
+    padding-left: 5px;
 }
