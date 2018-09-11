@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
 import {ReceipeCatalog} from '../../models/receipeCatalog.model';
+import { FormGroup, FormControl, FormArray} from '@angular/forms';
 @Component({
   selector: 'app-edit-topic',
   templateUrl: './edit-topic.component.html',
@@ -8,6 +9,7 @@ import {ReceipeCatalog} from '../../models/receipeCatalog.model';
 export class EditTopicComponent implements OnInit {
   @Input() items: ReceipeCatalog;
   @Input() subtopics: ReceipeCatalog;
+  @Input() parent: FormGroup;
   @Input() editing: boolean;
   @Output() remove: EventEmitter<any> = new EventEmitter();
   @Output() edit: EventEmitter<any> = new EventEmitter();
@@ -17,8 +19,25 @@ export class EditTopicComponent implements OnInit {
   showList = null;
   expandTopic: any = null;
   tabTitle: string = 'Edit Tab';
-  editableCategory: boolean = false;
+  editableCategory: boolean;
 
+  form = new FormGroup({
+    item: new FormGroup({
+      title: new FormControl(null),
+      active: new FormControl(true),
+      static: new FormControl(false),
+      subtopic: new FormGroup({
+          title: new FormControl(null),
+          active: new FormControl(true),
+          static: new FormControl(false),
+            children: new FormGroup({
+              title: new FormControl(null),
+              description: new FormControl(null),
+            })
+        })
+    }),
+    catalog: new FormArray([])
+  });
   constructor() { }
 
   ngOnInit() {
@@ -26,7 +45,8 @@ export class EditTopicComponent implements OnInit {
   onEdit(event, item) {
     this.cancel.emit();
     if (this.edit) {
-      this.edit.emit(this.items);
+      // this.edit.emit(this.items);
+      console.log('edit',this.items);
     }
     this.editing = !this.editing;
   }
@@ -39,8 +59,8 @@ export class EditTopicComponent implements OnInit {
     // this.remove.emit(this.subtopics);
   }
   onCancel() {
-    this.editing = !this.editing;
-    this.formReset();
+    this.editing = false;
+    // this.formReset();
     this.cancel.emit(this.editing);
   }
   formReset() {

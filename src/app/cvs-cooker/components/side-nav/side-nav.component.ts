@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit, ContentChild, AfterContentInit } from '@angular/core';
-import { EditTopicComponent } from '../edit-topic/edit-topic.component';
-import { AddTopicComponent } from '../add-topic/add-topic.component';
-import { AddCategoryComponent } from '../add-category/add-category.component';
 import { ReceipeCatalog } from '../../models/receipeCatalog.model';
+// import { EditTopicComponent } from '../edit-topic/edit-topic.component';
+// import { AddTopicComponent } from '../add-topic/add-topic.component';
+// import { AddCategoryComponent } from '../add-category/add-category.component';
 
 @Component({
   selector: 'side-nav',
@@ -11,20 +11,22 @@ import { ReceipeCatalog } from '../../models/receipeCatalog.model';
 })
 export class SideNavComponent implements OnInit, AfterViewInit, AfterContentInit {
 // @ViewChild('subtopics') subtopics: TemplateRef<any>;
-  @Input() topic: ReceipeCatalog;
-  @Input() topicId: ReceipeCatalog;
-  @Input() receipes: ReceipeCatalog;
-  @Input() subtopics: ReceipeCatalog;
-  @Input() addNewTopic: ReceipeCatalog;
-  @Output() active: EventEmitter<any> = new EventEmitter();
-  @Output() remove: EventEmitter<any> = new EventEmitter();
-  @Output() add: EventEmitter<any> = new EventEmitter();
-  @Output() adder: EventEmitter<any> = new EventEmitter();
-  @Output() editMain: EventEmitter<any> = new EventEmitter();
-  @Output() cancel: EventEmitter<any> = new EventEmitter();
-  @ContentChild(EditTopicComponent) editPanel: EditTopicComponent;
-  @ViewChild(AddTopicComponent) addPanel: AddTopicComponent;
-  @ContentChild(AddCategoryComponent) addTopicForm: AddCategoryComponent;
+  // @Input() topicId: ReceipeCatalog;
+  // @Input() receipes: ReceipeCatalog;
+  // @Input() subtopics: ReceipeCatalog;
+  // @Input() addNewTopic: ReceipeCatalog;
+  // @Output() active: EventEmitter<any> = new EventEmitter();
+    // @Output() add: EventEmitter<any> = new EventEmitter();
+    // @Output() cancel: EventEmitter<any> = new EventEmitter();
+    // @ContentChild(EditTopicComponent) editPanel: EditTopicComponent;
+    // @ViewChild(AddTopicComponent) addPanel: AddTopicComponent;
+    // @ViewChild(AddCategoryComponent) addTopicForm: AddCategoryComponent;
+    @Input() catalog: ReceipeCatalog; // ngFor receipe items passed from service
+    @Input() cancelgoToStep2: boolean; // ngFor receipe items passed from service
+    @Output() goToStep2: EventEmitter<any> = new EventEmitter(); // Send Step 1 to home.component for Step 2
+  @Output() editCategory: EventEmitter<any> = new EventEmitter(); // Activate Edit Dialog
+  @Output() remove: EventEmitter<any> = new EventEmitter(); // Remove item from Edit Dialog
+
   cancelling: boolean = false;
   editing = false;
   addingTopic = false;
@@ -34,28 +36,28 @@ export class SideNavComponent implements OnInit, AfterViewInit, AfterContentInit
   activeSubtopic: boolean = null;
   item: any;
   selectedItems: ReceipeCatalog;
-  itemToEdit: ReceipeCatalog;
+  // itemToEdit: ReceipeCatalog;
   test: any;
   itemAdd: any;
 
   constructor() { }
 
   ngAfterContentInit(){
-    console.log('after cnotent', this.addTopicForm);
-    console.log('after content', this.editPanel);
-    if (this.addTopicForm.cancel) {
-      this.addTopicForm.cancel.subscribe(cancelDialog => {
-        this.addingTopic = cancelDialog;
-        this.cancel.emit();
-       });
-    }
+    // console.log('after cnotent', this.addTopicForm);
+    // console.log('after content', this.editPanel);
+    // if (this.addTopicForm.cancel) {
+    //   this.addTopicForm.cancel.subscribe(cancelDialog => {
+    //     this.addingTopic = cancelDialog;
+    //     this.cancel.emit();
+    //    });
+    // }
     // this.addTopicForm.edit.subscribe((item) => console.log('mmmmm', item));
     // this.addTopicForm.edit.subscribe(event => this.test = event );
-    this.addTopicForm.adder.subscribe(event => {
-      this.itemAdd = event;
-      console.log('mar', this.itemAdd);
-      this.add.emit(event);
-    });
+    // this.addTopicForm.adder.subscribe(event => {
+    //   this.itemAdd = event;
+    //   console.log('mar', this.itemAdd);
+    //   this.add.emit(event);
+    // });
 
     // if (this.addTopicForm) {
     //   this.addTopicForm.edit.subscribe((item: any) => {
@@ -64,7 +66,7 @@ export class SideNavComponent implements OnInit, AfterViewInit, AfterContentInit
     //     this.adder.emit(this.itemAdd);
     //   } );
     // }
-    console.log('mmmmm', this.itemAdd);
+    // console.log('mmmmm', this.itemAdd);
   }
   ngAfterViewInit() {
     // console.log('edittopic', this.editPanel);
@@ -74,6 +76,7 @@ export class SideNavComponent implements OnInit, AfterViewInit, AfterContentInit
   ngOnInit() {
     // console.log('Subtopic', this.subtopics);
   }
+  // Expand Category List items to show sub-categories
   expandList(i: number) {
     if (this.showList = null) {
       this.expandTopic = i;
@@ -88,60 +91,64 @@ export class SideNavComponent implements OnInit, AfterViewInit, AfterContentInit
       this.showList = false;
     }
   }
-  addTopic(event: ReceipeCatalog) {
-    console.log('ev', event);
-    this.addingTopic = !this.addingTopic;
-    this.adder.emit(this.addingTopic);
+  // Step 1: Toggle Step One Add Category Dialog for this item:
+  addTopic() {
+    this.cancelgoToStep2 = !this.cancelgoToStep2;
+    console.log('Step 1: Activate Step One for this item: ', this.cancelgoToStep2);
+    this.goToStep2.emit(this.cancelgoToStep2);
+  }
 
-  }
-  onCancel(val) {
-    console.log('vak', val);
-    this.editing = false;
-    if (this.addingTopic !== val) {
-      this.addingTopic = false;
-    } else {
-      this.addingTopic = true;
-    }
-  }
+  // Activate Edit Dialog
   editItem(event, item) {
-    // this.editing = true;
+    console.log('Activate Edit Dialog for this item: ', item);
     this.editing = !this.editing;
-    this.itemToEdit = item;
-    this.editMain.emit(item);
-    console.log('itemtoedit', item, event);
+    this.editCategory.emit(item);
+    // this.editing = true;
+    // this.itemToEdit = item;
+    // console.log('itemtoedit', item, event);
   }
-  onAdd(event: ReceipeCatalog, item) {
-    console.log('addddd', event, item);
-    if (this.adder && event) {
-      this.adder.emit(event);
-    }
-  }
-  onEdit(event: ReceipeCatalog, item) {
-    console.log('evet', event, item);
-    // this.editing = !this.editing;
-    // if (this.activeTopic) {
-    //   this.editPanel.tabTitle = 'Edit/Remove Topic';
-    //   this.activeTopic = null;
-    // } else if (this.activeSubtopic) {
-    //   this.editPanel.tabTitle = 'Edit/Remove Subtopic';
-    //   this.activeSubtopic = null;
-    // }
-    // this.cancel.emit();
-    if (this.editMain && event) {
-      this.editMain.emit(event);
-    }
-//     this.editMain.emit(event);
-// console.log('sub',event);
-  }
-  onNameChange(value: string) {
-    this.subtopics.title = value;
-  }
+
+  // onAdd(event: ReceipeCatalog, item) {
+  //   console.log('addddd', event, item);
+  //   if (this.goToStep2 && event) {
+  //     this.goToStep2.emit(event);
+  //   }
+  // }
+  // onEdit(event: ReceipeCatalog, item) {
+  //   // this.editing = !this.editing;
+  //   // if (this.activeTopic) {
+  //     //   this.editPanel.tabTitle = 'Edit/Remove Topic';
+  //     //   this.activeTopic = null;
+  //     // } else if (this.activeSubtopic) {
+  //       //   this.editPanel.tabTitle = 'Edit/Remove Subtopic';
+  //       //   this.activeSubtopic = null;
+  //       // }
+  //       // this.cancel.emit();
+  //       //     this.editMain.emit(event);
+  //       // console.log('sub',event);
+  //       console.log('evet', event, item);
+  //   if (this.editCategory && event) {
+  //     this.editCategory.emit(event);
+  //   }
+  // }
+  // onNameChange(value: string) {
+  //   this.subtopics.title = value;
+  // }
   onRemove(event) {
     // console.log('myremove', event);
     this.editing = false;
     this.remove.emit(event);
   }
 }
+  // onCancel(val) {
+  //   console.log('vak', val);
+  //   this.editing = false;
+  //   if (this.addingTopic !== val) {
+  //     this.addingTopic = false;
+  //   } else {
+  //     this.addingTopic = true;
+  //   }
+  // }
 // @Component({
 //   selector: 'side-nav-topic',
 //   template: `

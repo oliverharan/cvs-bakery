@@ -161,20 +161,23 @@ form {
     position: relative;
 }
 
-form>h2 {
+form > div > h2 {
     font-size: 185%;
     font-weight: bold;
     padding-top: 10px;
     text-transform: uppercase;
-    width: 50%;
+    width: 65%;
     white-space: pre-wrap;
 }
 
-form>span {
+form > div > span {
     padding: 5px 0 15px;
+    display: inherit;
 }
 
-form>button {
+form > div > button {
+  display: block;
+  width: 100%;
     margin: 15px 0px 0;
     padding: 10px 0;
     font-weight: bold;

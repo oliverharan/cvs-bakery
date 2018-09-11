@@ -1,4 +1,4 @@
-<div class="d-flex">
+<div [formGroup]="parent" class="d-flex">
     <div class="subtopic-input-container">
         <div *ngIf="editing" class="subtopic-input-wrapper ">
             <!-- <div class="subtopic-input-button" *ngIf="!items.static">
@@ -6,18 +6,22 @@
 
             <div class="topic-input-tab">{{tabTitle}}</div>
             <div (click)="onCancel()" class=" fas fa-times-circle fa-2x topic-input-close "></div>
-            <form (submit)="onSubmit($event)">
+            <form [formGroup]="form" (ngSubmit)="onEdit($event, items)">
+              <div formGroupName="item">
                 <h2>Editing {{items.title}}</h2>
                 <span>Change the category name.</span>
-                <input type="text" ngModel value="{{items.title}}" name="title" (input)="onNameChange(subTopicName.value)" #subTopicName />
+                <input formControlName="title" type="text" value="{{items.title}}" name="title" (input)="onNameChange(subTopicName.value)" #subTopicName />
                 <div class="editable">
-                    <input type="checkbox" name="editableCategory" #topicNameEditable [value]="items.static" ngModel="items.static" (change)="editableCategory = !editableCategory">
-                    <label>Make editable</label>
+                    <input formControlName="static" type="checkbox" name="editableCategory" #topicNameEditable [value]="items.static" (change)="items.static = !items.static">
+                    <label>Edit lock</label>
                 </div>
-                <div>(change or remove this item publicly) </div>
+                <div>(Do not let this item be edited) </div>
                 <!-- <input type="text" [(ngModel)]="items.title" name="title" (input)="onNameChange(subTopicName.value)" #subTopicName /> -->
-                <button type="button" (click)="onEdit($event, items)">{{editing ? 'Done': 'Edit'}}</button>
+                <!-- <button type="button" (click)="onEdit($event, items)">{{editing ? 'Done': 'Edit'}}</button> -->
+                <button type="submit">{{editing ? 'Done': 'Edit'}}</button>
                 <button type="button" (click)="onRemove($event)">{{editing ? 'Remove': 'Remove'}}</button>
+              </div>
+              {{form.value | json}}
             </form>
         </div>
     </div>

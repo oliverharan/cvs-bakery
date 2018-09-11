@@ -14,14 +14,15 @@
             <side-nav
               id="editor"
               class="dFlex fBasis"
-              [topic]="catalogList"
-              (add)="handleAdd($event)"
-              (editMain)="activeEdit($event)"
-              (cancel)="handleCancel();"
-              (remove)="handleRemove($event)">
-              <app-add-category
+              [catalog]="catalogList"
+              (goToStep2)="addDialog($event)"
+              [cancelgoToStep2]="showAddDialog"
+              (editCategory)="activeEdit($event)"
+              (remove)="handleRemove($event)"
+              (cancel)="handleCancel();">
+              <!-- <app-add-category
                 [items]="selectedItems"
-                [editing]="addingTopic"
+                [editing]="editing"
                 (edit)="onEdit($event)"
                 (active)="addDialog($event)"
                 (adder)="addDialog($event)"
@@ -31,9 +32,9 @@
               [items]="selectedItems"
               [editing]="editing"
               (edit)="onEdit($event)"
-              (cancel)="onCancel()"
-              (remove)="onRemove($event)">
-            </app-edit-topic>
+              (cancel)="onCancel($event)"
+              (remove)="handleRemove($event)">
+            </app-edit-topic> -->
             <!-- <app-edit-topic
             *ngIf="editing && itemToEdit.id == items.id"
             [editing]="editing"
@@ -42,8 +43,26 @@
             (edit)="onEdit($event)"
             (remove)="onRemove($event)">
           </app-edit-topic> -->
-
             </side-nav>
+            <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+                <app-add-category
+                  *ngIf="showAddDialog"
+                  [parent]="form"
+                  [items]="selectedItems"
+                  [editing]="showAddDialog"
+                  (edit)="onEdit($event)"
+                  (active)="addDialog($event)"
+                  (cancel)="handleAddCancel($event)">
+                </app-add-category>
+                <app-edit-topic
+                [parent]="form"
+                [items]="selectedItems"
+                [editing]="editing"
+                (edit)="onEdit($event)"
+                (cancel)="handleEditCancel($event)"
+                (remove)="handleRemove($event)">
+              </app-edit-topic>
+              </form>
           </div>
         </div>
       </div>
@@ -56,6 +75,9 @@
       <div class="pane-center-content vertical">
         <div class="pane-center-content-wrapper vertical">
           Item content
+          <app-add-code *ngIf="stepTwoDialog"
+          [editCode]="stepOne">
+          </app-add-code>
         </div>
         <span class="resizer vertical "></span>
         Right Main Content Panel -->

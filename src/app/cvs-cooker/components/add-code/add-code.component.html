@@ -1,0 +1,40 @@
+    <div class="d-flex">
+        <div class="add-code-input-container">
+      <div class="add-code-input-wrapper ">
+        <div class="add-code-input-tab">
+          Code Solution
+        </div>
+        <div (click)="onCancel()" class=" fas fa-times-circle fa-2x add-code-input-close "></div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+          <div formGroupName="item">
+              <div class="stepTwoTab">Step 2
+                <p>Add your solution. For instance, you have a solution for the Accessibility category within the Screen Reader sub-category - Just add your code solution for one or any scripting language</p>
+              </div>
+              <hr>
+          <h2>Add a category</h2>
+            <span>Enter a generic category which your code describes.</span>
+            <input formControlName="title" placeholder="(i.e. Design or French Cooking)" type="text" name="title" #topicName [value]="item.title" />
+            <div class="editable">
+                <input formControlName="static" type="checkbox" name="editableCategory" #topicNameEditable [value]="item.static" [checked]="item.static">
+                <label>Make editable</label>
+            </div>
+            <div>(change the name or remove this item) </div>
+            <hr>
+            <div formGroupName="subtopic">
+            <h2>Add a sub-category</h2>
+            <span>Enter items specific to your category.</span>
+            <input formControlName="title" placeholder="(i.e. Colors or Meat Recipes)" type="text" name="subTitle" #subTopicName [value]="item.subtopic.title"/>
+            <div class="editable">
+                <input formControlName="static" type="checkbox" name="editableSubCategory" #subTopicNameEditable [value]="item.subtopic.static" [checked]="item.subtopic.static"  >
+                <label>Make editable</label>
+            </div>
+            <div>(change the name or remove this item) </div>
+          </div>
+            <hr>
+            <button type="submit">Add</button>
+            <button type="button" (click)="onCancel()">Cancel</button>
+          </div>
+          </form>
+      </div>
+    </div>
+  </div>

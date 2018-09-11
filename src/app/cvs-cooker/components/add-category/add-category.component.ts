@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { RelayService } from '../../services/relay.service';
 import { ReceipeCatalog } from '../../models/receipeCatalog.model';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-add-category',
@@ -8,7 +9,23 @@ import { ReceipeCatalog } from '../../models/receipeCatalog.model';
   styleUrls: ['./add-category.component.css']
 })
 export class AddCategoryComponent implements OnInit {
-
+  form = new FormGroup({
+    item: new FormGroup({
+      title: new FormControl(null),
+      active: new FormControl(true),
+      static: new FormControl(null),
+      subtopic: new FormGroup({
+          title: new FormControl(null),
+          active: new FormControl(true),
+          static: new FormControl(false),
+            children: new FormGroup({
+              title: new FormControl(null),
+              description: new FormControl(null),
+            })
+        })
+    }),
+    catalog: new FormArray([])
+  });
   item: ReceipeCatalog = {
     title: '',
     active: true,
@@ -25,6 +42,7 @@ export class AddCategoryComponent implements OnInit {
   };
   @Input() items: ReceipeCatalog;
   @Input() editing: boolean;
+  @Input() parent: FormGroup;
   @Output() cancel: EventEmitter<any> = new EventEmitter();
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() adder: EventEmitter<any> = new EventEmitter();
@@ -96,9 +114,14 @@ export class AddCategoryComponent implements OnInit {
     };
   }
   onSubmit(event: any) {
+    event.preventDefault();
+
     console.log('Step 1: Topic/Subtopic Injection', event);
+    console.log('Step 1: Form Submit Values', this.form.value);
     // console.log(JSON.parse(JSON.stringify(test.currentTarget, null, 2)));
     // this.adder.emit(event);
+    console.log('Event log', event);
+    this.adder.emit(this.form.value);
 
     // console.log('items', event.currentTarget);
     if (this.item.title !== '') {
@@ -115,6 +138,6 @@ export class AddCategoryComponent implements OnInit {
     // this.editableCategory = false;
     // this.item.title = '';
     // this.item.subtopic[0].title = '';
-    this.formReset();
+    // this.formReset();
   }
 }

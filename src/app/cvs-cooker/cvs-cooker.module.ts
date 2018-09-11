@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 // Angular Firebase
@@ -20,8 +20,7 @@ import { SubtopicDirective } from '../cvs-cooker/Directives/subtopic.directive';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
+    // ReactiveFormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase, 'cvs-bakery'),
     AngularFirestoreModule
@@ -31,7 +30,8 @@ import { SubtopicDirective } from '../cvs-cooker/Directives/subtopic.directive';
     MainNavComponent,
     SideNavComponent,
     OvenComponent,
-
+    // FormsModule,
+    // ReactiveFormsModule,
   ],
   declarations: [
     MainNavComponent,

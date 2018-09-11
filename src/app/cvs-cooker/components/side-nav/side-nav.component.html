@@ -1,12 +1,12 @@
 <div class="d-flex f-flow f-basis">
     <div class="pane-left-content-wrapper">
-      <ng-content *ngIf='addingTopic' select="app-add-category"></ng-content>
-        <span class="d-flex justifyEnd align-center add-category">Add New Category<span class="fas fa-plus" (click)="addTopic($event);"></span></span>
+      <!-- <ng-content *ngIf='addingTopic' select="app-add-category"></ng-content> -->
+        <span class="d-flex justifyEnd align-center add-category">Add New Category<span class="fas fa-plus" (click)="addTopic();"></span></span>
     </div>
   <!-- Topics-->
   <!-- Loop Catagory Topics-->
   <div>
-  <ul *ngFor="let items of topic; let i = index">
+  <ul *ngFor="let items of catalog; let i = index">
     <li>
       <div class="d-flex">
         <!-- Expand Subtopics List-->
@@ -19,7 +19,7 @@
         <!-- <button *ngIf="!items.static" (click)="activeTopic = true; selectedEdit = i; selectedItems = items; onEdit(items[i], i); " class=" d-flex f-basis justifyEnd edit-button fas fa-pencil-alt"></button> -->
         <div class="d-flex f-basis justifyEnd">
             <button class="fas fa-pencil-alt d-flex edit-button " *ngIf="!items.static" (click)="activeTopic = true; selectedEdit = i; selectedItems = items; editItem($event, items); "></button>
-            <ng-content select="app-edit-topic"></ng-content>
+            <!-- <ng-content select="app-edit-topic"></ng-content> -->
             <!-- <app-edit-topic *ngIf="editing && itemToEdit.id == items.id" [editing]="editing" [items]="selectedItems" (cancel)="onCancel()" (edit)="onEdit($event)" (remove)="onRemove($event)"></app-edit-topic> -->
           </div>
       </div>
