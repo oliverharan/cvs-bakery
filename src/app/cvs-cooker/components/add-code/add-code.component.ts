@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterContentInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterContentInit, AfterViewInit, ElementRef, Renderer2 } from '@angular/core';
 import {AddCategoryComponent} from '../add-category/add-category.component';
 import { FormGroup, FormControl, FormArray } from '@angular/forms';
 @Component({
@@ -9,32 +9,44 @@ import { FormGroup, FormControl, FormArray } from '@angular/forms';
 
 export class AddCodeComponent implements OnInit, AfterContentInit, AfterViewInit {
   @Input() editCode: any;
+  @Input() parent: FormGroup;
   @ViewChild(AddCategoryComponent) addCode: AddCategoryComponent;
-  form = new FormGroup({
-    item: new FormGroup({
-      title: new FormControl(null),
-      active: new FormControl(true),
-      static: new FormControl(null),
-      subtopic: new FormGroup({
-          title: new FormControl(null),
-          active: new FormControl(true),
-          static: new FormControl(false),
-            children: new FormGroup({
-              title: new FormControl(null),
-              description: new FormControl(null),
-            })
-        })
-    }),
-    catalog: new FormArray([])
-  });
+  @ViewChild('editCategoryTitle') editCategoryTitle: ElementRef;
+  @ViewChild('editSubCategoryTitle') editSubCategoryTitle: ElementRef;
+  // form = new FormGroup({
+  //   item: new FormGroup({
+  //     title: new FormControl(null),
+  //     active: new FormControl(true),
+  //     static: new FormControl(null),
+  //     subtopic: new FormGroup({
+  //         title: new FormControl(null),
+  //         active: new FormControl(true),
+  //         static: new FormControl(false),
+  //           children: new FormGroup({
+  //             title: new FormControl(null),
+  //             description: new FormControl(null),
+  //           })
+  //       })
+  //   }),
+  //   catalog: new FormArray([])
+  // });
   item:any;
-  constructor() {}
+  it:any;
+  blockEdit: boolean = true;
+  editing: boolean = false;
+  editingSub: boolean = false;
+  editingBC: boolean = false;
+  constructor(private renderer: Renderer2) {}
   ngAfterViewInit() {
     // console.log('MY ITEM FOR CODE', this.editCode);
     // this.addCode.adder.subscribe((data: any) => {
     //   this.item = data;
     // });
     // console.log('Adder', this.item);
+
+  }
+  print(p) {
+    console.log('MY ITEM FOR CODE2', p[0].controls.title.value);
 
   }
   ngAfterContentInit() {
@@ -46,6 +58,49 @@ export class AddCodeComponent implements OnInit, AfterContentInit, AfterViewInit
     }
   }
   ngOnInit() {
+    console.log('Parent form', this.parent.get('catalog') as FormArray);
+    // console.log('Parent form control', this.it);
+    this.it = this.parent.get('catalog') as FormArray;
+    console.log('Parent form control', this.it);
 
   }
+  get catalogs() {
+    return (this.parent.get('catalog') as FormArray).controls;
+  }
+  get subtopic() {
+    return (this.catalogs[0].get('subtopic') as FormGroup);
+  }
+  get children() {
+    return (this.catalogs[0].get('subtopic.children') as FormGroup);
+  }
+  get solution() {
+    return (this.catalogs[0].get('subtopic.children.solution') as FormGroup);
+  }
+  get language() {
+    return (this.catalogs[0].get('subtopic.children.solution.language') as FormGroup);
+  }
+  editCategory() {
+    this.renderer.removeAttribute(this.editCategoryTitle.nativeElement, 'disabled');
+    if (!this.editing) {
+      this.renderer.setAttribute(this.editCategoryTitle.nativeElement, 'disabled', 'true');
+    }
+    // console.log('NE', this.editCategoryTitle.nativeElement);
+  }
+  editSubCategory() {
+    this.renderer.removeAttribute(this.editSubCategoryTitle.nativeElement, 'disabled');
+    if (!this.editingSub) {
+      this.renderer.setAttribute(this.editSubCategoryTitle.nativeElement, 'disabled', 'true');
+    }
+    // console.log('NE', this.editCategoryTitle.nativeElement);
+  }
+  editBC() {
+    this.renderer.removeAttribute(this.editSubCategoryTitle.nativeElement, 'disabled');
+    if (!this.editingSub) {
+      this.renderer.setAttribute(this.editSubCategoryTitle.nativeElement, 'disabled', 'true');
+    }
+    // console.log('NE', this.editCategoryTitle.nativeElement);
+  }
+  // get subtopic_title() {
+  //   return (this.catalogs[0].get('subtopic.title'));
+  // }
 }

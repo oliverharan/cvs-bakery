@@ -9,43 +9,56 @@ import { FormGroup, FormControl, FormArray } from '@angular/forms';
   styleUrls: ['./add-category.component.css']
 })
 export class AddCategoryComponent implements OnInit {
-  form = new FormGroup({
-    item: new FormGroup({
-      title: new FormControl(null),
-      active: new FormControl(true),
-      static: new FormControl(null),
-      subtopic: new FormGroup({
-          title: new FormControl(null),
-          active: new FormControl(true),
-          static: new FormControl(false),
-            children: new FormGroup({
-              title: new FormControl(null),
-              description: new FormControl(null),
-            })
-        })
-    }),
-    catalog: new FormArray([])
-  });
+  // form = new FormGroup({
+  //   item: new FormGroup({
+  //     title: new FormControl(null),
+  //     active: new FormControl(true),
+  //     static: new FormControl(null),
+  //     subtopic: new FormGroup({
+  //         title: new FormControl(null),
+  //         active: new FormControl(true),
+  //         static: new FormControl(false),
+  //           children: new FormGroup({
+  //             title: new FormControl(null),
+  //             description: new FormControl(null),
+  //           })
+  //       })
+  //   }),
+  //   catalog: new FormArray([])
+  // });
   item: ReceipeCatalog = {
     title: '',
     active: true,
     static: false,
     subtopic: [{
       title: '',
-      active: null,
-      static: null,
+      active: true,
+      static: false,
       children: [{
         title: '',
-        description: ''
+        description: '',
+        active: true,
+        static: false,
+        solution: [{
+          title: '',
+          description: '',
+          language: [{
+            options: ''
+          }],
+          code: '',
+          active: true,
+          static: false
+        }]
       }]
     }]
   };
+
   @Input() items: ReceipeCatalog;
   @Input() editing: boolean;
   @Input() parent: FormGroup;
   @Output() cancel: EventEmitter<any> = new EventEmitter();
   @Output() edit: EventEmitter<any> = new EventEmitter();
-  @Output() adder: EventEmitter<any> = new EventEmitter();
+  @Output() active: EventEmitter<any> = new EventEmitter();
   @Output() remove: EventEmitter<any> = new EventEmitter();
   @ViewChild('topicName') topicTitle: any;
   @ViewChild('topicNameEditable') topicNameEditable: any;
@@ -53,6 +66,7 @@ export class AddCategoryComponent implements OnInit {
   @ViewChild('subTopicNameEditable') subTopicNameEditable: any;
 
   tabTitle: string = 'Add Tab';
+  addCategoryForm: Object; // Form data for output to side-nav
   initTitle: string;
   editableCategory: boolean = false;
   editableSubCategory: boolean = false;
@@ -93,35 +107,39 @@ export class AddCategoryComponent implements OnInit {
     this.cancel.emit(this.editing);
 
   }
-  formReset() {
-    this.topicTitle.nativeElement.value = '';
-    this.topicNameEditable.nativeElement.checked = false;
-    this.subTopicName.nativeElement.value = '';
-    this.subTopicNameEditable.nativeElement.checked = false;
-    this.item = {
-      title: '',
-      active: true,
-      static: false,
-      subtopic: [{
-        title: '',
-        active: null,
-        static: null,
-        children: [{
-          title: '',
-          description: ''
-        }]
-      }]
-    };
-  }
+  // formReset() {
+  //   this.topicTitle.nativeElement.value = '';
+  //   this.topicNameEditable.nativeElement.checked = false;
+  //   this.subTopicName.nativeElement.value = '';
+  //   this.subTopicNameEditable.nativeElement.checked = false;
+  //   this.item = {
+  //     title: '',
+  //     active: true,
+  //     static: false,
+  //     subtopic: [{
+  //       title: '',
+  //       active: null,
+  //       static: null,
+  //       children: [{
+  //         title: '',
+  //         description: ''
+  //       }]
+  //     }]
+  //   };
+  // }
+  // Form submit event
   onSubmit(event: any) {
     event.preventDefault();
+    console.log('Step 1: Topic/Subtopic Submit Event', event);
+    console.log('Step 1: Topic/Subtopic Submit Form data', this.parent.get('item').value);
+    this.addCategoryForm = this.parent.get('item').value;
+    this.active.emit(this.addCategoryForm);
 
-    console.log('Step 1: Topic/Subtopic Injection', event);
-    console.log('Step 1: Form Submit Values', this.form.value);
+    // console.log('Step 1: Form Submit Values', this.form.value);
     // console.log(JSON.parse(JSON.stringify(test.currentTarget, null, 2)));
     // this.adder.emit(event);
     console.log('Event log', event);
-    this.adder.emit(this.form.value);
+    // this.adder.emit(this.form.value);
 
     // console.log('items', event.currentTarget);
     if (this.item.title !== '') {
@@ -131,7 +149,7 @@ export class AddCategoryComponent implements OnInit {
       // if (this.editableSubCategory) {
       //   this.item.subtopic[0].static = this.editableSubCategory;
       // }
-      this.adder.emit(event);
+      // this.adder.emit(event);
     //   console.log('eveve', this.item);
     }
     // this.editableSubCategory = false;

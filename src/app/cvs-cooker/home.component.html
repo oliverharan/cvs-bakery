@@ -2,6 +2,44 @@
 <main-nav [details]="credits"></main-nav>
 <!-- Left Content Panel-->
 <div class="sideNavContainer">
+
+  <ng-template
+  [ngIf]="showAddDialog || editing || showStepTwoDialog">
+      <form
+      [ngClass]="{'codeForm' : showStepTwoDialog, 'showStep1': showAddDialog || editing || showStepTwoDialog}"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit($event)">
+          <app-add-category
+          *ngIf="showAddDialog"
+          [parent]="form"
+          [items]="selectedItems"
+          [editing]="showAddDialog"
+          (edit)="onEdit($event)"
+          (active)="handleAdd($event)"
+          (cancel)="handleAddCancel()">
+        </app-add-category>
+        <app-edit-topic
+        *ngIf="editing"
+        [parent]="form"
+        [items]="selectedItems"
+        [editing]="editing"
+        (edit)="onEdit($event)"
+        (cancel)="handleEditCancel()">
+        <!-- <button type="submit" [disabled]="form.invalid">Submit</button>
+        <button type="button" (click)="onCancel()">Cancel</button> -->
+      </app-edit-topic>
+      <app-add-code
+      *ngIf="showStepTwoDialog"
+      [editCode]="stepOne"
+      [parent]="form"
+      >
+    </app-add-code>
+      <!-- <button *ngIf="showAddDialog || editing" #submitAddCategory type="submit" [disabled]="form.valid  ">Submit</button> -->
+      <!-- <button *ngIf="editing" type="button" (click)="handleRemove($event)">{{editing ? 'Remove': 'Remove'}}</button> -->
+      <!-- <button *ngIf="showAddDialog || editing" type="button" (click)="onCancel()">Cancel</button> -->
+      </form>
+    </ng-template>
+
   <div class="pane-left vertical">
     <div class="pane-left-wrapper vertical">
       <div class="pane-left-content vertical">
@@ -18,8 +56,7 @@
               (goToStep2)="addDialog($event)"
               [cancelgoToStep2]="showAddDialog"
               (editCategory)="activeEdit($event)"
-              (remove)="handleRemove($event)"
-              (cancel)="handleCancel();">
+              (remove)="handleRemove($event)">
               <!-- <app-add-category
                 [items]="selectedItems"
                 [editing]="editing"
@@ -44,25 +81,7 @@
             (remove)="onRemove($event)">
           </app-edit-topic> -->
             </side-nav>
-            <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
-                <app-add-category
-                  *ngIf="showAddDialog"
-                  [parent]="form"
-                  [items]="selectedItems"
-                  [editing]="showAddDialog"
-                  (edit)="onEdit($event)"
-                  (active)="addDialog($event)"
-                  (cancel)="handleAddCancel($event)">
-                </app-add-category>
-                <app-edit-topic
-                [parent]="form"
-                [items]="selectedItems"
-                [editing]="editing"
-                (edit)="onEdit($event)"
-                (cancel)="handleEditCancel($event)"
-                (remove)="handleRemove($event)">
-              </app-edit-topic>
-              </form>
+
           </div>
         </div>
       </div>
@@ -75,9 +94,13 @@
       <div class="pane-center-content vertical">
         <div class="pane-center-content-wrapper vertical">
           Item content
-          <app-add-code *ngIf="stepTwoDialog"
-          [editCode]="stepOne">
+          <!-- <form *ngIf="showStepTwoDialog" [formGroup]="form" class="codeForm">
+          <app-add-code *ngIf="showStepTwoDialog"
+          [editCode]="stepOne"
+          [parent]="form"
+          >
           </app-add-code>
+          </form> -->
         </div>
         <span class="resizer vertical "></span>
         Right Main Content Panel -->

@@ -10,10 +10,21 @@ export interface ReceipeCatalog {
     static: boolean;
     children?: [{
       id?: string;
-      title: string;
+      title?: string;
       active?: boolean;
       static?: boolean;
-      description: string;
+      description?: string;
+      solution?: [{
+        id?: string;
+        title?: string;
+        description?: string;
+        language?: [{
+          options: string
+        }];
+        code?: string;
+        active: boolean;
+        static: boolean;
+      }]
     }];
   }];
 }

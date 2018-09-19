@@ -14,50 +14,64 @@ export class EditTopicComponent implements OnInit {
   @Output() remove: EventEmitter<any> = new EventEmitter();
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() cancel: EventEmitter<any> = new EventEmitter();
-  cancelling: boolean = false;
+  tabTitle: string = 'Edit Tab'; // Default title for Tab
+  editedForm: any;
+  // cancelling: boolean = false;
   // editing = false;
-  showList = null;
-  expandTopic: any = null;
-  tabTitle: string = 'Edit Tab';
-  editableCategory: boolean;
+  // showList = null;
+  // expandTopic: any = null;
+  // editableCategory: boolean;
 
-  form = new FormGroup({
-    item: new FormGroup({
-      title: new FormControl(null),
-      active: new FormControl(true),
-      static: new FormControl(false),
-      subtopic: new FormGroup({
-          title: new FormControl(null),
-          active: new FormControl(true),
-          static: new FormControl(false),
-            children: new FormGroup({
-              title: new FormControl(null),
-              description: new FormControl(null),
-            })
-        })
-    }),
-    catalog: new FormArray([])
-  });
+  // form = new FormGroup({
+  //   item: new FormGroup({
+  //     title: new FormControl(null),
+  //     active: new FormControl(true),
+  //     static: new FormControl(false),
+  //     subtopic: new FormGroup({
+  //         title: new FormControl(null),
+  //         active: new FormControl(true),
+  //         static: new FormControl(false),
+  //           children: new FormGroup({
+  //             title: new FormControl(null),
+  //             description: new FormControl(null),
+  //           })
+  //       })
+  //   }),
+  //   catalog: new FormArray([])
+  // });
   constructor() { }
 
   ngOnInit() {
+    this.parent.get('item.title').setValue(this.items.title);
+    this.parent.get('item.static').setValue(this.items.static);
+  }
+  onAdd(){
+    console.log('Formgroup', this.parent.get('item').value);
   }
   onEdit(event, item) {
-    this.cancel.emit();
-    if (this.edit) {
-      // this.edit.emit(this.items);
-      console.log('edit',this.items);
+    // this.cancel.emit();
+    this.editedForm = this.parent.get('item').value;
+    console.log('Formgroup', this.editedForm);
+    if (this.parent.valid) {
+      this.edit.emit(this.editedForm);
     }
-    this.editing = !this.editing;
+
+    // this.cancel.emit();
+
+    // if (this.edit) {
+    //   // this.edit.emit(this.items);
+    //   console.log('edit',this.items);
+    // }
+    // this.editing = !this.editing;
   }
   onNameChange(value: string) {
     this.items.title = value;
   }
-  onRemove(event) {
-    // console.log('child item remove', this.items);
-    this.remove.emit(this.items);
-    // this.remove.emit(this.subtopics);
-  }
+  // onRemove(event) {
+  //   // console.log('child item remove', this.items);
+  //   this.remove.emit(this.items);
+  //   // this.remove.emit(this.subtopics);
+  // }
   onCancel() {
     this.editing = false;
     // this.formReset();

@@ -1,11 +1,15 @@
+/* Resetters and Setters */
 .d-flex {
   display: flex;
 }
 .f-basis{
   flex-basis: 100%;
 }
-.f-flow{
+.f-flow-column {
   flex-flow: column nowrap;
+}
+.f-flow-row {
+  flex-flow: row nowrap;
 }
 .justifyEnd {
   justify-content: flex-end;
@@ -17,9 +21,41 @@
 .align-center{
   align-items: center;
 }
+.align-left{
+  align-items: flex-start;
+}
 .align-self-center{
   align-self: center;
 }
+.align-self-right{
+  align-self: flex-end;
+}
+.flex11auto {
+  flex:1 1 auto;
+}
+input {
+  width: 100%;
+  border: navajowhite;
+  padding: 5px;
+  font-family: Lato, sans-serif;
+  font-size: 125%;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+hr {
+  width: 100%;
+    border: 0;
+    border-top: 1px solid #77e364;
+    border-bottom: 1px solid #3bc224;
+    margin: 20px 0;
+}
+h6 {
+  font-size: 96%;
+  text-transform: uppercase;
+}
+/* Stylers */
 .add-code-input-tab {
   position: absolute;
   top: -31px;
@@ -34,7 +70,7 @@
   color: #f2f2f2;
 }
 
-.add-code-input-container {
+/* .add-code-input-container {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -42,30 +78,19 @@
   width: 100%;
   z-index: 1;
   color:#eee;
-/* height: inherit; */
-}
+} */
 .add-code-input-wrapper{
-  flex-basis: 100%;
-  padding:0 33px;
+  /* flex-basis: 100%;
+  padding:0 33px; */
   /* height: 165px; */
-  min-height: 250px;
-  max-height: 250px;
+  /* min-height: 250px;
+  max-height: 250px; */
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-input {
-  width: 100%;
-  border: navajowhite;
-  padding: 5px;
-  font-family: Lato, sans-serif;
-  font-size: 125%;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 15px;
-  box-sizing: border-box;
-}
-form {
+
+.codeFormWrapper {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -73,16 +98,21 @@ form {
     /* top: 20px; */
     position: relative;
 }
-form div > h2{
+.codeFormWrapper div > h2{
   font-size: 162%;
-  font-weight: bold;
-  padding-top: 10px;
+  font-weight: 400;
 }
-form  div > span{
+.codeFormWrapper div > h2:nth-child(2){
+  text-transform: uppercase;
+  font-weight: 900;
+  padding: 10px 0;
+
+}
+/* .codeFormWrapper  div > span{
   display: inherit;
   padding: 5px 0 15px;
-}
-form  div > button{
+} */
+/* .codeFormWrapper  div > button{
 margin:15px 0px 0;
 padding:10px 0;
 font-weight: bold;
@@ -91,17 +121,27 @@ text-transform: uppercase;
 background-color:#269206;
 color:#f2f2f2;
 border: none;
+} */
+
+.editButton,.lockedButton, .editBC {
+  margin:0;
+  padding: 0 18px;
+  font-size: 78%;
+  text-transform: uppercase;
+  background-color: #269206;
+  color: #f2f2f2;
+  border: none;
+  height: 25px;
 }
-form div > button:nth-child(10){
+.lockedButton {
+  background-color: rgba(44,144,26,.39);
+  color: rgba(242,242,242,.49);
+}
+
+.codeFormWrapper div > button:nth-child(10){
   margin-bottom:15px;
 }
-hr {
-  width: 100%;
-    border: 0;
-    border-top: 1px solid #77e364;
-    border-bottom: 1px solid #3bc224;
-    margin-top: 20px;
-}
+
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #ccc;
 }
@@ -130,12 +170,38 @@ hr {
 }
 .stepTwoTab {
   text-transform: uppercase;
-  font-size:150%;
+  font-size:42px;
   font-weight: 900;
   padding-top:15px;
 }
 .stepTwoTab p{
-  font-size: 72%;
+  font-size: 19.2px;
+  line-height: 1.25;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.stepTwoTab p:nth-child(2){
+  font-size: 14px;
+  line-height: 1.25;
   text-transform: initial;
   font-weight: 400;
+}
+.editCategory{
+  margin: 15px 0;
+}
+input:disabled, textarea:disabled {
+  color: rgba(84, 84, 84, .49);
+}
+.fa-angle-double-right {
+  padding: 0 15px;
+}
+.btnWrapper{
+  padding-right: 5px;
+}
+.noWrap {
+  white-space: nowrap;
+}
+.editSubCategory {
+  margin: 0;
+  padding: 0;
 }

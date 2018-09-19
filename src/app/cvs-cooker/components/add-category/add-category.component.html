@@ -1,26 +1,25 @@
 <!-- <div *ngIf="editing" class="d-flex"> -->
-    <div [formGroup]="parent" class="d-flex">
-        <div class="add-topic-input-container">
+  <div class="add-topic-input-container">
       <div class="add-topic-input-wrapper ">
         <div class="add-topic-input-tab">
-            {{tabTitle}}
+            TEST
           </div>
           <div class="stepOneTab">Step 1
             <p>Create a generic category such as Design. You can further add a sub-category that relates to Design such as HTML Design or Theming or CSS Layout.</p>
           </div>
           <hr>
         <div (click)="onCancel()" class=" fas fa-times-circle fa-2x add-topic-input-close "></div>
-        <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
-            <div formGroupName="item">
+        <!-- <form [formGroup]="form" (ngSubmit)="onSubmit($event)"> -->
+            <div [formGroup]="parent" class="addFormWrapper" >
+          <div formGroupName="item">
             <h2>Add a category</h2>
-            <span>Enter a generic category which your code describes.</span>
-            <input formControlName="title" placeholder="(i.e. Design or French Cooking)" type="text" name="title" #topicName [value]="item.title" required/>
+            <span>Enter a generic name that categorizes your code solution.</span>
+            <input id="mainTitle" formControlName="title" placeholder="(i.e. Design or French Cooking)" type="text" name="title" #topicName [value]="item.title" required/>
             <div class="editable">
                 <input formControlName="static" type="checkbox" name="editableCategory" #topicNameEditable [value]="item.static" (change)="editableCategory = !editableCategory">
-                <label>Make editable</label>
+                <label>Lock item</label>
             </div>
-            <div>(change the name or remove this item) </div>
-
+            <div>(Protect this category from being edited or removed) </div>
             <hr>
             <div formGroupName="subtopic">
             <h2>Add a sub-category</h2>
@@ -28,20 +27,22 @@
             <input formControlName="title" placeholder="(i.e. Colors or Meat Recipes)" type="text" name="subTitle" #subTopicName/>
             <div class="editable">
                 <input formControlName="static" type="checkbox" name="editableSubCategory" #subTopicNameEditable [value]="item.subtopic[0].static" (change)="editableSubCategory = !editableSubCategory"  >
-                <label>Make editable</label>
+                <label>Lock item</label>
             </div>
-            <div>(change the name or remove this item) </div>
+            <div>(Protect this category from being edited or removed) </div>
           </div>
             <hr>
+            <ng-content select="button"></ng-content>
             <!-- <input type="submit" value="Add"> -->
-            <button type="submit" [disabled]="form.invalid">Add</button>
+            <button type="submit" (click)="onSubmit($event)">Add</button>
+            <!-- <button type="submit" [disabled]="form.invalid">Add</button> -->
             <!-- <button type="button" (click)="onEdit()">Add</button> -->
-            <button type="button" (click)="onCancel()">Cancel</button>
+            <!-- <button type="button" (click)="onCancel()">Cancel</button> -->
          <pre>
-           {{form.value | json}}
+           <!-- {{form.value | json}} -->
          </pre>
+         </div>
         </div>
-          </form>
-      </div>
+          <!-- </form> -->
     </div>
-  </div>
+</div>

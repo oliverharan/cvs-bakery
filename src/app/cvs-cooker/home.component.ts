@@ -17,47 +17,72 @@ export class HomeComponent implements OnInit {
     item: new FormGroup({
       title: new FormControl(null),
       active: new FormControl(true),
-      static: new FormControl(null),
+      static: new FormControl(false),
       subtopic: new FormGroup({
-          title: new FormControl(null),
+          title: new FormControl('11'),
           active: new FormControl(true),
           static: new FormControl(false),
-            children: new FormGroup({
+          children: new FormGroup({
+            title: new FormControl(null),
+            description: new FormControl('1'),
+            active: new FormControl(true),
+            static: new FormControl(false),
+            solution: new FormGroup({
               title: new FormControl(null),
-              description: new FormControl(null),
+              description: new FormControl('2'),
+              code: new FormControl(null),
+              active: new FormControl(true),
+              static: new FormControl(false),
+              language: new FormGroup({
+                options: new FormControl([
+                'html',
+                'css',
+                'js',
+                'json',
+                'angular 2+',
+                'angularJS 1.x',
+                'other'])
+              })
             })
+          })
         })
     }),
     catalog: new FormArray([])
   });
-  credits: Credits[];
-  catalogList: ReceipeCatalog[];
-  catalogListSubTopic: ReceipeCatalog[];
-  show = false;
-  editing = false;
-  selectedEdit: any;
-  topicEditToggle = false;
-  stepOne: any;
+  // catalogListSubTopic: ReceipeCatalog[];
+  // show = false;
+  // selectedEdit: any;
+  // topicEditToggle = false;
   // activeStepOne: any;
-  selectedItems: any; // Select category item for Edit Dialog
-  showStepTwoDialog: boolean = false;
-  showAddDialog: boolean;
-  showEditDialog: boolean;
+  // showEditDialog: boolean;
+
+  // Storage
+    credits: Credits[]; // Store Credits data from service
+    catalogList: ReceipeCatalog[]; // Store Category Catalog data from service
+  // Add Dialog
+    stepOne: any; // Pass data to Step 2 from Add Dialog (Step 1)
+    showAddDialog: boolean; // Toggle Add Dialog (Step 1)
+  // Edit Dialog
+    editing = false; // Toggle Edit Dialog (Step 1)
+    selectedItems: any; // Store selected category item for Edit Dialog (Step 1)
+  // Code Dialog
+    showStepTwoDialog: boolean = false; // Toggle Code Dialog (Step 1)
+
   constructor( private relayService: RelayService ) {}
 
   ngOnInit() {
-
     // Navbar Get Credits button
-    this.relayService.getCredits().subscribe((data: Credits[]) => this.credits = data);
+      this.relayService.getCredits().subscribe((data: Credits[]) => this.credits = data);
 
     // SideNav Get Topics
-    this.relayService.getReceipeCatalog().subscribe((data: ReceipeCatalog[]) => {
-      this.catalogList = data;
-    });
+      this.relayService.getReceipeCatalog().subscribe((data: ReceipeCatalog[]) => {
+        this.catalogList = data;
+      });
   }
     // Activate Add Category Dialog
     addDialog(event) {
       console.log('Activation for Step 1 Add Category passed: ', event);
+        this.showAddDialog = null;
       if (this.editing === true) {
         this.editing = false;
         this.showAddDialog = event;
@@ -65,18 +90,18 @@ export class HomeComponent implements OnInit {
         this.showAddDialog = event;
       }
       // this.showAddDialog = event;
-      // this.stepOne = event.item;
-      // console.log('adddialog2', this.stepOne);
+      this.stepOne = event;
+      console.log('adddialog2', this.stepOne);
       // console.log('adddialog', this.stepOne);
       // setTimeout(() => {
       //   console.log('adddialog', this.stepOne);
       // }, 2000);
       // console.log('adddialog', JSON.parse(JSON.stringify(event.currentTarget)));
     }
-    handleAdd(event: ReceipeCatalog) {
-      console.log('myvent', event);
-      // this.relayService.addCategory(event);
-    }
+    // handleAdd(event: ReceipeCatalog) {
+    //   console.log('myvent', event);
+    //   // this.relayService.addCategory(event);
+    // }
     // Activate Edit Category Dialog
     activeEdit(event: ReceipeCatalog) {
       if (event) {
@@ -88,44 +113,85 @@ export class HomeComponent implements OnInit {
         }
         this.selectedItems = event;
         console.log('Activation for Step 1 Edit Category passed: ', event);
-        // this.activeStepOne = event;
-        // console.log('Step One: Contain step 1 data for step 2', this.activeStepOne);
+        // this.stepOne = event;
+        console.log('Step One: Contain step 1 data for step 2', this.selectedItems);
       }
       // this.relayService.updateReceipCatalog(event);
-      this.selectedEdit = '';
+      // this.selectedEdit = '';
     }
-    handleEdit(event: ReceipeCatalog) {
-      console.log('myvent2', event);
-      this.relayService.updateReceipCatalog(event);
-      this.selectedEdit = '';
-      // this.catalogList[i].title = event;
-      // this.relayService
-      // .updateReceipCatalog(event)
-      // .subscribe((data: ReceipeCatalog) => {
-      //   this.catalogList = this.catalogList.map(((catalogList: ReceipeCatalog) => {
-      //     if (catalogList.id === event.id) {
-      //       // console.log('Value handle edit', catalogList);
-      //       catalogList = Object.assign({}, catalogList, event);
-      //     }
-      //     console.log('Value handle edit', catalogList);
-      //     return catalogList;
-      //   }));
-      // });
+    // handleEdit(event: ReceipeCatalog) {
+    //   console.log('myvent2', event);
+    //   this.relayService.updateReceipCatalog(event);
+    //   this.selectedEdit = '';
+    //   // this.catalogList[i].title = event;
+    //   // this.relayService
+    //   // .updateReceipCatalog(event)
+    //   // .subscribe((data: ReceipeCatalog) => {
+    //   //   this.catalogList = this.catalogList.map(((catalogList: ReceipeCatalog) => {
+    //   //     if (catalogList.id === event.id) {
+    //   //       // console.log('Value handle edit', catalogList);
+    //   //       catalogList = Object.assign({}, catalogList, event);
+    //   //     }
+    //   //     console.log('Value handle edit', catalogList);
+    //   //     return catalogList;
+    //   //   }));
+    //   // });
+    // }
+    // Add catelog into Form array
+    createCatalog(item) {
+      return new FormGroup({
+        title: new FormControl(item.title),
+        active: new FormControl(item.active),
+        static: new FormControl(item.static),
+        subtopic: new FormGroup({
+            title: new FormControl(item.subtopic.title),
+            active: new FormControl(item.subtopic.active),
+            static: new FormControl(item.subtopic.static),
+              children: new FormGroup({
+                title: new FormControl(item.subtopic.children.title),
+                description: new FormControl(item.subtopic.children.description),
+                active: new FormControl(item.subtopic.children.active),
+                static: new FormControl(item.subtopic.children.static),
+                solution: new FormGroup({
+                  title: new FormControl(item.subtopic.children.title),
+                  description: new FormControl(item.subtopic.children.solution.description),
+                  language: new FormGroup({
+                    options: new FormControl(item.subtopic.children.solution.language.options)
+                  }),
+                  code: new FormControl(item.subtopic.children.solution.code),
+                  active: new FormControl(item.subtopic.children.solution.active),
+                  static: new FormControl(item.subtopic.children.solution.static),
+                }),
+
+              })
+          })
+      });
+    }
+    // Handle Add Dialog for Step 2
+    handleAdd(event) {
+      console.log('Step 1: Contain Add Category Form Data and Pass to Step 2', event);
+      this.showAddDialog = !this.showAddDialog;
+      this.showStepTwoDialog = !this.showStepTwoDialog;
+      const addedFormData = this.form.get('catalog') as FormArray;
+      addedFormData.push(this.createCatalog(event));
+      // this.stepOne = addedFormData;
+      console.log('Create Formgroup from returned data in Add Category', addedFormData);
     }
     // Remove item from Edit Dialog
     handleRemove(event: ReceipeCatalog) {
       console.log('Handle remove this item from Edit Dialog', event);
-        this.show = false;
-        this.relayService.removeItem(event);
+      this.editing = false;
+      // NEEDS ITEMS
+      // this.relayService.removeItem(event);
+        // this.show = false;
       // this.catalogList = this.catalogList.filter((catalogList: ReceipeCatalog) => {
       //   console.log(event.id);
       //  return catalogList.id !== event.id;
       // });
     }
     // Cancel Add Dialog
-    handleAddCancel(e) {
-      console.log('Handle Cancel Edit Dialog: ', e);
-      this.selectedEdit = '';
+    handleAddCancel() {
+      // this.selectedEdit = '';
       // this.topicEditToggle = false;
       if (this.editing === true) {
         this.editing = false;
@@ -142,8 +208,7 @@ export class HomeComponent implements OnInit {
     }
     // Cancel Edit Dialog
     handleEditCancel(e) {
-      console.log('Handle Cancel Edit Dialog: ', e);
-      this.selectedEdit = '';
+      // this.selectedEdit = '';
       if (this.showAddDialog === true) {
         this.showAddDialog = false;
         this.editing = !this.editing;
@@ -155,10 +220,36 @@ export class HomeComponent implements OnInit {
       console.log('myyyye', e);
       // this.topicEditToggle = e;
       this.editing = e;
-
     }
     onEdit(e) {
       console.log('homeedit', e);
+    }
+    onSubmit(event: any) {
+      event.preventDefault();
+
+      console.log('Step 1: Topic/Subtopic Injection', event);
+      console.log('Step 1: Form Submit Values', this.form.value);
+      // console.log(JSON.parse(JSON.stringify(test.currentTarget, null, 2)));
+      // this.adder.emit(event);
+      console.log('Event log', event);
+      // this.adder.emit(this.form.value);
+      this.addDialog(this.form.value);
+      // console.log('items', event.currentTarget);
+      // if (this.item.title !== '') {
+      //   // if (this.editableCategory) {
+      //   //   this.item.static = this.editableCategory;
+      //   // }
+      //   // if (this.editableSubCategory) {
+      //   //   this.item.subtopic[0].static = this.editableSubCategory;
+      //   // }
+      //   this.adder.emit(event);
+      // //   console.log('eveve', this.item);
+      // }
+      // this.editableSubCategory = false;
+      // this.editableCategory = false;
+      // this.item.title = '';
+      // this.item.subtopic[0].title = '';
+      // this.formReset();
     }
 
 }
