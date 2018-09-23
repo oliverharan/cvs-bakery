@@ -36,6 +36,7 @@ export class AddCodeComponent implements OnInit, AfterContentInit, AfterViewInit
   editing: boolean = false;
   editingSub: boolean = false;
   editingBC: boolean = false;
+  scriptLanguage: any[] =  ['html', 'css', 'js', 'json', 'angular 2+', 'angularJS 1.x', 'other'];
   constructor(private renderer: Renderer2) {}
   ngAfterViewInit() {
     // console.log('MY ITEM FOR CODE', this.editCode);
@@ -76,8 +77,8 @@ export class AddCodeComponent implements OnInit, AfterContentInit, AfterViewInit
   get solution() {
     return (this.catalogs[0].get('subtopic.children.solution') as FormGroup);
   }
-  get language() {
-    return (this.catalogs[0].get('subtopic.children.solution.language') as FormGroup);
+  get code() {
+    return (this.catalogs[0].get('subtopic.children.solution.code') as FormGroup);
   }
   editCategory() {
     this.renderer.removeAttribute(this.editCategoryTitle.nativeElement, 'disabled');

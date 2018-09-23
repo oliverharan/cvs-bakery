@@ -42,10 +42,10 @@ export class AddCategoryComponent implements OnInit {
         solution: [{
           title: '',
           description: '',
-          language: [{
-            options: ''
+          code: [{
+            language: '',
+            script: ''
           }],
-          code: '',
           active: true,
           static: false
         }]

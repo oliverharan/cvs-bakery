@@ -18,10 +18,14 @@ export interface ReceipeCatalog {
         id?: string;
         title?: string;
         description?: string;
-        language?: [{
-          options: string
-        }];
-        code?: string;
+        code: [{
+          language: string;
+          script: string;
+        }]
+        // language?: [{
+        //   options: string;
+        // }];
+        // code?: string;
         active: boolean;
         static: boolean;
       }]

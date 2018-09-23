@@ -28,14 +28,17 @@
                           </div>
                           <hr>
                           <div class="addCodeContent">
-                              <div [formGroup]="language">
+                              <div [formGroup]="code">
                               <h2>Add solution</h2>
                               <span>Select the scripting language and paste your code.</span>
-                              <select formControlName="options">
-                                <option *ngFor="let option of catalog.value.subtopic.children.solution.language.options">
-                                  {{option}}
+                              <select formControlName="language">
+                                <!-- <option *ngFor="let option of scriptLanguage" [value]="catalog.value.subtopic.children.solution.code.language" #scriptOption> -->
+                                  <option value="" [selected]="true">Script language</option>
+                                  <option *ngFor="let option of scriptLanguage" [value]="option.value" #scriptOption>
+                                    {{option}}
                                 </option>
                               </select>
+                              <textarea formControlName="script"></textarea>
                               <!-- <input id="mainTitle" formControlName="title" placeholder="(i.e. Design or French Cooking)" type="text" name="title" #topicName [value]="item.title" required/> -->
                               <div class="editable">
                                   <!-- <input formControlName="static" type="checkbox" name="editableCategory" #topicNameEditable [value]="item.static" (change)="editableCategory = !editableCategory"> -->

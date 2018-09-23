@@ -30,18 +30,18 @@ export class HomeComponent implements OnInit {
             solution: new FormGroup({
               title: new FormControl(null),
               description: new FormControl('2'),
-              code: new FormControl(null),
               active: new FormControl(true),
               static: new FormControl(false),
-              language: new FormGroup({
-                options: new FormControl([
-                'html',
-                'css',
-                'js',
-                'json',
-                'angular 2+',
-                'angularJS 1.x',
-                'other'])
+              code: new FormGroup({
+                language: new FormControl([
+                  'html',
+                  'css',
+                  'js',
+                  'json',
+                  'angular 2+',
+                  'angularJS 1.x',
+                  'other']),
+                script: new FormControl(null)
               })
             })
           })
@@ -155,10 +155,10 @@ export class HomeComponent implements OnInit {
                 solution: new FormGroup({
                   title: new FormControl(item.subtopic.children.title),
                   description: new FormControl(item.subtopic.children.solution.description),
-                  language: new FormGroup({
-                    options: new FormControl(item.subtopic.children.solution.language.options)
+                  code: new FormGroup({
+                    language: new FormControl(item.subtopic.children.solution.code.language),
+                    script: new FormControl(item.subtopic.children.solution.code.script)
                   }),
-                  code: new FormControl(item.subtopic.children.solution.code),
                   active: new FormControl(item.subtopic.children.solution.active),
                   static: new FormControl(item.subtopic.children.solution.static),
                 }),
