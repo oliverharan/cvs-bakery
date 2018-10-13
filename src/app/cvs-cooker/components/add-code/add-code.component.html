@@ -8,8 +8,20 @@
         <!-- <form [formGroup]="form" (ngSubmit)="onSubmit($event)"> -->
           <div [formGroup]="parent" class="codeFormWrapper">
             <div formArrayName="catalog">
-              <div *ngFor="let catalog of catalogs; let i = index;">
+              <div *ngFor="let catalogList of catalogs; let i = index;">
                 <div [formGroupName]="i">
+                    <input type="text" formControlName="title">
+                    <input type="text" formControlName="id">
+                    <div formArrayName="subtopic">
+                        <div *ngFor="let subtopicList of getSubtopic(i); let subtopicIndex = index;">
+                            <div [formGroupName]="i">
+                                whoo
+                          <input type="text" formControlName="id">
+                          <input type="text" formControlName="title">
+                          hoo
+                            </div>
+                            </div>
+                            </div>
                     <div class="stepTwoTab">Step 2
                         <p>Select your language(s) to add your code.</p>
                         <p>For example, if we have a solution for Screen Readers in Accessibility - We can organize our code among different scripting environments.</p>
@@ -17,35 +29,56 @@
                       </div>
                       <hr>
                       <div class="d-flex f-flow-column">
-                          <div class=" d-flex f-flow-row align-center">
+                          <!-- <div class=" d-flex f-flow-row align-center"> -->
                               <!-- <span class="fa fa-hand-point-right"></span> -->
-                              <h6>{{catalog.value.title}}</h6>
+                              <!-- <h6>{{catalog.value.title}}</h6>
                               <span class="fa fa-angle-double-right"></span>
-                              <h6>{{catalog.value.subtopic.title}}</h6>
+                              <h6>{{catalog.value.subtopic.title}}</h6> -->
                               <!-- <div class="d-flex justifyEnd flex11auto btnWrapper">
                                   <button type="button" class="editBC" (click)="this.editingBC = !this.editingBC;">{{editingBC ? 'Done': 'Edit'}}</button>
                               </div> -->
-                          </div>
-                          <hr>
+                          <!-- </div> -->
+                          <!-- <hr> -->
                           <div class="addCodeContent">
-                              <div [formGroup]="code">
+                              <div>
                               <h2>Add solution</h2>
-                              <span>Select the scripting language and paste your code.</span>
+                              <p>Select the scripting language and paste your code.</p>
+                              <hr>
+                              <div formArrayName="children">
+                                <div *ngFor="let childs of getChildren(i, 0); let childrenIndex = index">
+                                  <div [formGroupName]="childrenIndex">
+                                  <input formControlName="title" type="text" placeholder="Headline">
+                                  <input formControlName="id" type="hidden">
+                                  <div class="childrenTitleEx">(ie. (Catagory):HTML -> (SubCategory):Elements -> (Headline): New HTML 5 -> (Solution): -> &lt;canvas&gt; tag</div>
+                                </div>
+                              </div>
+                                </div>
+                                  <div formArrayName="solution">
+                                    <hr>
+                                    <input formControlName="title" type="text" placeholder="Solution Title">
+                                    <input formControlName="id" type="hidden">
+                                  </div>
+                              <div formArrayName="code">
                               <select formControlName="language">
                                 <!-- <option *ngFor="let option of scriptLanguage" [value]="catalog.value.subtopic.children.solution.code.language" #scriptOption> -->
-                                  <option value="" [selected]="true">Script language</option>
-                                  <option *ngFor="let option of scriptLanguage" [value]="option.value" #scriptOption>
+                                  <option value="" [selected]="true">Select language</option>
+                                  <option *ngFor="let option of scriptLanguage" #scriptOption>
                                     {{option}}
                                 </option>
                               </select>
-                              <textarea formControlName="script"></textarea>
+                              <textarea formControlName="script" placeholder="Insert code here..."></textarea>
                               <!-- <input id="mainTitle" formControlName="title" placeholder="(i.e. Design or French Cooking)" type="text" name="title" #topicName [value]="item.title" required/> -->
+                              </div>
                               <div class="editable">
-                                  <!-- <input formControlName="static" type="checkbox" name="editableCategory" #topicNameEditable [value]="item.static" (change)="editableCategory = !editableCategory"> -->
+                                  <input formControlName="static" type="checkbox" name="addCodeLock" #addCodeLock [value]="codeLockCheckbox" (change)="codeLockCheckbox = !codeLockCheckbox">
                                   <label>Lock item</label>
                               </div>
                               <div>(Protect this category from being edited or removed) </div>
                               <hr>
+                              <button type="button" (click)="onSubmit($event)">Add</button>
+                              </div>
+                              <div>
+
                               </div>
                           </div>
                           <ng-template [ngIf]="this.editingBC">
@@ -57,17 +90,17 @@
                                       <!-- <button type="button" class="editButton" (click)="this.editing = !this.editing; editCategory()">{{editing ? 'Done': 'Edit'}}</button> -->
                                   </div>
                                   <hr>
-                                  <div [formGroup]="subtopic">
+                                  <div formArrayName="subtopic">
                                       <div class="d-flex align-center f-flow-row">
                                     <h2 class="noWrap">Sub-Category:</h2>
                                     <!-- <input class="editSubCategory" formControlName="title" [attr.disabled]="'disabled' ? 'blockEdit': null" #editSubCategoryTitle> -->
                                     <input class="editSubCategory" formControlName="title" #editSubCategoryTitle>
                                     <!-- <button type="button" class="editButton" (click)="this.editingSub = !this.editingSub; editSubCategory()">{{editingSub ? 'Done': 'Edit'}}</button> -->
                                   </div>
-                                    <div [formGroup]="children">
+                                    <div formArrayName="children">
                                           <h2>Code Receipe/Solution Title</h2>
                                           <input formControlName="description">
-                                          <div [formGroup]="solution">
+                                          <div formArrayName="solution">
                                               <h2>Code Receipe/Solution Title</h2>
                                               <input formControlName="description">
                                             </div>
@@ -76,9 +109,6 @@
                               </div>
                           </ng-template>
                       </div>
-
-
-
 
               </div>
 

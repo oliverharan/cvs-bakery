@@ -11,6 +11,10 @@ a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, bo
 }
 body, button, html {
   font-family: Lato,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
 }
 ul {
   list-style-type: none;

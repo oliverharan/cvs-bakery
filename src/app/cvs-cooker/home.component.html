@@ -5,10 +5,17 @@
 
   <ng-template
   [ngIf]="showAddDialog || editing || showStepTwoDialog">
+  <app-form-bowl></app-form-bowl>
+    <!-- <div class="formContainer">
       <form
       [ngClass]="{'codeForm' : showStepTwoDialog, 'showStep1': showAddDialog || editing || showStepTwoDialog}"
       [formGroup]="form"
       (ngSubmit)="onSubmit($event)">
+      <div formArrayName="items">
+        <div *ngFor="let item of items; let itemIndex of index;">
+            <div [formGroupName]="itemIndex">
+
+
           <app-add-category
           *ngIf="showAddDialog"
           [parent]="form"
@@ -25,19 +32,25 @@
         [editing]="editing"
         (edit)="onEdit($event)"
         (cancel)="handleEditCancel()">
+      -->
         <!-- <button type="submit" [disabled]="form.invalid">Submit</button>
         <button type="button" (click)="onCancel()">Cancel</button> -->
-      </app-edit-topic>
+      <!-- </app-edit-topic>
       <app-add-code
       *ngIf="showStepTwoDialog"
       [editCode]="stepOne"
       [parent]="form"
+      (addCodeSubmit)="handleSubmit($event)"
       >
-    </app-add-code>
+    </app-add-code> -->
       <!-- <button *ngIf="showAddDialog || editing" #submitAddCategory type="submit" [disabled]="form.valid  ">Submit</button> -->
       <!-- <button *ngIf="editing" type="button" (click)="handleRemove($event)">{{editing ? 'Remove': 'Remove'}}</button> -->
       <!-- <button *ngIf="showAddDialog || editing" type="button" (click)="onCancel()">Cancel</button> -->
-      </form>
+   <!-- </div>
+  </div>
+</div>
+    </form>
+    </div> -->
     </ng-template>
 
   <div class="pane-left vertical">

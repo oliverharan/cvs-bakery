@@ -10,7 +10,7 @@
     <li>
       <div class="d-flex">
         <!-- Expand Subtopics List-->
-        <button *ngIf="items.subtopic[0].title !== ''" (click)="expandList(i)" class="chevron-down-button fas fa-caret-right"></button>
+        <button *ngIf="items.subtopic.title !== ''" (click)="expandList(i)" class="chevron-down-button fas fa-caret-right"></button>
         <!-- Topics-->
         <div [ngClass]="{topic_tab : !items.subtopic || !items.subtopic[0].title}" class="subtopic-content align-center">
           {{items.title}}

@@ -42,8 +42,8 @@ export class EditTopicComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.parent.get('item.title').setValue(this.items.title);
-    this.parent.get('item.static').setValue(this.items.static);
+    this.parent.get('item.title').setValue(this.items.items[0].title);
+    this.parent.get('item.static').setValue(this.items.items[0].static);
   }
   onAdd(){
     console.log('Formgroup', this.parent.get('item').value);
@@ -65,7 +65,7 @@ export class EditTopicComponent implements OnInit {
     // this.editing = !this.editing;
   }
   onNameChange(value: string) {
-    this.items.title = value;
+    this.items.items[0].title = value;
   }
   // onRemove(event) {
   //   // console.log('child item remove', this.items);
@@ -77,20 +77,20 @@ export class EditTopicComponent implements OnInit {
     // this.formReset();
     this.cancel.emit(this.editing);
   }
-  formReset() {
-    this.items = {
-      title: '',
-      active: true,
-      static: false,
-      subtopic: [{
-        title: '',
-        active: null,
-        static: null,
-        children: [{
-          title: '',
-          description: ''
-        }]
-      }]
-    };
-  }
+  // formReset() {
+  //   this.items = {
+  //     title: '',
+  //     active: true,
+  //     static: false,
+  //     subtopic: [{
+  //       title: '',
+  //       active: null,
+  //       static: null,
+  //       children: [{
+  //         title: '',
+  //         description: ''
+  //       }]
+  //     }]
+  //   };
+  // }
 }

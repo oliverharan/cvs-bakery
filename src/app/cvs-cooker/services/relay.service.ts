@@ -40,7 +40,29 @@ export class RelayService {
    }
    addCategory(item: ReceipeCatalog) {
     //  console.log('serv', item);
-     this.recipesCollection.add(item);
+    //  const id = this.afs.createId();
+    //       this.recipesCollection.doc(id).set(item);
+        this.recipesCollection.add(item);
+  //   const subtitleId = this.afs.createId();
+  //   const childrenId = this.afs.createId();
+  //   const codeId = this.afs.createId();
+  //   const id = this.afs.createId();
+  //   // const item: Item = { id, name };
+  //   console.log('my item', item);
+  //   this.recipesCollection.doc(id).set({
+  //     item: {
+  //       'title': item.title,
+  //     }
+  // });
+  //       this.recipesCollection.add(item).then(function(docRef) {
+  //     console.log('Document written with ID: ', docRef.id);
+  // });
+//     this.recipesCollection.add(item)
+//     .then(ref => {
+//       ref.set({ id: ref.id }, { merge: true }).then(() => {
+// console.log('Your extra id field has been created');
+// });
+// });
    }
   getCredits() {
     return this.credits;
@@ -62,7 +84,7 @@ export class RelayService {
     // .get(`${API}/receipeCatalog`);
   }
   updateReceipCatalog(recipeCatalog: ReceipeCatalog) {
-    this.recipeDoc = this.afs.doc(`recipeCatalog/${recipeCatalog.id}`);
+    this.recipeDoc = this.afs.doc(`recipeCatalog/${recipeCatalog.items[0].id}`);
     this.recipeDoc.update(recipeCatalog);
     // Json-server connect
     // console.log(receipe);
@@ -70,7 +92,7 @@ export class RelayService {
     // .put(`${API}/receipeCatalog/${receipe.id}`, receipe);
   }
   removeItem(recipeCatalog: ReceipeCatalog) {
-    this.recipeDoc = this.afs.doc(`recipeCatalog/${recipeCatalog.id}`);
+    this.recipeDoc = this.afs.doc(`recipeCatalog/${recipeCatalog.items[0].id}`);
     console.log('doc', this.recipeDoc);
     this.recipeDoc.delete();
   }

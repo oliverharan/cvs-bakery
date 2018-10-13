@@ -35,7 +35,6 @@
 }
 input {
   width: 100%;
-  border: navajowhite;
   padding: 5px;
   font-family: Lato, sans-serif;
   font-size: 125%;
@@ -156,8 +155,9 @@ border: none;
 }
 .add-code-input-close {
   position: absolute;
-  top: 9px;
-  right: 19px;
+  top: -10px;
+  right: -10px;
+  border-radius: 17px;
 }
 .editable{
   height: 18px;
@@ -172,7 +172,6 @@ border: none;
   text-transform: uppercase;
   font-size:42px;
   font-weight: 900;
-  padding-top:15px;
 }
 .stepTwoTab p{
   font-size: 19.2px;
@@ -204,4 +203,42 @@ input:disabled, textarea:disabled {
 .editSubCategory {
   margin: 0;
   padding: 0;
+}
+.addCodeContent {
+  padding-right: 20px;
+}
+.addCodeContent > div {
+  display: flex;
+  flex-direction: column;
+}
+.addCodeContent > div > h2 {
+    font-size: 162%;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+.addCodeContent > div > p {
+  padding: 10px 0 0;
+}
+.addCodeContent > div > div:nth-child(5) > select {
+  width: 100%;
+  padding: 5px;
+  font-family: Lato, sans-serif;
+  font-size: 125%;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  color: #5e5e5e;
+}
+.addCodeContent > div > div:nth-child(5) > textarea {
+  width: 100%;
+  font-size: 79%;
+  margin: 15px 0;
+  min-height: 175px;
+  background: #5e5e5e;
+  color: chartreuse;
+}
+.childrenTitleEx{
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 62%;
 }

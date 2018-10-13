@@ -113,24 +113,32 @@
 .fBasis {
     flex-basis: 100%;
 }
-form:before {
+/* form:before {
   transform: translateX(-100%);
-}
-form {
-  /* display: flex; */
+} */
+/* form {
+  max-height: 250px;
+  min-height: 250px;
+  overflow-y: scroll;
+} */
+.formContainer {
   background: rgba(65,223,78,.90);
   position: absolute;
   flex-direction: column;
   max-height: 250px;
   min-height: 250px;
-  overflow: scroll;
   bottom: 0;
-  padding: 0 33px;
+  padding: 25px 33px 0px 33px;
   z-index: 1;
   width: 50%;
   color: #f2f2f2;
   text-shadow: 1px 1px 2px seagreen;
   transform-origin: 0% 100%;
+  border-top-left-radius: 25px;
+  /* border-top-right-radius: 25px; */
+}
+.formContainer:before {
+  transform: translateX(-100%);
 }
 .showStep1 {
   animation: showStep1 200ms ease-out;
@@ -156,7 +164,7 @@ form {
     transform: scale(2) translateX(100%);
   }
 } */
-form > button {
+/* form > button {
   display: block;
   width: 100%;
   margin:15px 0px 0;
@@ -167,7 +175,7 @@ form > button {
   background-color:#269206;
   color:#f2f2f2;
   border: none;
-}
+} */
 /* .codeForm {
   min-height: 250px;
   width: 100%;

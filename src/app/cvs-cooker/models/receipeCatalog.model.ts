@@ -1,34 +1,33 @@
 export interface ReceipeCatalog {
-  id?: string;
-  title: string;
-  active: boolean;
-  static: boolean;
-  subtopic: [{
+  items: [{
     id?: string;
     title: string;
     active: boolean;
     static: boolean;
-    children?: [{
+    subtopic: [{
       id?: string;
-      title?: string;
-      active?: boolean;
-      static?: boolean;
-      description?: string;
-      solution?: [{
+      title: string;
+      active: boolean;
+      static: boolean;
+      children?: [{
         id?: string;
         title?: string;
+        active?: boolean;
+        static?: boolean;
         description?: string;
-        code: [{
-          language: string;
-          script: string;
+        solution?: [{
+          id?: string;
+          title?: string;
+          active: boolean;
+          static: boolean;
+          description?: string;
+          code: [{
+            id?: string;
+            language: string;
+            script: string;
+          }]
         }]
-        // language?: [{
-        //   options: string;
-        // }];
-        // code?: string;
-        active: boolean;
-        static: boolean;
-      }]
+      }];
     }];
   }];
 }
