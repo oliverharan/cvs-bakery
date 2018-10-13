@@ -1,0 +1,24 @@
+<div class="cvsb-mainNav">
+  <div class="cvsb-headerBar">
+    <div class="cvsb-sideMenu">
+      <div class="cvsb-logoWrap">
+        <a class="cvsb-sprite"></a>
+        <div class="cvsb-name">
+          <a href="#">cvs-bakery</a>
+          <div class="author">
+            <span>By</span>
+            <a href="#">The Angular Architects Team</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cvsb-rightTabs">
+    <button type="button" class="menuButton primary" (click)="toggleCredits()">Credits</button>
+    <div class="creditPopOver" #credit>
+      <credits [details]="details">
+      </credits>
+    </div>
+    <div class="popover-connector"></div>
+  </div>
+</div>

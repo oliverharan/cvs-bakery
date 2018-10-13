@@ -1,0 +1,148 @@
+    <div class="d-flex1">
+        <div class="add-code-input-container">
+      <div class="add-code-input-wrapper ">
+        <!-- <div class="add-code-input-tab">
+          Code Solution
+        </div> -->
+        <div (click)="onCancel()" class=" fas fa-times-circle fa-2x add-code-input-close "></div>
+        <!-- <form [formGroup]="form" (ngSubmit)="onSubmit($event)"> -->
+          <div [formGroup]="parent" class="codeFormWrapper">
+            <div formArrayName="catalog">
+              <div *ngFor="let catalogList of catalogs; let i = index;">
+                <div [formGroupName]="i">
+                    <input type="text" formControlName="title">
+                    <input type="text" formControlName="id">
+                    <div formArrayName="subtopic">
+                        <div *ngFor="let subtopicList of getSubtopic(i); let subtopicIndex = index;">
+                            <div [formGroupName]="i">
+                                whoo
+                          <input type="text" formControlName="id">
+                          <input type="text" formControlName="title">
+                          hoo
+                            </div>
+                            </div>
+                            </div>
+                    <div class="stepTwoTab">Step 2
+                        <p>Select your language(s) to add your code.</p>
+                        <p>For example, if we have a solution for Screen Readers in Accessibility - We can organize our code among different scripting environments.</p>
+                        <!-- <p>For instance, To add a solution for Screen Readers in the Accessibility category - Just add your code solution for one or multiple scripting languages</p> -->
+                      </div>
+                      <hr>
+                      <div class="d-flex f-flow-column">
+                          <!-- <div class=" d-flex f-flow-row align-center"> -->
+                              <!-- <span class="fa fa-hand-point-right"></span> -->
+                              <!-- <h6>{{catalog.value.title}}</h6>
+                              <span class="fa fa-angle-double-right"></span>
+                              <h6>{{catalog.value.subtopic.title}}</h6> -->
+                              <!-- <div class="d-flex justifyEnd flex11auto btnWrapper">
+                                  <button type="button" class="editBC" (click)="this.editingBC = !this.editingBC;">{{editingBC ? 'Done': 'Edit'}}</button>
+                              </div> -->
+                          <!-- </div> -->
+                          <!-- <hr> -->
+                          <div class="addCodeContent">
+                              <div>
+                              <h2>Add solution</h2>
+                              <p>Select the scripting language and paste your code.</p>
+                              <hr>
+                              <div formArrayName="children">
+                                <div *ngFor="let childs of getChildren(i, 0); let childrenIndex = index">
+                                  <div [formGroupName]="childrenIndex">
+                                  <input formControlName="title" type="text" placeholder="Headline">
+                                  <input formControlName="id" type="hidden">
+                                  <div class="childrenTitleEx">(ie. (Catagory):HTML -> (SubCategory):Elements -> (Headline): New HTML 5 -> (Solution): -> &lt;canvas&gt; tag</div>
+                                </div>
+                              </div>
+                                </div>
+                                  <div formArrayName="solution">
+                                    <hr>
+                                    <input formControlName="title" type="text" placeholder="Solution Title">
+                                    <input formControlName="id" type="hidden">
+                                  </div>
+                              <div formArrayName="code">
+                              <select formControlName="language">
+                                <!-- <option *ngFor="let option of scriptLanguage" [value]="catalog.value.subtopic.children.solution.code.language" #scriptOption> -->
+                                  <option value="" [selected]="true">Select language</option>
+                                  <option *ngFor="let option of scriptLanguage" #scriptOption>
+                                    {{option}}
+                                </option>
+                              </select>
+                              <textarea formControlName="script" placeholder="Insert code here..."></textarea>
+                              <!-- <input id="mainTitle" formControlName="title" placeholder="(i.e. Design or French Cooking)" type="text" name="title" #topicName [value]="item.title" required/> -->
+                              </div>
+                              <div class="editable">
+                                  <input formControlName="static" type="checkbox" name="addCodeLock" #addCodeLock [value]="codeLockCheckbox" (change)="codeLockCheckbox = !codeLockCheckbox">
+                                  <label>Lock item</label>
+                              </div>
+                              <div>(Protect this category from being edited or removed) </div>
+                              <hr>
+                              <button type="button" (click)="onSubmit($event)">Add</button>
+                              </div>
+                              <div>
+
+                              </div>
+                          </div>
+                          <ng-template [ngIf]="this.editingBC">
+                              <div>
+                                  <div class="d-flex align-center f-flow-row">
+                                      <h2>Category:</h2>
+                                      <!-- <input class="editCategory" formControlName="title" [attr.disabled]="'disabled' ? 'blockEdit': null" #editCategoryTitle> -->
+                                      <input class="editCategory" formControlName="title" #editCategoryTitle>
+                                      <!-- <button type="button" class="editButton" (click)="this.editing = !this.editing; editCategory()">{{editing ? 'Done': 'Edit'}}</button> -->
+                                  </div>
+                                  <hr>
+                                  <div formArrayName="subtopic">
+                                      <div class="d-flex align-center f-flow-row">
+                                    <h2 class="noWrap">Sub-Category:</h2>
+                                    <!-- <input class="editSubCategory" formControlName="title" [attr.disabled]="'disabled' ? 'blockEdit': null" #editSubCategoryTitle> -->
+                                    <input class="editSubCategory" formControlName="title" #editSubCategoryTitle>
+                                    <!-- <button type="button" class="editButton" (click)="this.editingSub = !this.editingSub; editSubCategory()">{{editingSub ? 'Done': 'Edit'}}</button> -->
+                                  </div>
+                                    <div formArrayName="children">
+                                          <h2>Code Receipe/Solution Title</h2>
+                                          <input formControlName="description">
+                                          <div formArrayName="solution">
+                                              <h2>Code Receipe/Solution Title</h2>
+                                              <input formControlName="description">
+                                            </div>
+                                        </div>
+                                    </div>
+                              </div>
+                          </ng-template>
+                      </div>
+
+              </div>
+
+            </div>
+          <!-- <div formGroupName="item">
+              <div class="stepTwoTab">Step 2
+                <p>Add your solution. For instance, you have a solution for the Accessibility category within the Screen Reader sub-category - Just add your code solution for one or any scripting language</p>
+              </div>
+              <hr>
+          <h2>Add a category</h2>
+            <span>Enter a generic category which your code describes.</span>
+            <input formControlName="title" placeholder="(i.e. Design or French Cooking)" type="text" name="title" #topicName [value]="item.title" />
+            <div class="editable">
+                <input formControlName="static" type="checkbox" name="editableCategory" #topicNameEditable [value]="item.static" [checked]="item.static">
+                <label>Make editable</label>
+            </div>
+            <div>(change the name or remove this item) </div>
+            <hr>
+            <div formGroupName="subtopic">
+            <h2>Add a sub-category</h2>
+            <span>Enter items specific to your category.</span>
+            <input formControlName="title" placeholder="(i.e. Colors or Meat Recipes)" type="text" name="subTitle" #subTopicName [value]="item.subtopic.title"/>
+            <div class="editable">
+                <input formControlName="static" type="checkbox" name="editableSubCategory" #subTopicNameEditable [value]="item.subtopic.static" [checked]="item.subtopic.static"  >
+                <label>Make editable</label>
+            </div>
+            <div>(change the name or remove this item) </div>
+          </div>
+            <hr>
+            <button type="submit">Add</button>
+            <button type="button" (click)="onCancel()">Cancel</button>
+          </div> -->
+        </div>
+          <!-- </form> -->
+      </div>
+    </div>
+  </div>

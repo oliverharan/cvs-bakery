@@ -1,0 +1,194 @@
+.d-flex {
+    display: flex;
+}
+
+.f-basis {
+    flex-basis: 100%;
+}
+
+.f-flow {
+    flex-flow: column wrap;
+    overflow-wrap: break-word;
+}
+
+.editTopic {
+    color: red;
+}
+
+.editPanel {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.justifyEnd {
+    justify-content: flex-end;
+}
+
+.subtopic-content {
+    text-transform: uppercase;
+    font-size: 125%;
+    font-weight: bold;
+    letter-spacing: .05em;
+}
+
+.hidden {
+    height: 0;
+    opacity: 0;
+}
+
+.subtopicList {
+    opacity: 1;
+    height: 100%;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.align-self-center {
+    align-self: center;
+}
+
+.topic_tab {
+    padding-left: 20px;
+}
+
+.topic_tab_2x {
+    padding-left: 40px;
+}
+
+.topic-input-container {
+    position: relative;
+}
+
+.topic-input-tab {
+    position: absolute;
+    top: -31px;
+    left: 31px;
+    background: rgba(65, 223, 78, .90);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px 15px 5px 14px;
+    font-size: 118%;
+    text-transform: uppercase;
+    font-weight: bolder;
+    color: #f2f2f2;
+}
+
+.subtopic-input-wrapper {}
+
+.subtopic-input-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgba(65, 223, 78, .90);
+    width: 100%;
+    height: inherit;
+}
+
+.subtopic-input-button {
+    height: 165px;
+}
+
+
+/* .chevron-down-button::before {
+  content: "";
+  background-color: transparent;
+  border-style: none;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  color: #2196F3;
+} */
+
+.chevron-down-button {
+    /* background: url(../../../../assets/icons/chevron-down.svg) top center no-repeat; */
+    background-color: transparent;
+    border-style: none;
+    min-width: 20px;
+    height: 20px;
+    padding: 0;
+    color: #d58d68;
+}
+
+.edit-button {
+    justify-content: center;
+    background-color: transparent;
+    border-style: none;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    color: #d58d68;
+    z-index: 0;
+}
+
+.topic-input-container {
+    position: relative;
+    display: flex;
+    min-height: 165px;
+}
+
+.topic-input-contents {
+    flex-basis: 100%;
+    padding-left: 33px;
+}
+
+.topic-input-contents>input {
+    width: 225px;
+    border: navajowhite;
+    padding: 5px;
+    font-family: Lato, sans-serif;
+    font-size: 125%;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.topic-input-contents>h2 {
+    font-size: 162%;
+    font-weight: bold;
+    padding-bottom: 15px;
+}
+
+.topic-input-close {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+}
+
+.topic-input-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    align-items: flex-end;
+    display: flex;
+}
+
+.topic-btn {
+    background: #0c66a1;
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    color: #f2f2f2;
+    margin: 0 5px 5px;
+}
+
+.topic-btn:last-child {
+    margin-right: 9px;
+}
+
+.topic-btn>span {
+    font-family: Lato, sans-serif;
+    text-transform: uppercase;
+    padding-left: 5px;
+}
+
+.add-category {
+    height: 25px;
+}
+
+.add-category>span {
+    padding: 8px 0 8px 8px;
+    color: rgba(65, 223, 78, .90);
+}

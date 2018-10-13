@@ -1,0 +1,162 @@
+.cvsb-mainNav{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  font-size: 14px;
+  padding: 5px;
+  color: #777;
+  font-weight: 400;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.cvsb-mainNav,.cvsb-rightTabs {
+  background: #353535;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.cvsb-headerBar{
+  height: 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  width: 100%;
+}
+.cvsb-sideMenu{
+  color: #fff;
+  background: #353535;
+}
+.cvsb-logoWrap {
+  position: relative;
+  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.3);
+  box-shadow: 0 10px 5px rgba(0,0,0,.3);
+}
+.cvsb-sprite {
+  position: relative;
+  padding: 0 5px;
+  margin-left: 10px;
+  margin-right: 5px;
+  display: inline-block;
+  background-image: url(https://www.cvs.com/webcontent/images/header-sprite.png);
+  background-repeat: no-repeat;
+  width: 23px;
+  height: 25px;
+  line-height: 0;
+  font-size: 0;
+  color: transparent;
+  background-position: -5px -160px;
+  vertical-align: middle;
+}
+.cvsb-name {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 900;
+  font-size: 16px;
+  color: #eee;
+  margin-top: 0;
+  border-radius: 2px;
+  position: relative;
+}
+.cvsb-name a {
+  color: #eee;
+  text-decoration: none;
+  }
+.author {
+  margin-top: 0;
+  position: relative;
+  font-size: 11px;
+  font-weight: 400;
+  color: #888;
+  line-height: 12px;
+}
+.author a {
+  margin-left: 3px;
+  opacity: .9;
+  color: #ccc;
+  text-decoration: none;
+}
+.cvsb-rightTabs {
+  z-index: 10;
+  margin-left: auto;
+  background: #353535;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  border-radius: 0!important;
+  color: #ccc;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 7px 15px;
+  margin: 0;
+  font-size: 12px;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: relative;
+}
+.menuButton {
+  margin-right: 5px;
+}
+
+.menuButton.primary {
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  color: #fff;
+  background: #0c66a1;
+}
+.creditPopOver{
+  color: #ccc;
+  cursor: default;
+  text-transform: none;
+  position: fixed;
+  background: #353535;
+  z-index: 9999;
+  top: 55px;
+  right: 10px;
+  padding: 15px 15px 0;
+  font-weight: 400;
+  font-size: 12px;
+  width: 500px;
+  text-align: left;
+  -webkit-box-shadow: 0 5px 8px #000;
+  box-shadow: 0 5px 8px #000;
+  white-space: nowrap;
+  display: none;
+}
+
+.popover-connector {
+  position: absolute;
+  right: 6px;
+  top: 20px;
+  width: 75px;
+  background: #353535;
+  height: 30px;
+  content: " ";
+  z-index: -100;
+  display: none;
+
+}
+.active {
+display: block;
+}

@@ -1,0 +1,42 @@
+<div class="formContainer"  *ngIf="showAddDialog">
+    <form [ngClass]="{'codeForm' : showStepTwoDialog,
+    'showStep1': showAddDialog || editing || showStepTwoDialog}"
+    [formGroup]="form">
+    <app-add-category [parent]="form" (active)="handleAdd($event)"></app-add-category>
+    <!-- <div formArrayName="items">
+      <div *ngFor="let item of items; let itemIndex of index;">
+          <div [formGroupName]="itemIndex"> -->
+
+
+        <!-- <app-add-category
+        *ngIf="showAddDialog"
+        [parent]="form"
+        [items]="selectedItems"
+        [editing]="showAddDialog"
+        (edit)="onEdit($event)"
+        (active)="handleAdd($event)"
+        (cancel)="handleAddCancel()">
+      </app-add-category>
+      <app-edit-topic
+      *ngIf="editing"
+      [parent]="form"
+      [items]="selectedItems"
+      [editing]="editing"
+      (edit)="onEdit($event)"
+      (cancel)="handleEditCancel()">
+    </app-edit-topic>
+    <app-add-code
+    *ngIf="showStepTwoDialog"
+    [editCode]="stepOne"
+    [parent]="form"
+    (addCodeSubmit)="handleSubmit($event)"
+    >
+  </app-add-code> -->
+    <!-- <button *ngIf="showAddDialog || editing" #submitAddCategory type="submit" [disabled]="form.valid  ">Submit</button> -->
+    <!-- <button *ngIf="editing" type="button" (click)="handleRemove($event)">{{editing ? 'Remove': 'Remove'}}</button> -->
+    <!-- <button *ngIf="showAddDialog || editing" type="button" (click)="onCancel()">Cancel</button> -->
+  <!-- </div>
+</div>
+</div> -->
+  </form>
+</div>

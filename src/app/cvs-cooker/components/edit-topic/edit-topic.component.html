@@ -1,0 +1,46 @@
+<div [formGroup]="parent" >
+    <div class="subtopic-input-container">
+        <div *ngIf="editing" class="subtopic-input-wrapper ">
+            <!-- <div class="subtopic-input-button" *ngIf="!items.static">
+          </div> -->
+
+            <div class="topic-input-tab">{{tabTitle}}</div>
+            <div (click)="onCancel()" class=" fas fa-times-circle fa-2x topic-input-close "></div>
+            <!-- <form [formGroup]="parent" (ngSubmit)="onEdit($event, items)"> -->
+                <div class="editFormWrapper">
+                    <div formGroupName="item" class="editFormWrapper">
+                        <h2>Editing {{items.title}}</h2>
+                <span>Change the category name.</span>
+                <input formControlName="title" type="text" name="title" (input)="onNameChange(subTopicName.value)" #subTopicName required />
+                <!-- <div formGroupName="subtopic">
+                  <select formControlName="title">
+                      <option
+                        [ngValue]=""
+                        [disabled]="true"
+                        [selected]="true">
+                          Select a category to edit
+                      </option>
+                      <option
+                        *ngFor="let sub of items.subtopic"
+                        [ngValue]="sub.title">
+                          {{sub.title}}
+                    </option>
+                  </select>
+                </div> -->
+                <div class="editable">
+                    <input formControlName="static" type="checkbox" name="editableCategory" #topicNameEditable (change)="items.static = !items.static">
+                    <label>Lock item</label>
+                </div>
+                <div>(Protect this category from being edited or removed) </div>
+                <!-- <input type="text" [(ngModel)]="items.title" name="title" (input)="onNameChange(subTopicName.value)" #subTopicName /> -->
+                <!-- <button type="button" (click)="onEdit($event, items)">{{editing ? 'Done': 'Edit'}}</button> -->
+                <!-- <button type="button" (click)="onAdd()">Add</button> -->
+                <button type="submit">{{editing ? 'Done': 'Edit'}}</button>
+                <!-- <button type="button" (click)="onRemove($event)">{{editing ? 'Remove': 'Remove'}}</button> -->
+              </div>
+              <!-- {{form.value | json}} -->
+            <!-- </form> -->
+        </div>
+        </div>
+    </div>
+</div>

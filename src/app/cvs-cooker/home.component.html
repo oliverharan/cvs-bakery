@@ -1,0 +1,149 @@
+<!-- Main Top NavBar-->
+<main-nav [details]="credits"></main-nav>
+<!-- Left Content Panel-->
+<div class="sideNavContainer">
+
+  <ng-template
+  [ngIf]="showAddDialog || editing || showStepTwoDialog">
+  <app-form-bowl></app-form-bowl>
+    <!-- <div class="formContainer">
+      <form
+      [ngClass]="{'codeForm' : showStepTwoDialog, 'showStep1': showAddDialog || editing || showStepTwoDialog}"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit($event)">
+      <div formArrayName="items">
+        <div *ngFor="let item of items; let itemIndex of index;">
+            <div [formGroupName]="itemIndex">
+
+
+          <app-add-category
+          *ngIf="showAddDialog"
+          [parent]="form"
+          [items]="selectedItems"
+          [editing]="showAddDialog"
+          (edit)="onEdit($event)"
+          (active)="handleAdd($event)"
+          (cancel)="handleAddCancel()">
+        </app-add-category>
+        <app-edit-topic
+        *ngIf="editing"
+        [parent]="form"
+        [items]="selectedItems"
+        [editing]="editing"
+        (edit)="onEdit($event)"
+        (cancel)="handleEditCancel()">
+      -->
+        <!-- <button type="submit" [disabled]="form.invalid">Submit</button>
+        <button type="button" (click)="onCancel()">Cancel</button> -->
+      <!-- </app-edit-topic>
+      <app-add-code
+      *ngIf="showStepTwoDialog"
+      [editCode]="stepOne"
+      [parent]="form"
+      (addCodeSubmit)="handleSubmit($event)"
+      >
+    </app-add-code> -->
+      <!-- <button *ngIf="showAddDialog || editing" #submitAddCategory type="submit" [disabled]="form.valid  ">Submit</button> -->
+      <!-- <button *ngIf="editing" type="button" (click)="handleRemove($event)">{{editing ? 'Remove': 'Remove'}}</button> -->
+      <!-- <button *ngIf="showAddDialog || editing" type="button" (click)="onCancel()">Cancel</button> -->
+   <!-- </div>
+  </div>
+</div>
+    </form>
+    </div> -->
+    </ng-template>
+
+  <div class="pane-left vertical">
+    <div class="pane-left-wrapper vertical">
+      <div class="pane-left-content vertical">
+        <div class="pane-left-content-wrapper">
+          <span>Now serving, fresh hot topics. Select a topic to view all its receipes.</span>
+        </div>
+        <div class="pane-left-content-wrapper">
+          <div class="pane-left-content-inner">
+            <!-- Topic Sidenav -->
+            <side-nav
+              id="editor"
+              class="dFlex fBasis"
+              [catalog]="catalogList"
+              (goToStep2)="addDialog($event)"
+              [cancelgoToStep2]="showAddDialog"
+              (editCategory)="activeEdit($event)"
+              (remove)="handleRemove($event)">
+              <!-- <app-add-category
+                [items]="selectedItems"
+                [editing]="editing"
+                (edit)="onEdit($event)"
+                (active)="addDialog($event)"
+                (adder)="addDialog($event)"
+                (cancel)="onCancel($event)">
+              </app-add-category>
+              <app-edit-topic
+              [items]="selectedItems"
+              [editing]="editing"
+              (edit)="onEdit($event)"
+              (cancel)="onCancel($event)"
+              (remove)="handleRemove($event)">
+            </app-edit-topic> -->
+            <!-- <app-edit-topic
+            *ngIf="editing && itemToEdit.id == items.id"
+            [editing]="editing"
+            [items]="selectedItems"
+            (cancel)="onCancel()"
+            (edit)="onEdit($event)"
+            (remove)="onRemove($event)">
+          </app-edit-topic> -->
+            </side-nav>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="resizer vertical "></span>
+  <!-- Center Content Panel -->
+  <div class="pane-center vertical">
+    <div class="pane-center-wrapper vertical">
+      <div class="pane-center-content vertical">
+        <div class="pane-center-content-wrapper vertical">
+          Item content
+          <!-- <form *ngIf="showStepTwoDialog" [formGroup]="form" class="codeForm">
+          <app-add-code *ngIf="showStepTwoDialog"
+          [editCode]="stepOne"
+          [parent]="form"
+          >
+          </app-add-code>
+          </form> -->
+        </div>
+        <span class="resizer vertical "></span>
+        Right Main Content Panel -->
+        <div class="panel-right vertical">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-oven></app-oven>
+
+<!-- <div class="pane-left-content-wrapper" *ngFor="let items of receipes">
+                  <ul>
+                    <li>{{items.title}}</li>
+                    <li  #subtopics="subtopic" [subtopic]="receipes" *ngFor="let subitems of items['subtopic']" ><div *ngIf="subitems.title">{{subitems.title}}</div></li>
+                  </ul>
+                </div> -->
+
+
+<!-- {{items.title}}
+                        <div>
+                            <button (click)="toggleSubTopics(); expandTopic = i" class="chevron-down-button " [@slideInOut]></button>
+                        </div> -->
+<!-- Edit Button-->
+<!-- <button *ngIf="!items.static" (click)="onEdit(catalogList[i], i); selectedEdit = i" class="edit-button fas fa-pencil-alt"></button> -->
+<!-- <side-nav *ngFor="let subItems of items['subtopic']" [subtopics]="subItems" (edit)="handleEdit($event, i)" (remove)="handleRemove($event, i)"></side-nav>                     -->
+<!-- Sub Topics-->
+<!-- <div *ngIf="visible">
+                        <side-nav [ngClass]="expandTopic === i ? 'show': 'hidden'"  *ngFor="let subItems of items['subtopic']" [subtopics]="subItems"></side-nav>
+                    </div> -->
+<!-- Edit Topic Name-->
+<!-- <topic-input *ngIf="topicEditToggle" id="editor" [itemTitle]="items" (editMain)="handleEdit($event)" (remove)="handleRemove($event)" (cancel)="handleCancel();" class="topic-input"></topic-input> -->
+<!-- <topic-input id="editor" [itemTitle]="items" (editMain)="handleEdit($event)" (remove)="handleRemove($event)" (cancel)="handleCancel();" class="topic-input"></topic-input> -->
